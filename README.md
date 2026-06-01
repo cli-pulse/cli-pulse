@@ -1,7 +1,8 @@
 # CLI Pulse
 
 CLI Pulse is a developer app for monitoring usage, quotas, resets, sessions,
-and alerts across supported AI coding providers. Available on macOS, iOS,
+and alerts across 50+ AI coding providers — and for remotely watching and
+steering your Mac's AI-CLI agents from your phone. Available on macOS, iOS,
 watchOS, and Android (beta).
 
 This repository is the **public distribution and trust-documentation** repo
@@ -21,9 +22,15 @@ below.
 
 CLI Pulse helps developers see — at a glance — how much of their AI provider
 quotas they've used, what each provider is costing, when limits reset, and
-which sessions are currently active. It supports providers like Claude,
-Codex, Gemini, OpenRouter, Cursor, Copilot, JetBrains AI, Ollama, Warp,
-Augment, and others.
+which sessions are currently active. It supports 50+ providers, including
+Claude, Codex, Gemini, OpenRouter, Cursor, Copilot, JetBrains AI, Ollama,
+Warp, and Augment.
+
+It also turns your phone into a remote control for your Mac's coding agents:
+pair the macOS app's local helper, then from iPhone or iPad watch your
+managed AI-CLI sessions live, send prompts, approve or deny permission
+requests, and keep an eye on a whole swarm of agents — without touching your
+Mac.
 
 The product spans:
 
