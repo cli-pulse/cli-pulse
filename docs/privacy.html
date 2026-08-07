@@ -38,7 +38,7 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: April 28, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: August 6, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never leave your device</strong>, and everything else we sync is kept to the minimum needed for cross-device viewing.
@@ -137,8 +137,54 @@
         <td class="sync">✅ Yes (when a crash/error happens)</td>
         <td>So crashes are visible to us without waiting for an App Store review</td>
       </tr>
+      <tr>
+        <td><strong>Anonymous install statistics</strong> (random install id, install channel, app version, OS major.minor, and whether a CLI was ever found)</td>
+        <td>Supabase &mdash; <strong>not linked to any account</strong></td>
+        <td class="sync">&#9989; Yes, unless you turn it off</td>
+        <td>Tells us whether the app actually works for people who never sign in</td>
+      </tr>
     </tbody>
   </table>
+
+  <h3>About that last row</h3>
+  <p>
+    Every other upload in this table happens only when you are signed in and is attached to
+    your account. <strong>Anonymous install statistics are the one exception</strong>, so they
+    get spelled out here rather than buried in a table cell.
+  </p>
+  <p>
+    Since v1.44 you can use CLI Pulse without an account. That means we cannot tell whether the
+    app works for the people using it that way &mdash; whether it found their CLIs, whether they
+    ever saw a number. Two counters, and nothing else:
+  </p>
+  <ol>
+    <li><strong>CLI Pulse was installed</strong> &mdash; recorded on first launch.</li>
+    <li><strong>CLI Pulse found a CLI to track</strong> &mdash; recorded the first time this
+      happens, and never updated afterwards.</li>
+  </ol>
+  <p>
+    Sent with each: a <strong>random</strong> identifier generated on your Mac, which channel the
+    app came from (App Store, direct download, or Homebrew), the app version, and your macOS
+    version rounded to major.minor (<code>15.1</code>, never the full build string).
+  </p>
+  <p>
+    <strong>Not sent, ever:</strong> your account or email (there is no account involved, and no
+    login token is attached to the request), your name, your device's name, serial number or
+    hardware identifiers, your IP address, any file path or project name, which provider you use,
+    or any token count or cost figure.
+  </p>
+  <p>
+    The identifier is random &mdash; not derived from your hardware, and not a hash of anything
+    about it. It lives in the app's preferences, so <strong>uninstalling CLI Pulse deletes
+    it</strong>; reinstalling produces a new, unrelated one. We cannot connect it to you, and we
+    cannot connect two installs to each other.
+  </p>
+  <p>
+    <strong>Turning it off:</strong> Settings &rsaquo; Privacy &rsaquo; &ldquo;Send anonymous
+    install statistics&rdquo;. Off means nothing is sent at all. <strong>Local-only mode also
+    turns it off</strong> &mdash; you do not need to set both. The app tells you about this on
+    first launch, before it sends anything.
+  </p>
 
   <p><strong>The key point:</strong> the two categories of data you'd be most worried about &mdash; provider API keys and raw session-log contents &mdash; never touch our servers, full stop.</p>
 
@@ -176,12 +222,15 @@
     <li><strong>App Sandbox</strong> is enabled (<code>com.apple.security.app-sandbox</code>). File access outside the app container requires security-scoped bookmarks you grant explicitly in Settings &rarr; CLI Tool Access.</li>
     <li><strong>TLS 1.2+</strong> for every network connection.</li>
     <li><strong>Supabase server-side encryption at rest</strong> (AES-256) for the database and storage backing your account. We do <strong>not</strong> currently offer end-to-end encryption &mdash; the metrics we store are aggregate numbers, not secrets. See "Roadmap" below.</li>
-    <li><strong>No third-party product-analytics SDKs.</strong> We do not ship Google Analytics, Firebase Analytics, Amplitude, Mixpanel, Crashlytics, or any similar product-analytics tool. There is no fingerprinting and no ad network integration.</li>
+    <li><strong>No third-party product-analytics SDKs.</strong> We do not ship Google Analytics, Firebase Analytics, Amplitude, Mixpanel, Crashlytics, or any similar product-analytics tool. There is no fingerprinting and no ad network integration. This is a statement about SDKs, and we would rather over-explain than let it read as more than it is: we do collect the two anonymous install counters described above, ourselves, to our own database. They are opt-out, carry no account, and go nowhere else.</li>
     <li><strong>Sentry for crash reports only.</strong> We ship the Sentry SDK in all clients (macOS, iOS, watchOS, Android) strictly for crash and error reporting. PII is disabled (<code>sendDefaultPii = false</code>), IP addresses are dropped at the Sentry ingest layer, and a local <code>beforeSend</code> hook scrubs API keys, OAuth tokens, JWTs, Bearer headers, <code>/Users/&lt;name&gt;</code> paths, and any field whose name contains common sensitive fragments (<code>token</code>, <code>secret</code>, <code>password</code>, <code>api_key</code>, <code>supabase</code>, etc.) before the event leaves your device. Performance tracing is disabled (<code>tracesSampleRate = 0</code>); only crashes and explicit error reports are sent.</li>
   </ul>
 
   <h2>Your controls</h2>
   <ul>
+    <li><strong>Disable anonymous install statistics:</strong> Settings &rsaquo; Privacy &rsaquo;
+      &ldquo;Send anonymous install statistics&rdquo;. On by default, disclosed on first launch
+      before anything is sent. Local-only mode disables it too.</li>
     <li><strong>Revoke folder access:</strong> Settings &rarr; CLI Tool Access &rarr; specific directory &rarr; remove bookmark.</li>
     <li><strong>Disable Yield Score / git tracking:</strong> Settings &rarr; Privacy &rarr; "Track git activity" toggle. Off by default; the toggle stops uploads immediately.</li>
     <li><strong>Delete API keys:</strong> Remove any provider config in Settings &rarr; Providers; the Keychain entry is deleted.</li>
@@ -191,6 +240,10 @@
 
   <h2>Data retention</h2>
   <ul>
+    <li><strong>Anonymous install rows</strong> are deleted 400 days after they were last
+      touched. They are not attached to an account, so account deletion does not reach them
+      &mdash; there is no link to follow. Deleting the app deletes the only copy of the
+      identifier, which is on your Mac.</li>
     <li>Local Keychain entries persist until you delete the provider or the app.</li>
     <li>On Supabase, account-active metrics are retained for up to <strong>18 months</strong> of rolling history. A nightly job prunes rows older than that from the long-tail analytical tables.</li>
     <li>If you set a shorter <code>data_retention</code> in Settings &rarr; Privacy, that value applies to your sessions, alerts, and device snapshots.</li>
