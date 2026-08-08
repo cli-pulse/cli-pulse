@@ -49,418 +49,367 @@
 }
 </script>
 
-<link rel="stylesheet" href="./assets/site.css">
+<style>
+:root {
+  --bg-page: #05050a;
+  --bg-surface: #0e0e16;
+  --bg-card: #13131f;
+  --text: #f5f5f7;
+  --text-muted: #8a8aa3;
+  --brand: #4a86ff;
+  --brand-light: #82b1ff;
+  --accent-green: #3ddc84;
+  --border: rgba(255,255,255,0.08);
+  --radius: 18px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
+  background: var(--bg-page);
+  color: var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a { color: var(--brand-light); text-decoration:none; }
+a:hover { text-decoration:underline; }
+a:focus-visible, button:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+img { max-width:100%; height:auto; display:block; }
+.container { width:min(1100px, 92%); margin-inline:auto; }
+
+header {
+  position:sticky; top:0; z-index:50;
+  background: rgba(5,5,10,0.8);
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid var(--border);
+}
+nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:700; color:#fff; }
+.brand img { width:28px; height:28px; border-radius:7px; }
+.nav-links { display:flex; gap:28px; list-style:none; font-size:0.92rem; }
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color:#fff; text-decoration:none; }
+.nav-toggle { display:none; background:transparent; border:0; color:var(--text); cursor:pointer; }
+.nav-toggle svg { width:24px; height:24px; }
+
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:12px 20px; border-radius:999px; font-weight:600; font-size:0.95rem;
+  transition: transform .15s ease, background .15s ease;
+  border:0; cursor:pointer;
+}
+.btn:hover { transform: translateY(-1px); text-decoration:none; }
+.btn-primary { background: var(--brand); color:#fff; }
+.btn-secondary { background: rgba(255,255,255,0.08); color:#fff; border:1px solid var(--border); }
+
+.hero { text-align:center; padding: 80px 0 40px; position:relative; overflow:hidden; }
+.hero::before {
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(circle at 50% 30%, rgba(74,134,255,0.18), transparent 55%);
+  pointer-events:none;
+}
+.eyebrow { color:var(--brand-light); font-weight:600; font-size:0.85rem; margin-bottom:16px; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height:1.05; letter-spacing:-0.03em; margin-bottom:20px; }
+.hero p { color:var(--text-muted); font-size: clamp(1.05rem, 2.2vw, 1.25rem); max-width:640px; margin:0 auto 32px; }
+.hero-actions { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:48px; }
+.hero-visual { position:relative; max-width:900px; margin:0 auto; }
+.hero-visual img { border-radius: var(--radius); box-shadow: 0 24px 80px rgba(0,0,0,0.6); border:1px solid var(--border); }
+
+.trust { padding: 40px 0 60px; text-align:center; }
+.trust-row { display:flex; flex-wrap:wrap; justify-content:center; gap:32px 48px; color:var(--text-muted); font-size:0.9rem; }
+.trust-row span { display:flex; align-items:center; gap:8px; }
+
+.section { padding: 80px 0; }
+.section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:12px; }
+.section-lede { color:var(--text-muted); font-size:1.05rem; max-width:560px; margin-bottom:40px; }
+.section-head { text-align:center; }
+.section-head .section-lede { margin-inline:auto; }
+
+.bento { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+.bento-card {
+  background: var(--bg-card); border:1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; text-align:left;
+}
+.bento-card h3 { font-size:1.1rem; margin-bottom:8px; display:flex; align-items:center; gap:10px; }
+.bento-card p { color:var(--text-muted); font-size:0.94rem; }
+.bento-card.wide { grid-column: span 2; }
+
+.providers { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:28px; }
+.chip { background: var(--bg-card); border:1px solid var(--border); padding:8px 14px; border-radius:999px; font-size:0.9rem; font-weight:600; }
+
+.download-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+.download-card { background: var(--bg-card); border:1px solid var(--border); border-radius: var(--radius); padding:24px; text-align:center; }
+.download-card h4 { margin:12px 0 4px; }
+.download-card small { color:var(--text-muted); font-size:0.8rem; display:block; margin-bottom:14px; }
+.download-card .emoji { font-size:1.8rem; line-height:1; }
+.code { background:#05050a; color:#e6e6f0; padding:12px; border-radius:10px; font-family: ui-monospace, Menlo, monospace; font-size:0.75rem; text-align:left; overflow-x:auto; }
+
+.faq { max-width:760px; margin:0 auto; display:grid; gap:12px; }
+details { background: var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; }
+summary { font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+summary::-webkit-details-marker { display:none; }
+summary svg { width:18px; height:18px; color:var(--text-muted); flex-shrink:0; }
+details p { color:var(--text-muted); margin-top:10px; font-size:0.95rem; }
+
+footer { border-top:1px solid var(--border); padding: 60px 0 30px; color:var(--text-muted); font-size:0.9rem; }
+.footer-grid { display:grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap:40px; margin-bottom:40px; }
+.footer-grid h4 { color:#fff; margin-bottom:14px; font-size:0.85rem; }
+.footer-grid ul { list-style:none; display:grid; gap:8px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .download-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .nav-links {
+    position:absolute; top:64px; left:0; right:0;
+    flex-direction:column; gap:0;
+    background: var(--bg-surface);
+    border-bottom:1px solid var(--border);
+    padding: 8px 0;
+    display:none;
+  }
+  .nav-links.is-open { display:flex; }
+  .nav-links li { width:100%; }
+  .nav-links a { display:block; padding:12px 24px; }
+  .nav-toggle { display:block; }
+  .nav-cta { display:none; }
+  .hero-actions { flex-direction:column; align-items:stretch; }
+  .hero-actions .btn { width:100%; }
+}
+@media (max-width: 560px) {
+  .bento, .download-grid { grid-template-columns: 1fr; }
+  .bento-card.wide { grid-column:auto; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction:column; }
+}
+</style>
 </head>
 <body>
 
-<header class="site-header">
+<header>
   <div class="container">
-    <a class="brand" href="./index.html" aria-label="CLI Pulse home">
-      <img src="./assets/app-icon.png" alt="CLI Pulse app icon" loading="lazy">
-      CLI Pulse
-    </a>
-
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
-
     <nav>
-      <ul class="nav-menu" id="navMenu">
+      <a class="brand" href="./index.html" aria-label="CLI Pulse home">
+        <img src="./assets/app-icon.png" alt="CLI Pulse app icon">
+        CLI Pulse
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="navMenu">
         <li><a href="#features">Features</a></li>
-        <li><a href="#platforms">Platforms</a></li>
         <li><a href="#providers">Providers</a></li>
         <li><a href="#privacy">Privacy</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li class="lang-switch"><a href="./zh/index.html" lang="zh-CN" aria-label="切换到中文">中文</a></li>
-        <li><a class="nav-cta" href="#download">Download</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="./zh/index.html" lang="zh-CN" aria-label="切换到中文">中文</a></li>
+        <li class="nav-cta"><a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download</a></li>
       </ul>
+
+      <a class="btn btn-primary nav-cta" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download</a>
     </nav>
   </div>
 </header>
 
 <main>
   <section class="hero" aria-labelledby="hero-title">
-    <svg class="pulse-decoration" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,100 L240,100 L300,140 L360,60 L420,160 L480,90 L540,110 L600,40 L660,130 L720,100 L960,100 L1020,80 L1080,120 L1200,100"></path>
-    </svg>
-
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <p class="hero-eyebrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-          </svg>
-          AI coding usage tracker
-        </p>
-        <h1 id="hero-title">One place to watch all your AI coding usage.</h1>
-        <p>CLI Pulse gathers usage, quotas, reset status, sessions, and cost estimates from the AI providers and CLI tools you already use — then shows them on Mac, iPhone, iPad, Apple Watch, and Android. Your provider keys and raw session logs stay on your device.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            Download on the App Store
-          </a>
-          <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
-              <path d="M12 2v20M2 12h20"></path>
-            </svg>
-            macOS DMG
-          </a>
-        </div>
-        <div class="hero-meta">
-          <span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            Keys stay local
-          </span>
-          <span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            macOS · iOS · watchOS · Android Beta
-          </span>
-        </div>
+    <div class="container">
+      <p class="eyebrow">AI coding usage tracker</p>
+      <h1 id="hero-title">One place to watch all your AI coding usage.</h1>
+      <p>CLI Pulse gathers usage, quotas, resets, sessions, and cost estimates from the AI providers and CLI tools you already use — then shows them on Mac, iPhone, iPad, Apple Watch, and Android. Your provider keys and raw session logs stay on your device.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download on the App Store</a>
+        <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">macOS DMG</a>
       </div>
-
       <div class="hero-visual">
-        <div class="device-laptop">
-          <img src="./assets/screenshot-macos-overview.png" width="2880" height="1800" alt="CLI Pulse overview on macOS, showing usage and quotas for multiple AI providers.">
-        </div>
-        <div class="device-phone">
-          <img src="./assets/screenshot-ios-overview.png" width="1290" height="2796" alt="CLI Pulse overview on iPhone, showing provider usage and reset status.">
-        </div>
+        <img src="./assets/screenshot-macos-overview.png" alt="CLI Pulse dashboard on macOS showing provider usage and quotas.">
       </div>
     </div>
   </section>
 
-  <section class="section section-alt" id="platforms" aria-labelledby="platforms-title">
+  <section class="trust">
     <div class="container">
-      <h2 class="section-title" id="platforms-title">Built for the devices you already use</h2>
-      <p class="section-lede">CLI Pulse runs natively across Apple platforms and is available as an internal beta on Android.</p>
-
-      <div class="platform-grid">
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#eef2ff;color:#2a5fcc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
-          </div>
-          <h3>macOS</h3>
-          <p>Menu-bar app with a local helper that scans session logs and talks directly to provider APIs.</p>
-          <span class="badge badge-available">Available</span>
-        </article>
-
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#f0f0f5;color:#333">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <line x1="12" y1="18" x2="12" y2="18"></line>
-            </svg>
-          </div>
-          <h3>iPhone &amp; iPad</h3>
-          <p>Carry the same dashboard in your pocket. View quotas, sessions, and alerts on the go.</p>
-          <span class="badge badge-available">Available</span>
-        </article>
-
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#f5f0ff;color:#6b21a8">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="6" y="4" width="12" height="16" rx="4" ry="4"></rect>
-              <line x1="12" y1="8" x2="12" y2="8"></line>
-            </svg>
-          </div>
-          <h3>Apple Watch</h3>
-          <p>Glanceable complications and a quick-view app for quota status without reaching for your phone.</p>
-          <span class="badge badge-available">Available</span>
-          <figure class="watch-preview">
-            <img src="./assets/screenshot-watch-overview.png" width="422" height="514" alt="CLI Pulse quota glance on Apple Watch." loading="lazy">
-          </figure>
-        </article>
-
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#e8f8ef;color:#1a6c3f">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <path d="M12 18h.01"></path>
-            </svg>
-          </div>
-          <h3>Android Beta</h3>
-          <p>Join the internal testing program to try the Android build early and help shape it.</p>
-          <span class="badge badge-beta">Beta</span>
-        </article>
+      <div class="trust-row">
+        <span>🖥 macOS · 📱 iOS · ⌚ watchOS · 🤖 Android Beta</span>
+        <span>🔐 Provider keys stay local</span>
+        <span>⚡ 50+ providers supported</span>
       </div>
     </div>
   </section>
 
-  <section class="section" id="providers" aria-labelledby="providers-title">
-    <div class="container provider-cloud">
-      <h2 class="section-title" id="providers-title">Works with the providers you already use</h2>
-      <p class="section-lede">Connect the AI coding agents and CLI tools already on your machine. CLI Pulse supports 50+ providers, including the ones below.</p>
-
-      <div class="provider-list">
-        <span class="provider-chip"><span class="provider-avatar" style="background:#e8d5c4;color:#1d1d1f">C</span> Claude</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#e5e5ea;color:#1d1d1f">Cx</span> Codex</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#dbeafe;color:#1d1d1f">G</span> Gemini</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#f2f2f7;color:#1d1d1f">Cu</span> Cursor</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#dbeafe;color:#1d1d1f">CP</span> Copilot</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#ede9fe;color:#1d1d1f">OR</span> OpenRouter</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#ffedd5;color:#1d1d1f">JB</span> JetBrains AI</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#f3f4f6;color:#1d1d1f">Ol</span> Ollama</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#f3e8ff;color:#1d1d1f">W</span> Warp</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#e0f2fe;color:#1d1d1f">A</span> Augment</span>
-        <span class="provider-chip provider-more">50+ more</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt" id="features" aria-labelledby="features-title">
+  <section class="section" id="features" aria-labelledby="features-title">
     <div class="container">
-      <h2 class="section-title" id="features-title">What you can see and do</h2>
-      <p class="section-lede">A focused dashboard for the numbers that matter when you live inside AI coding agents.</p>
-
-      <div class="outcome-grid">
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 20v-6M6 20V10M18 20V4"></path>
-            </svg>
-            Usage and quota visibility
-          </h3>
-          <p>See tokens, requests, remaining quota, and plan tier for each provider in one place, updated from your Mac's local scanner and provider APIs.</p>
+      <div class="section-head">
+        <h2 class="section-title" id="features-title">Everything at a glance</h2>
+        <p class="section-lede">A focused dashboard for the numbers that matter when you live inside AI coding agents.</p>
+      </div>
+      <div class="bento">
+        <article class="bento-card wide">
+          <h3>📊 Usage &amp; quota visibility</h3>
+          <p>See tokens, requests, remaining quota, plan tier, and reset dates for each provider in one place.</p>
         </article>
-
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-            </svg>
-            Reset status and alerts
-          </h3>
-          <p>Track which quotas have reset, which are close to their limit, and get alerts when a provider is running low — without opening each dashboard.</p>
+        <article class="bento-card">
+          <h3>🔔 Reset status &amp; alerts</h3>
+          <p>Know which quotas reset daily, weekly, or monthly and get alerts before you hit a limit.</p>
         </article>
-
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="12" y1="1" x2="12" y2="23"></line>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
-            Cost estimates
-          </h3>
-          <p>Get local cost estimates based on each provider's published pricing. Useful for spotting runaway spend, but not a replacement for your official bill.</p>
+        <article class="bento-card">
+          <h3>💰 Cost estimates</h3>
+          <p>Local estimates from published pricing help you spot runaway spend before the bill arrives.</p>
         </article>
-
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-              <path d="M16 10l-4-3-4 3"></path>
-            </svg>
-            Session visibility and control
-          </h3>
-          <p>When the macOS helper is running and you are signed in, view live AI-CLI sessions from your iPhone or iPad and respond to prompts or permission requests.</p>
+        <article class="bento-card wide">
+          <h3>📱 Session control from mobile</h3>
+          <p>When the macOS helper is running, view and respond to AI-CLI sessions from your iPhone or iPad.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
-    <div class="container privacy-grid">
-      <div class="privacy-content">
+  <section class="section" id="providers" style="background:var(--bg-surface)" aria-labelledby="providers-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" id="providers-title">Works with the tools you already use</h2>
+        <p class="section-lede">Connect the AI coding agents and CLI tools already on your machine.</p>
+      </div>
+      <div class="providers">
+        <span class="chip">Claude</span>
+        <span class="chip">Codex</span>
+        <span class="chip">Gemini</span>
+        <span class="chip">Cursor</span>
+        <span class="chip">Copilot</span>
+        <span class="chip">OpenRouter</span>
+        <span class="chip">JetBrains AI</span>
+        <span class="chip">Ollama</span>
+        <span class="chip">Warp</span>
+        <span class="chip">Augment</span>
+        <span class="chip">+ 50 more</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="privacy" aria-labelledby="privacy-title">
+    <div class="container">
+      <div class="section-head">
         <h2 class="section-title" id="privacy-title">Privacy by design</h2>
-        <p class="section-lede">The credentials and logs you are most protective of never leave your device. Only aggregated numbers and operational metadata sync to your account.</p>
-
-        <ul class="privacy-list">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Provider API keys stay in your device's secure store
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Provider session cookies and bridged OAuth tokens stay local
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Raw session-log contents are scanned on your Mac only
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Sync uses only aggregated usage, quota summaries, and display metadata
-          </li>
-        </ul>
-
-        <div class="privacy-links">
-          <a href="./privacy.html">Privacy Policy</a>
-          <a href="./data-handling.html">Data Handling</a>
-          <a href="./security.html">Security</a>
-        </div>
+        <p class="section-lede">The credentials and logs you worry about never leave your device.</p>
       </div>
-
-      <div class="privacy-visual" aria-hidden="true">
-        <div class="data-card">
-          <h4>What stays on device</h4>
-          <div class="data-row"><span>API keys</span><span class="stay-local">Local</span></div>
-          <div class="data-row"><span>Session cookies</span><span class="stay-local">Local</span></div>
-          <div class="data-row"><span>OAuth tokens</span><span class="stay-local">Local</span></div>
-          <div class="data-row"><span>Raw session logs</span><span class="stay-local">Local</span></div>
-          <div class="data-row"><span>Aggregated metrics</span><span class="synced">Synced</span></div>
-          <div class="data-row"><span>Quota summaries</span><span class="synced">Synced</span></div>
-        </div>
+      <div class="bento" style="max-width:900px; margin-inline:auto">
+        <article class="bento-card">
+          <h3>🔒 API keys</h3>
+          <p>Stored in your device's secure keychain, never uploaded.</p>
+        </article>
+        <article class="bento-card">
+          <h3>🍪 Session cookies</h3>
+          <p>Used locally as headers, never sent to our servers.</p>
+        </article>
+        <article class="bento-card">
+          <h3>📝 Raw logs</h3>
+          <p>Scanned on-device only. Only aggregated numbers sync.</p>
+        </article>
+        <article class="bento-card">
+          <h3>☁️ Synced data</h3>
+          <p>Token counts, quota summaries, cost estimates, and display metadata.</p>
+        </article>
       </div>
+      <p style="text-align:center; margin-top:32px; color:var(--text-muted)">Read the full <a href="./privacy.html">Privacy Policy</a> and <a href="./data-handling.html">Data Handling</a> breakdown.</p>
     </div>
   </section>
 
-  <section class="section download-section" id="download" aria-labelledby="download-title">
+  <section class="section" id="download" style="background:var(--bg-surface)" aria-labelledby="download-title">
     <div class="container">
-      <h2 class="section-title" id="download-title">Get CLI Pulse</h2>
-      <p class="section-lede">Download from the App Store, grab the signed macOS DMG, or join the Android internal testing program.</p>
-
-      <div class="download-options">
+      <div class="section-head">
+        <h2 class="section-title" id="download-title">Get CLI Pulse</h2>
+        <p class="section-lede">Choose the channel that fits your workflow.</p>
+      </div>
+      <div class="download-grid">
         <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <h3>App Store</h3>
-          <p class="platform-note">iPhone · iPad · Apple Watch · Mac</p>
-          <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download</a>
+          <div class="emoji" aria-hidden="true">🍎</div>
+          <h4>App Store</h4>
+          <small>iPhone · iPad · Watch · Mac</small>
+          <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709" style="width:100%">Download</a>
         </article>
-
         <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-          <h3>macOS</h3>
-          <p class="platform-note">Signed &amp; notarized DMG</p>
-          <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" style="color:#1d1d1f;border-color:rgba(0,0,0,.18)">Download DMG</a>
+          <div class="emoji" aria-hidden="true">🖥</div>
+          <h4>macOS DMG</h4>
+          <small>Signed &amp; notarized</small>
+          <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" style="width:100%">Download</a>
         </article>
-
         <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01"></path>
-          </svg>
-          <h3>Android Beta</h3>
-          <p class="platform-note">Google Play internal test</p>
-          <a class="btn btn-primary" href="https://play.google.com/apps/internaltest/4699926885235347963" style="background:var(--accent-green);color:#0d2818;box-shadow:none">Join Beta</a>
+          <div class="emoji" aria-hidden="true">🤖</div>
+          <h4>Android Beta</h4>
+          <small>Google Play internal test</small>
+          <a class="btn btn-secondary" href="https://play.google.com/apps/internaltest/4699926885235347963" style="width:100%; background:var(--accent-green); color:#0d2818; border:0">Join Beta</a>
         </article>
-
         <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <polyline points="6 9 10 12 6 15"></polyline>
-            <line x1="13" y1="15" x2="18" y2="15"></line>
-          </svg>
-          <h3>Homebrew</h3>
-          <p class="platform-note">macOS package manager</p>
-          <div class="install-code"><pre><code>brew tap cli-pulse/tap
+          <div class="emoji" aria-hidden="true">🍺</div>
+          <h4>Homebrew</h4>
+          <small>macOS package manager</small>
+          <div class="code">brew tap cli-pulse/tap
 brew trust cli-pulse/tap
-brew install --cask cli-pulse</code></pre></div>
+brew install --cask cli-pulse</div>
         </article>
       </div>
-
-      <p class="beta-note">You can also sideload the Android APK from <a href="https://github.com/cli-pulse/cli-pulse/releases">GitHub Releases</a>. Binaries from any other source are not authentic.</p>
     </div>
   </section>
 
-  <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+  <section class="section" aria-labelledby="faq-title">
     <div class="container">
-      <h2 class="section-title" id="faq-title" style="text-align:center">Frequently asked questions</h2>
-      <p class="section-lede" style="text-align:center;margin-inline:auto">Quick answers about the product, data, and support.</p>
-
-      <div class="faq-list">
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-            What is CLI Pulse?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-1">
-            <div>
-              CLI Pulse is a developer app that monitors AI coding usage, quotas, resets, sessions, and cost estimates across the providers and CLI tools you already use. It runs on macOS, iOS, watchOS, and Android (beta).
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-            Which platforms are supported?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-2">
-            <div>
-              macOS, iPhone, iPad, and Apple Watch are available on the App Store. Android is available through a Google Play internal testing beta. Windows and Linux clients are not offered today.
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-            Does any data leave my device?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-3">
-            <div>
-              Your provider API keys, session cookies, OAuth tokens, and raw session-log contents stay on your device. CLI Pulse syncs only aggregated usage metrics, quota summaries, cost estimates, session display metadata, and device heartbeat information to your account. See the <a href="./privacy.html">Privacy Policy</a> and <a href="./data-handling.html">Data Handling</a> pages for the full breakdown.
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-            Are cost numbers the same as my provider bill?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-4">
-            <div>
-              No. CLI Pulse estimates cost locally from each provider's published pricing and your recorded token or request counts. Provider invoices remain the authoritative source. Estimates are useful for spotting trends, not for reconciliation.
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
-            How do I get support?
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-5">
-            <div>
-              Email <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a> for general support, or open an issue on <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a> for bug reports and feature requests. Security disclosures should be sent privately; see <a href="./security.html">Security</a>.
-            </div>
-          </div>
-        </article>
+      <div class="section-head">
+        <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>What is CLI Pulse? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>A developer app for monitoring usage, quotas, resets, sessions, and cost estimates across the AI coding providers and CLI tools you already use.</p>
+        </details>
+        <details>
+          <summary>Which platforms are supported? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>macOS, iPhone, iPad, and Apple Watch are available on the App Store. Android is available via Google Play internal testing. Windows and Linux are not supported.</p>
+        </details>
+        <details>
+          <summary>Does any data leave my device? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>Your provider API keys, session cookies, OAuth tokens, and raw session-log contents stay on your device. CLI Pulse syncs only aggregated usage metrics, quota summaries, cost estimates, session display metadata, and device heartbeat information to your account.</p>
+        </details>
+        <details>
+          <summary>Are cost numbers the same as my provider bill? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>No. CLI Pulse estimates cost locally from each provider's published pricing and your recorded token or request counts. Provider invoices remain the authoritative source.</p>
+        </details>
+        <details>
+          <summary>How do I get support? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>Email <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a> for general support, or open an issue on <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a> for bug reports and feature requests.</p>
+        </details>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand">
-          <img src="./assets/app-icon.png" alt="" loading="lazy">
-          CLI Pulse
-        </div>
-        <p>A developer app for monitoring AI coding usage, quotas, resets, sessions, and cost estimates across the providers you already use.</p>
+      <div>
+        <strong>CLI Pulse</strong>
+        <p style="margin-top:10px">AI coding usage tracker for developers. Monitor the AI providers and CLI tools you already use.</p>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>Product</h4>
         <ul>
           <li><a href="#features">Features</a></li>
-          <li><a href="#platforms">Platforms</a></li>
           <li><a href="#providers">Providers</a></li>
           <li><a href="#download">Download</a></li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>Trust</h4>
         <ul>
           <li><a href="./privacy.html">Privacy</a></li>
@@ -469,8 +418,7 @@ brew install --cask cli-pulse</code></pre></div>
           <li><a href="./terms.html">Terms</a></li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>Support</h4>
         <ul>
           <li><a href="./support.html">Support Center</a></li>
@@ -480,14 +428,32 @@ brew install --cask cli-pulse</code></pre></div>
         </ul>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>&copy; 2026 CLI Pulse · Jason Ye &amp; Yuqi Cao. All rights reserved.</p>
-      <p>Closed-source commercial software. See <a href="https://github.com/cli-pulse/cli-pulse/blob/main/LICENSE.md">LICENSE.md</a>.</p>
+      <p><a href="https://github.com/cli-pulse/cli-pulse/blob/main/LICENSE.md">LICENSE.md</a></p>
     </div>
   </div>
 </footer>
 
-<script src="./assets/site.js"></script>
+<script>
+(function () {
+  'use strict';
+  var navToggle = document.getElementById('navToggle');
+  var navMenu = document.getElementById('navMenu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = navMenu.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
+</script>
+
 </body>
 </html>

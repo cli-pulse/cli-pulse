@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://cli-pulse.github.io/cli-pulse/zh/">
 <link rel="alternate" hreflang="en" href="https://cli-pulse.github.io/cli-pulse/">
 <link rel="alternate" hreflang="zh-CN" href="https://cli-pulse.github.io/cli-pulse/zh/">
+<link rel="alternate" hreflang="x-default" href="https://cli-pulse.github.io/cli-pulse/">
 <link rel="icon" type="image/png" href="../assets/app-icon.png">
 
 <!-- Open Graph -->
@@ -48,418 +49,367 @@
 }
 </script>
 
-<link rel="stylesheet" href="../assets/site.css">
+<style>
+:root {
+  --bg-page: #05050a;
+  --bg-surface: #0e0e16;
+  --bg-card: #13131f;
+  --text: #f5f5f7;
+  --text-muted: #8a8aa3;
+  --brand: #4a86ff;
+  --brand-light: #82b1ff;
+  --accent-green: #3ddc84;
+  --border: rgba(255,255,255,0.08);
+  --radius: 18px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after { animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--bg-page);
+  color: var(--text);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a { color: var(--brand-light); text-decoration:none; }
+a:hover { text-decoration:underline; }
+a:focus-visible, button:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+img { max-width:100%; height:auto; display:block; }
+.container { width:min(1100px, 92%); margin-inline:auto; }
+
+header {
+  position:sticky; top:0; z-index:50;
+  background: rgba(5,5,10,0.8);
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid var(--border);
+}
+nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:700; color:#fff; }
+.brand img { width:28px; height:28px; border-radius:7px; }
+.nav-links { display:flex; gap:28px; list-style:none; font-size:0.92rem; }
+.nav-links a { color: var(--text-muted); }
+.nav-links a:hover { color:#fff; text-decoration:none; }
+.nav-toggle { display:none; background:transparent; border:0; color:var(--text); cursor:pointer; }
+.nav-toggle svg { width:24px; height:24px; }
+
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:12px 20px; border-radius:999px; font-weight:600; font-size:0.95rem;
+  transition: transform .15s ease, background .15s ease;
+  border:0; cursor:pointer;
+}
+.btn:hover { transform: translateY(-1px); text-decoration:none; }
+.btn-primary { background: var(--brand); color:#fff; }
+.btn-secondary { background: rgba(255,255,255,0.08); color:#fff; border:1px solid var(--border); }
+
+.hero { text-align:center; padding: 80px 0 40px; position:relative; overflow:hidden; }
+.hero::before {
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(circle at 50% 30%, rgba(74,134,255,0.18), transparent 55%);
+  pointer-events:none;
+}
+.eyebrow { color:var(--brand-light); font-weight:600; font-size:0.85rem; margin-bottom:16px; }
+.hero h1 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); line-height:1.1; letter-spacing:-0.02em; margin-bottom:20px; }
+.hero p { color:var(--text-muted); font-size: clamp(1.05rem, 2.2vw, 1.25rem); max-width:640px; margin:0 auto 32px; }
+.hero-actions { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:48px; }
+.hero-visual { position:relative; max-width:900px; margin:0 auto; }
+.hero-visual img { border-radius: var(--radius); box-shadow: 0 24px 80px rgba(0,0,0,0.6); border:1px solid var(--border); }
+
+.trust { padding: 40px 0 60px; text-align:center; }
+.trust-row { display:flex; flex-wrap:wrap; justify-content:center; gap:32px 48px; color:var(--text-muted); font-size:0.9rem; }
+.trust-row span { display:flex; align-items:center; gap:8px; }
+
+.section { padding: 80px 0; }
+.section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:12px; }
+.section-lede { color:var(--text-muted); font-size:1.05rem; max-width:560px; margin-bottom:40px; }
+.section-head { text-align:center; }
+.section-head .section-lede { margin-inline:auto; }
+
+.bento { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+.bento-card {
+  background: var(--bg-card); border:1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; text-align:left;
+}
+.bento-card h3 { font-size:1.1rem; margin-bottom:8px; display:flex; align-items:center; gap:10px; }
+.bento-card p { color:var(--text-muted); font-size:0.94rem; }
+.bento-card.wide { grid-column: span 2; }
+
+.providers { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:28px; }
+.chip { background: var(--bg-card); border:1px solid var(--border); padding:8px 14px; border-radius:999px; font-size:0.9rem; font-weight:600; }
+
+.download-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:16px; }
+.download-card { background: var(--bg-card); border:1px solid var(--border); border-radius: var(--radius); padding:24px; text-align:center; }
+.download-card h4 { margin:12px 0 4px; }
+.download-card small { color:var(--text-muted); font-size:0.8rem; display:block; margin-bottom:14px; }
+.download-card .emoji { font-size:1.8rem; line-height:1; }
+.code { background:#05050a; color:#e6e6f0; padding:12px; border-radius:10px; font-family: ui-monospace, Menlo, "SF Mono", "PingFang SC", monospace; font-size:0.75rem; text-align:left; overflow-x:auto; }
+
+.faq { max-width:760px; margin:0 auto; display:grid; gap:12px; }
+details { background: var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; }
+summary { font-weight:700; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+summary::-webkit-details-marker { display:none; }
+summary svg { width:18px; height:18px; color:var(--text-muted); flex-shrink:0; }
+details p { color:var(--text-muted); margin-top:10px; font-size:0.95rem; }
+
+footer { border-top:1px solid var(--border); padding: 60px 0 30px; color:var(--text-muted); font-size:0.9rem; }
+.footer-grid { display:grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap:40px; margin-bottom:40px; }
+.footer-grid h4 { color:#fff; margin-bottom:14px; font-size:0.85rem; }
+.footer-grid ul { list-style:none; display:grid; gap:8px; }
+.footer-bottom { border-top:1px solid var(--border); padding-top:24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; }
+
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .download-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .nav-links {
+    position:absolute; top:64px; left:0; right:0;
+    flex-direction:column; gap:0;
+    background: var(--bg-surface);
+    border-bottom:1px solid var(--border);
+    padding: 8px 0;
+    display:none;
+  }
+  .nav-links.is-open { display:flex; }
+  .nav-links li { width:100%; }
+  .nav-links a { display:block; padding:12px 24px; }
+  .nav-toggle { display:block; }
+  .nav-cta { display:none; }
+  .hero-actions { flex-direction:column; align-items:stretch; }
+  .hero-actions .btn { width:100%; }
+}
+@media (max-width: 560px) {
+  .bento, .download-grid { grid-template-columns: 1fr; }
+  .bento-card.wide { grid-column:auto; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction:column; }
+}
+</style>
 </head>
 <body>
 
-<header class="site-header">
+<header>
   <div class="container">
-    <a class="brand" href="./index.html" aria-label="CLI Pulse 首页">
-      <img src="../assets/app-icon.png" alt="CLI Pulse 应用图标" loading="lazy">
-      CLI Pulse
-    </a>
-
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="切换导航">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
-
     <nav>
-      <ul class="nav-menu" id="navMenu">
+      <a class="brand" href="./index.html" aria-label="CLI Pulse 首页">
+        <img src="../assets/app-icon.png" alt="CLI Pulse 应用图标">
+        CLI Pulse
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="切换导航">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="navMenu">
         <li><a href="#features">功能</a></li>
-        <li><a href="#platforms">平台</a></li>
         <li><a href="#providers">提供商</a></li>
         <li><a href="#privacy">隐私</a></li>
-        <li><a href="#faq">常见问题</a></li>
-        <li class="lang-switch"><a href="../index.html" lang="en" aria-label="Switch to English">EN</a></li>
-        <li><a class="nav-cta" href="#download">下载</a></li>
+        <li><a href="#download">下载</a></li>
+        <li><a href="../index.html" lang="en" aria-label="Switch to English">EN</a></li>
+        <li class="nav-cta"><a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">下载</a></li>
       </ul>
+
+      <a class="btn btn-primary nav-cta" href="https://apps.apple.com/app/cli-pulse/id6761163709">下载</a>
     </nav>
   </div>
 </header>
 
 <main>
   <section class="hero" aria-labelledby="hero-title">
-    <svg class="pulse-decoration" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,100 L240,100 L300,140 L360,60 L420,160 L480,90 L540,110 L600,40 L660,130 L720,100 L960,100 L1020,80 L1080,120 L1200,100"></path>
-    </svg>
-
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <p class="hero-eyebrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-          </svg>
-          AI 编程用量追踪器
-        </p>
-        <h1 id="hero-title">在一个地方查看你所有的 AI 编程用量。</h1>
-        <p>CLI Pulse 汇集你已使用的 AI 提供商和 CLI 工具的用量、额度、重置状态、会话和费用估算——并在 Mac、iPhone、iPad、Apple Watch 和 Android 上展示。你的 Provider API Key 和原始会话日志只留在设备上。</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            在 App Store 下载
-          </a>
-          <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
-              <path d="M12 2v20M2 12h20"></path>
-            </svg>
-            macOS DMG
-          </a>
-        </div>
-        <div class="hero-meta">
-          <span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            密钥本地保存
-          </span>
-          <span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            macOS · iOS · watchOS · Android Beta
-          </span>
-        </div>
+    <div class="container">
+      <p class="eyebrow">AI 编程用量追踪器</p>
+      <h1 id="hero-title">在一个地方看清所有 AI 编程用量。</h1>
+      <p>CLI Pulse 把你正在使用的 AI 提供商和 CLI 工具的用量、额度、重置状态、会话和费用估算汇总到一起，展示在 Mac、iPhone、iPad、Apple Watch 和 Android 上。Provider API Key 和原始会话日志只留在你的设备上。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">App Store 下载</a>
+        <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">macOS DMG</a>
       </div>
-
       <div class="hero-visual">
-        <div class="device-laptop">
-          <img src="../assets/screenshot-macos-overview.png" width="2880" height="1800" alt="CLI Pulse 在 macOS 上的总览界面，显示多个 AI 提供商的用量与额度。">
-        </div>
-        <div class="device-phone">
-          <img src="../assets/screenshot-ios-overview.png" width="1290" height="2796" alt="CLI Pulse 在 iPhone 上的总览界面，显示提供商用量与重置状态。">
-        </div>
+        <img src="../assets/screenshot-macos-overview.png" alt="CLI Pulse 在 macOS 上的总览界面，显示多个提供商的用量与额度。">
       </div>
     </div>
   </section>
 
-  <section class="section section-alt" id="platforms" aria-labelledby="platforms-title">
+  <section class="trust">
     <div class="container">
-      <h2 class="section-title" id="platforms-title">为你已有的设备打造</h2>
-      <p class="section-lede">CLI Pulse 原生运行于 Apple 平台，并在 Android 上以内部测试版提供。</p>
-
-      <div class="platform-grid">
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#eef2ff;color:#2a5fcc">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
-          </div>
-          <h3>macOS</h3>
-          <p>菜单栏应用，配合本地 helper 扫描会话日志并直接调用 Provider API。</p>
-          <span class="badge badge-available">已上线</span>
-        </article>
-
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#f0f0f5;color:#333">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <line x1="12" y1="18" x2="12" y2="18"></line>
-            </svg>
-          </div>
-          <h3>iPhone &amp; iPad</h3>
-          <p>把同一个仪表盘放进口袋。随时查看额度、会话和提醒。</p>
-          <span class="badge badge-available">已上线</span>
-        </article>
-
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#f5f0ff;color:#6b21a8">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="6" y="4" width="12" height="16" rx="4" ry="4"></rect>
-              <line x1="12" y1="8" x2="12" y2="8"></line>
-            </svg>
-          </div>
-          <h3>Apple Watch</h3>
-          <p>可扫一眼的复杂功能（complications）和快速查看应用，无需掏出手机。</p>
-          <span class="badge badge-available">已上线</span>
-          <figure class="watch-preview">
-            <img src="../assets/screenshot-watch-overview.png" width="422" height="514" alt="CLI Pulse 在 Apple Watch 上的额度一览。" loading="lazy">
-          </figure>
-        </article>
-
-        <article class="platform-card">
-          <div class="platform-icon" style="background:#e8f8ef;color:#1a6c3f">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-              <path d="M12 18h.01"></path>
-            </svg>
-          </div>
-          <h3>Android Beta</h3>
-          <p>加入内部测试计划，提前试用 Android 版本并帮助我们完善。</p>
-          <span class="badge badge-beta">Beta</span>
-        </article>
+      <div class="trust-row">
+        <span>🖥 macOS · 📱 iOS · ⌚ watchOS · 🤖 Android Beta</span>
+        <span>🔐 Provider API Key 留在本地</span>
+        <span>⚡ 支持 50+ 家提供商</span>
       </div>
     </div>
   </section>
 
-  <section class="section" id="providers" aria-labelledby="providers-title">
-    <div class="container provider-cloud">
-      <h2 class="section-title" id="providers-title">兼容你已有的提供商</h2>
-      <p class="section-lede">连接你已安装在机器上的 AI 编程 Agent 和 CLI 工具。CLI Pulse 支持 50+ 家提供商，包括以下这些。</p>
-
-      <div class="provider-list">
-        <span class="provider-chip"><span class="provider-avatar" style="background:#e8d5c4;color:#1d1d1f">C</span> Claude</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#e5e5ea;color:#1d1d1f">Cx</span> Codex</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#dbeafe;color:#1d1d1f">G</span> Gemini</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#f2f2f7;color:#1d1d1f">Cu</span> Cursor</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#dbeafe;color:#1d1d1f">CP</span> Copilot</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#ede9fe;color:#1d1d1f">OR</span> OpenRouter</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#ffedd5;color:#1d1d1f">JB</span> JetBrains AI</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#f3f4f6;color:#1d1d1f">Ol</span> Ollama</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#f3e8ff;color:#1d1d1f">W</span> Warp</span>
-        <span class="provider-chip"><span class="provider-avatar" style="background:#e0f2fe;color:#1d1d1f">A</span> Augment</span>
-        <span class="provider-chip provider-more">50+ 更多</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt" id="features" aria-labelledby="features-title">
+  <section class="section" id="features" aria-labelledby="features-title">
     <div class="container">
-      <h2 class="section-title" id="features-title">你能看到和做什么</h2>
-      <p class="section-lede">为长期泡在 AI 编程 Agent 里的人准备的聚焦式仪表盘。</p>
-
-      <div class="outcome-grid">
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 20v-6M6 20V10M18 20V4"></path>
-            </svg>
-            用量与额度可见性
-          </h3>
-          <p>在一个地方查看每家提供商的 token 数、请求数、剩余额度和套餐等级，数据来自 Mac 本地 scanner 和 Provider API。</p>
+      <div class="section-head">
+        <h2 class="section-title" id="features-title">一目了然</h2>
+        <p class="section-lede">为每天泡在 AI 编程 agent 里的开发者准备的聚焦仪表盘。</p>
+      </div>
+      <div class="bento">
+        <article class="bento-card wide">
+          <h3>📊 用量与额度可视化</h3>
+          <p>在一个界面查看每个提供商的 token 数、请求数、剩余额度、套餐等级和重置日期。</p>
         </article>
-
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-            </svg>
-            重置状态与提醒
-          </h3>
-          <p>追踪哪些额度已经重置、哪些接近上限，并在提供商快用完时收到提醒——无需逐个打开后台。</p>
+        <article class="bento-card">
+          <h3>🔔 重置状态与提醒</h3>
+          <p>清楚知道哪些额度按日、周、月重置，并在接近上限时收到提醒。</p>
         </article>
-
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="12" y1="1" x2="12" y2="23"></line>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
-            费用估算
-          </h3>
-          <p>根据各提供商公布的定价，在本地估算费用。适合发现异常开销，但不能替代官方账单。</p>
+        <article class="bento-card">
+          <h3>💰 费用估算</h3>
+          <p>基于各提供商公开定价在本地估算费用，帮你在账单到来前发现异常支出。</p>
         </article>
-
-        <article class="outcome-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-              <path d="M16 10l-4-3-4 3"></path>
-            </svg>
-            会话可见性与控制
-          </h3>
-          <p>macOS helper 运行且你已登录时，可在 iPhone 或 iPad 上查看 Mac 上的实时 AI-CLI 会话，并响应提示或权限请求。</p>
+        <article class="bento-card wide">
+          <h3>📱 从移动端控制会话</h3>
+          <p>macOS helper 运行时，可在 iPhone 或 iPad 上查看并响应 AI-CLI 会话。</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
-    <div class="container privacy-grid">
-      <div class="privacy-content">
-        <h2 class="section-title" id="privacy-title">隐私优先</h2>
-        <p class="section-lede">你最敏感的凭证和日志不会离开设备。只有聚合后的数字和运行元数据会同步到你的账户。</p>
-
-        <ul class="privacy-list">
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Provider API Key 留在设备安全存储中
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Provider 会话 Cookie 和桥接 OAuth Token 留在本地
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            原始会话日志内容仅在 Mac 上扫描
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            同步仅使用聚合用量、额度摘要和展示元数据
-          </li>
-        </ul>
-
-        <div class="privacy-links">
-          <a href="../privacy.html">隐私政策</a>
-          <a href="../data-handling.html">数据处理</a>
-          <a href="../security.html">安全</a>
-        </div>
-      </div>
-
-      <div class="privacy-visual" aria-hidden="true">
-        <div class="data-card">
-          <h4>哪些数据留在设备上</h4>
-          <div class="data-row"><span>API Key</span><span class="stay-local">本地</span></div>
-          <div class="data-row"><span>会话 Cookie</span><span class="stay-local">本地</span></div>
-          <div class="data-row"><span>OAuth Token</span><span class="stay-local">本地</span></div>
-          <div class="data-row"><span>原始会话日志</span><span class="stay-local">本地</span></div>
-          <div class="data-row"><span>聚合用量指标</span><span class="synced">同步</span></div>
-          <div class="data-row"><span>额度摘要</span><span class="synced">同步</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section download-section" id="download" aria-labelledby="download-title">
+  <section class="section" id="providers" style="background:var(--bg-surface)" aria-labelledby="providers-title">
     <div class="container">
-      <h2 class="section-title" id="download-title">获取 CLI Pulse</h2>
-      <p class="section-lede">从 App Store 下载、获取已签名的 macOS DMG，或加入 Android 内部测试计划。也支持用 Homebrew 安装。</p>
+      <div class="section-head">
+        <h2 class="section-title" id="providers-title">与你已有的工具协同工作</h2>
+        <p class="section-lede">连接你机器上已经安装的 AI 编程 agent 和 CLI 工具。</p>
+      </div>
+      <div class="providers">
+        <span class="chip">Claude</span>
+        <span class="chip">Codex</span>
+        <span class="chip">Gemini</span>
+        <span class="chip">Cursor</span>
+        <span class="chip">Copilot</span>
+        <span class="chip">OpenRouter</span>
+        <span class="chip">JetBrains AI</span>
+        <span class="chip">Ollama</span>
+        <span class="chip">Warp</span>
+        <span class="chip">Augment</span>
+        <span class="chip">+ 50 更多</span>
+      </div>
+    </div>
+  </section>
 
-      <div class="download-options">
-        <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <h3>App Store</h3>
-          <p class="platform-note">iPhone · iPad · Apple Watch · Mac</p>
-          <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">下载</a>
+  <section class="section" id="privacy" aria-labelledby="privacy-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" id="privacy-title">隐私优先设计</h2>
+        <p class="section-lede">你担心的凭证和日志永远不会离开你的设备。</p>
+      </div>
+      <div class="bento" style="max-width:900px; margin-inline:auto">
+        <article class="bento-card">
+          <h3>🔒 API Key</h3>
+          <p>存储在设备的安全密钥链中，不会上传。</p>
         </article>
-
-        <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-          <h3>macOS</h3>
-          <p class="platform-note">已签名并公证的 DMG</p>
-          <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" style="color:#1d1d1f;border-color:rgba(0,0,0,.18)">下载 DMG</a>
+        <article class="bento-card">
+          <h3>🍪 会话 Cookie</h3>
+          <p>仅在本地作为请求头使用，不会发往我们的服务器。</p>
         </article>
-
-        <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01"></path>
-          </svg>
-          <h3>Android Beta</h3>
-          <p class="platform-note">Google Play 内部测试</p>
-          <a class="btn btn-primary" href="https://play.google.com/apps/internaltest/4699926885235347963" style="background:var(--accent-green);color:#0d2818;box-shadow:none">加入 Beta</a>
+        <article class="bento-card">
+          <h3>📝 原始日志</h3>
+          <p>仅在设备上扫描，只同步聚合后的数字。</p>
         </article>
+        <article class="bento-card">
+          <h3>☁️ 同步数据</h3>
+          <p>token 计数、额度摘要、费用估算和展示用元数据。</p>
+        </article>
+      </div>
+      <p style="text-align:center; margin-top:32px; color:var(--text-muted)">阅读完整的 <a href="../privacy.html">隐私政策</a> 和 <a href="../data-handling.html">数据处理</a> 说明。</p>
+    </div>
+  </section>
 
+  <section class="section" id="download" style="background:var(--bg-surface)" aria-labelledby="download-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title" id="download-title">获取 CLI Pulse</h2>
+        <p class="section-lede">选择适合你工作流的渠道。</p>
+      </div>
+      <div class="download-grid">
         <article class="download-card">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <polyline points="6 9 10 12 6 15"></polyline>
-            <line x1="13" y1="15" x2="18" y2="15"></line>
-          </svg>
-          <h3>Homebrew</h3>
-          <p class="platform-note">macOS 包管理器</p>
-          <div class="install-code"><pre><code>brew tap cli-pulse/tap
+          <div class="emoji" aria-hidden="true">🍎</div>
+          <h4>App Store</h4>
+          <small>iPhone · iPad · Watch · Mac</small>
+          <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709" style="width:100%">下载</a>
+        </article>
+        <article class="download-card">
+          <div class="emoji" aria-hidden="true">🖥</div>
+          <h4>macOS DMG</h4>
+          <small>已签名并公证</small>
+          <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" style="width:100%">下载</a>
+        </article>
+        <article class="download-card">
+          <div class="emoji" aria-hidden="true">🤖</div>
+          <h4>Android Beta</h4>
+          <small>Google Play 内部测试</small>
+          <a class="btn btn-secondary" href="https://play.google.com/apps/internaltest/4699926885235347963" style="width:100%; background:var(--accent-green); color:#0d2818; border:0">加入 Beta</a>
+        </article>
+        <article class="download-card">
+          <div class="emoji" aria-hidden="true">🍺</div>
+          <h4>Homebrew</h4>
+          <small>macOS 包管理器</small>
+          <div class="code">brew tap cli-pulse/tap
 brew trust cli-pulse/tap
-brew install --cask cli-pulse</code></pre></div>
+brew install --cask cli-pulse</div>
         </article>
       </div>
-
-      <p class="beta-note">你也可以从 <a href="https://github.com/cli-pulse/cli-pulse/releases">GitHub Releases</a> 侧载 Android APK。其他来源的二进制文件均非正版。</p>
     </div>
   </section>
 
-  <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+  <section class="section" aria-labelledby="faq-title">
     <div class="container">
-      <h2 class="section-title" id="faq-title" style="text-align:center">常见问题</h2>
-      <p class="section-lede" style="text-align:center;margin-inline:auto">关于产品、数据和支持的快速解答。</p>
-
-      <div class="faq-list">
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-            CLI Pulse 是什么？
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-1">
-            <div>
-              CLI Pulse 是一款开发者应用，用于监控你已使用的 AI 提供商和 CLI 工具的用量、额度、重置状态、会话和费用估算。它运行在 macOS、iOS、watchOS 和 Android（Beta）上。
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-            支持哪些平台？
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-2">
-            <div>
-              macOS、iPhone、iPad 和 Apple Watch 已在 App Store 上架。Android 通过 Google Play 内部测试 Beta 提供。目前不提供 Windows 和 Linux 客户端。
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-            数据会离开我的设备吗？
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-3">
-            <div>
-              你的 Provider API Key、会话 Cookie、OAuth Token 和原始会话日志内容留在设备上。CLI Pulse 仅将聚合后的用量指标、额度摘要、费用估算、会话展示元数据和设备心跳信息同步到你的账户。详见 <a href="../privacy.html">隐私政策</a> 和 <a href="../data-handling.html">数据处理</a> 页面。
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-            费用数字是否等同于第一方账单？
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-4">
-            <div>
-              不等同。CLI Pulse 根据各提供商公布的定价和你记录的 token / 请求数，在本地估算费用。提供商账单仍是权威来源。估算适合发现趋势，不适合对账。
-            </div>
-          </div>
-        </article>
-
-        <article class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
-            如何获得支持？
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-          </button>
-          <div class="faq-answer" id="faq-answer-5">
-            <div>
-              一般支持请发邮件至 <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a>，或在 <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a> 提交 bug 和功能请求。安全披露请私信；详见 <a href="../security.html">安全</a> 页面。
-            </div>
-          </div>
-        </article>
+      <div class="section-head">
+        <h2 class="section-title" id="faq-title">常见问题</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>CLI Pulse 是什么？ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>一款开发者应用，用于监控你已使用的 AI 编程提供商和 CLI 工具的用量、额度、重置状态、会话和费用估算。</p>
+        </details>
+        <details>
+          <summary>支持哪些平台？ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>macOS、iPhone、iPad 和 Apple Watch 已在 App Store 上架。Android 通过 Google Play 内部测试 Beta 提供。目前不提供 Windows 和 Linux 客户端。</p>
+        </details>
+        <details>
+          <summary>数据会离开我的设备吗？ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>你的 Provider API Key、会话 Cookie、OAuth Token 和原始会话日志内容留在设备上。CLI Pulse 仅将聚合后的用量指标、额度摘要、费用估算、会话展示元数据和设备心跳信息同步到你的账户。详见 <a href="../privacy.html">隐私政策</a> 和 <a href="../data-handling.html">数据处理</a> 页面。</p>
+        </details>
+        <details>
+          <summary>费用数字是否等同于第一方账单？ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>不等同。CLI Pulse 根据各提供商公布的定价和你记录的 token / 请求数，在本地估算费用。提供商账单仍是权威来源。估算适合发现趋势，不适合对账。</p>
+        </details>
+        <details>
+          <summary>如何获得支持？ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+          <p>一般支持请发邮件至 <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a>，或在 <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a> 提交 bug 和功能请求。安全披露请私信；详见 <a href="../security.html">安全</a> 页面。</p>
+        </details>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
+<footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-brand">
-          <img src="../assets/app-icon.png" alt="" loading="lazy">
-          CLI Pulse
-        </div>
-        <p>一款用于监控你已使用的 AI 编程提供商的用量、额度、重置状态、会话和费用估算的开发者应用。</p>
+      <div>
+        <strong>CLI Pulse</strong>
+        <p style="margin-top:10px">面向开发者的 AI 编程用量追踪器。监控你已使用的 AI 提供商和 CLI 工具。</p>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>产品</h4>
         <ul>
           <li><a href="#features">功能</a></li>
-          <li><a href="#platforms">平台</a></li>
           <li><a href="#providers">提供商</a></li>
           <li><a href="#download">下载</a></li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>信任</h4>
         <ul>
           <li><a href="../privacy.html">隐私</a></li>
@@ -468,8 +418,7 @@ brew install --cask cli-pulse</code></pre></div>
           <li><a href="../terms.html">条款</a></li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>支持</h4>
         <ul>
           <li><a href="../support.html">支持中心</a></li>
@@ -479,14 +428,32 @@ brew install --cask cli-pulse</code></pre></div>
         </ul>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>&copy; 2026 CLI Pulse · Jason Ye &amp; Yuqi Cao. 保留所有权利。</p>
-      <p>闭源商业软件。详见 <a href="https://github.com/cli-pulse/cli-pulse/blob/main/LICENSE.md">LICENSE.md</a>。</p>
+      <p><a href="https://github.com/cli-pulse/cli-pulse/blob/main/LICENSE.md">LICENSE.md</a></p>
     </div>
   </div>
 </footer>
 
-<script src="../assets/site.js"></script>
+<script>
+(function () {
+  'use strict';
+  var navToggle = document.getElementById('navToggle');
+  var navMenu = document.getElementById('navMenu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = navMenu.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    navMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
