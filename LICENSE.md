@@ -1,6 +1,6 @@
 # License
 
-**Copyright © 2025–2026 Jason Ye (Yuhe Ye). All Rights Reserved.**
+**Copyright © 2025–2026 Jason Ye (Yuhe Ye) & Yuqi Cao. All Rights Reserved.**
 
 The contents of this repository are provided for product distribution,
 legal notices, release notes, support, and transparency documentation only.
