@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
 <title>CLI Pulse — V2 Direction B: Terminal</title>
 <style>
   :root {
@@ -112,6 +113,8 @@
 </head>
 <body>
 
+<aside id="prototype-only" role="note" style="padding:12px 20px;background:#2a1c08;color:#fef3c7;border-bottom:1px solid #f59e0b;text-align:center;font-family:system-ui,sans-serif"><strong>Design prototype — not a production page.</strong> Layout, commands, links, copy, and sample data are illustrative; use the current product page for verified information.</aside>
+
 <header>
   <div class="container">
     <nav>
@@ -125,7 +128,7 @@
         <li><a href="#privacy">$ privacy</a></li>
         <li><a href="#download">$ install</a></li>
       </ul>
-      <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">$ brew install clipulse</a>
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/cli-pulse/id6761163709">$ brew install clipulse</a>
     </nav>
   </div>
 </header>
@@ -133,9 +136,9 @@
 <section class="hero">
   <div class="container">
     <h1>Watch your AI usage from the command line.</h1>
-    <p>CLI Pulse tracks usage, quotas, resets, and cost estimates across 50+ AI providers — without uploading your keys or session logs.</p>
+    <p>CLI Pulse tracks usage, quotas, resets, and cost estimates across 50+ supported AI providers. Available metrics and controls vary by provider.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download on the App Store</a>
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/cli-pulse/id6761163709">Download on the App Store</a>
       <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">Get macOS DMG</a>
     </div>
 
@@ -147,6 +150,7 @@
         <span style="margin-left:auto; color:var(--text-muted); font-size:0.75rem; font-family:var(--mono)">zsh — clipulse</span>
       </div>
       <div class="term-body">
+        <div class="out"># Illustrative terminal concept — commands and values are sample data.</div>
         <div><span class="prompt">$</span> <span class="cmd">brew install --cask cli-pulse</span></div>
         <div class="out">==> Downloading https://github.com/cli-pulse/cli-pulse-distrib/releases/latest...
 ==> Installing CLI Pulse
@@ -177,7 +181,7 @@ Gemini    $4.82 estimated       reset: 6h</div>
         </article>
         <article class="card">
           <h3>💵 Cost estimates</h3>
-          <p>Local estimates from published pricing to catch runaway spend.</p>
+          <p>Review clearly labeled estimates; provider invoices remain authoritative.</p>
         </article>
         <article class="card">
           <h3>📱 Remote sessions</h3>
@@ -211,7 +215,7 @@ Gemini    $4.82 estimated       reset: 6h</div>
         <span>Ollama</span>
         <span>Warp</span>
         <span>Augment</span>
-        <span>+40 more</span>
+        <span>50+ supported total</span>
       </div>
     </div>
   </div>
@@ -232,7 +236,9 @@ Gemini    $4.82 estimated       reset: 6h</div>
     "aggregated_metrics",
     "quota_summaries",
     "cost_estimates",
-    "session_display_metadata"
+    "session_display_metadata",
+    "device_metadata",
+    "selected_alert_metadata"
   ]
 }</div>
         </div>
@@ -251,7 +257,7 @@ Gemini    $4.82 estimated       reset: 6h</div>
       <article class="download-item">
         <h4>🍎 App Store</h4>
         <p style="color:var(--text-muted); font-size:0.9rem">iPhone · iPad · Watch · Mac</p>
-        <a class="btn btn-secondary" href="https://apps.apple.com/app/cli-pulse/id6761163709" style="margin-top:10px">Download</a>
+        <a class="btn btn-secondary" href="https://apps.apple.com/us/app/cli-pulse/id6761163709" style="margin-top:10px">Download</a>
       </article>
       <article class="download-item">
         <h4>🖥 macOS DMG</h4>
@@ -260,8 +266,8 @@ Gemini    $4.82 estimated       reset: 6h</div>
       </article>
       <article class="download-item">
         <h4>🤖 Android Beta</h4>
-        <p style="color:var(--text-muted); font-size:0.9rem">Google Play internal test</p>
-        <a class="btn btn-secondary" href="https://play.google.com/apps/internaltest/4699926885235347963" style="margin-top:10px">Join Beta</a>
+        <p style="color:var(--text-muted); font-size:0.9rem">APK releases; Play access may require an invitation</p>
+        <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse/releases" style="margin-top:10px">View Beta releases</a>
       </article>
       <article class="download-item">
         <h4>🍺 Homebrew</h4>
@@ -285,11 +291,11 @@ brew install --cask cli-pulse</div>
       </details>
       <details>
         <summary>Which platforms are supported?</summary>
-        <p>macOS, iOS, watchOS on the App Store; Android via Google Play internal testing beta.</p>
+        <p>macOS, iOS, and watchOS are on the App Store; Android Beta availability and controls can differ from Apple clients.</p>
       </details>
       <details>
         <summary>Does any data leave my device?</summary>
-        <p>API keys, cookies, OAuth tokens, and raw session logs stay local. Only aggregated metrics and metadata sync to your account.</p>
+        <p>API keys, cookies, OAuth tokens, and raw session logs stay local. Aggregated usage, quota, session-display, device, cost-estimate, and selected alert metadata can sync to your account.</p>
       </details>
     </div>
   </div>

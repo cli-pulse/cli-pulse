@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
 <title>CLI Pulse — V2 Direction A: Mission Control</title>
 <style>
   :root {
@@ -117,6 +118,8 @@
 </head>
 <body>
 
+<aside id="prototype-only" role="note" style="padding:12px 20px;background:#2a1c08;color:#fef3c7;border-bottom:1px solid #f59e0b;text-align:center"><strong>Design prototype — not a production page.</strong> Layout, links, copy, and sample data are illustrative; use the current product page for verified information.</aside>
+
 <header>
   <div class="container">
     <nav>
@@ -130,7 +133,7 @@
         <li><a href="#privacy">Privacy</a></li>
         <li><a href="#download">Download</a></li>
       </ul>
-      <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download</a>
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/cli-pulse/id6761163709">Download</a>
     </nav>
   </div>
 </header>
@@ -138,14 +141,14 @@
 <section class="hero">
   <div class="container">
     <p class="eyebrow">AI coding usage tracker</p>
-    <h1>One place to watch all your AI coding usage.</h1>
-    <p>Track usage, quotas, resets, sessions, and cost estimates across 50+ AI providers — from your Mac to your phone. Your keys and raw session logs stay on your device.</p>
+    <h1>One place to watch your supported AI coding usage.</h1>
+    <p>Track usage, quotas, resets, sessions, and cost estimates across 50+ supported AI providers — from your Mac to your phone. Available metrics and controls vary by provider.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709">Download on the App Store</a>
+      <a class="btn btn-primary" href="https://apps.apple.com/us/app/cli-pulse/id6761163709">Download on the App Store</a>
       <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">macOS DMG</a>
     </div>
     <div class="hero-visual">
-      <img src="../assets/screenshot-macos-overview.png" alt="CLI Pulse dashboard on macOS showing provider usage and quotas.">
+      <img src="../assets/hero-mac-v2.png" alt="Illustrative CLI Pulse dashboard with sample provider usage and estimates.">
     </div>
   </div>
 </section>
@@ -177,7 +180,7 @@
       </article>
       <article class="bento-card">
         <h3>💰 Cost estimates</h3>
-        <p>Local estimates from published pricing to spot runaway spend.</p>
+        <p>Review clearly labeled estimates; provider invoices remain authoritative.</p>
       </article>
       <article class="bento-card wide">
         <h3>📱 Session control from mobile</h3>
@@ -204,7 +207,7 @@
       <span class="chip">Ollama</span>
       <span class="chip">Warp</span>
       <span class="chip">Augment</span>
-      <span class="chip">+ 50 more</span>
+      <span class="chip">50+ supported total</span>
     </div>
   </div>
 </section>
@@ -213,7 +216,7 @@
   <div class="container">
     <div class="section-head">
       <h2 class="section-title">Privacy by design</h2>
-      <p class="section-lede">The credentials and logs you worry about never leave your device.</p>
+      <p class="section-lede">Provider credentials and raw local session-log contents stay on-device; documented aggregated data can sync to your account.</p>
     </div>
     <div class="bento" style="max-width:900px; margin-inline:auto">
       <article class="bento-card">
@@ -226,11 +229,11 @@
       </article>
       <article class="bento-card">
         <h3>📝 Raw logs</h3>
-        <p>Scanned on-device only. Only aggregated numbers sync.</p>
+        <p>Scanned on-device; aggregated usage, quota, session-display, device, and selected alert metadata can sync.</p>
       </article>
       <article class="bento-card">
         <h3>☁️ Synced data</h3>
-        <p>Token counts, quota summaries, cost estimates, and display metadata.</p>
+        <p>Aggregated usage, quota, session-display, device, cost-estimate, and selected alert metadata.</p>
       </article>
     </div>
   </div>
@@ -247,7 +250,7 @@
         <div>🍎</div>
         <h4>App Store</h4>
         <small>iPhone · iPad · Watch · Mac</small>
-        <a class="btn btn-primary" href="https://apps.apple.com/app/cli-pulse/id6761163709" style="width:100%; justify-content:center">Download</a>
+        <a class="btn btn-primary" href="https://apps.apple.com/us/app/cli-pulse/id6761163709" style="width:100%; justify-content:center">Download</a>
       </article>
       <article class="download-card">
         <div>🖥</div>
@@ -258,8 +261,8 @@
       <article class="download-card">
         <div>🤖</div>
         <h4>Android Beta</h4>
-        <small>Google Play internal test</small>
-        <a class="btn btn-secondary" href="https://play.google.com/apps/internaltest/4699926885235347963" style="width:100%; justify-content:center">Join Beta</a>
+        <small>APK releases; Play access may require an invitation</small>
+        <a class="btn btn-secondary" href="https://github.com/cli-pulse/cli-pulse/releases" style="width:100%; justify-content:center">View Beta releases</a>
       </article>
       <article class="download-card">
         <div>🍺</div>
@@ -285,7 +288,7 @@ brew install --cask cli-pulse</div>
       </details>
       <details>
         <summary>Which platforms are supported?</summary>
-        <p>macOS, iOS, watchOS are available on the App Store. Android is in beta via Google Play internal testing.</p>
+        <p>macOS, iOS, and watchOS are available on the App Store. Android Beta availability and controls can differ from Apple clients.</p>
       </details>
       <details>
         <summary>Does any data leave my device?</summary>

@@ -144,7 +144,7 @@ If you are looking for the product itself, install it from one of the
 
 ## License / All Rights Reserved
 
-Copyright © Jason Ye & Yuqi Cao. All rights reserved.
+Copyright © Jason Ye. All rights reserved.
 
 The contents of this repository are provided for product distribution, legal
 notices, release notes, support, and transparency documentation only. No
