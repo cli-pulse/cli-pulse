@@ -38,7 +38,7 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: August 21, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: August 24, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never leave your device</strong>, and everything else we sync is kept to the minimum needed for cross-device viewing.
@@ -215,6 +215,26 @@
                                      └──────────────────┘</pre>
 
   <p>The scanner runs entirely on your Mac. Your API key never passes through our servers &mdash; it goes directly from your Keychain to the provider.</p>
+
+  <h2>When the scanning starts, and what you agree to first</h2>
+
+  <p><em>(Added in v1.50. It corrects something this page previously left implied, and the correction is a change to the app, not only to the wording here.)</em></p>
+
+  <p>Everything above describes what CLI Pulse does once it is running. It did not say clearly enough <strong>when</strong> that begins, and until v1.50 the answer was: as soon as you chose to use the app without an account, which you could do from the very first screen of the setup wizard &mdash; two screens before the one explaining what gets read. We found this by testing a fresh install and watching what it did.</p>
+
+  <p>Since v1.50, choosing to use CLI Pulse without an account asks a separate question before anything is read: <strong>&ldquo;Start local scan&rdquo;</strong> or <strong>&ldquo;Not now&rdquo;</strong>. Until you answer, CLI Pulse reads no files, contacts no provider, and touches no Keychain item. &ldquo;Not now&rdquo; is remembered, is not overridden by signing in later, and is reversible from Settings &rsaquo; Privacy at any time.</p>
+
+  <p>The question names all of it:</p>
+  <ul>
+    <li><strong>Session logs, last 30 days</strong> &mdash; <code>~/.codex/sessions/</code>, <code>~/.codex/archived_sessions/</code>, <code>~/.claude/projects/</code> and <code>~/.config/claude/projects/</code>. Parsed on your Mac for usage records; the results are cached on your Mac.</li>
+    <li><strong>What is derived from them</strong> &mdash; token counts, cost estimates, model names and dates, plus each conversation&rsquo;s file path, project folder and session id. Those last three are how the Sessions list can name your conversations. They stay on your Mac; the table above still governs what syncs (numbers only, and only when you are signed in).</li>
+    <li><strong>Calls to the providers you use</strong>, made with the OAuth tokens their own CLIs already stored on your Mac. This is the part most easily missed: &ldquo;local mode&rdquo; refers to <em>your data staying local</em>, not to the app being offline. To show live quota it talks to OpenAI, Anthropic and others directly.</li>
+    <li><strong>Renewing an expired provider token rewrites that CLI&rsquo;s own credential file</strong> (for example <code>~/.codex/auth.json</code>). CLI Pulse has always done this; it is now disclosed, and v1.50 also fixed a bug that made it happen far more often than intended &mdash; a date-parsing error meant a check written as &ldquo;renew if the token is more than 8 days old&rdquo; renewed it on essentially every refresh.</li>
+    <li><strong>A one-time macOS Keychain prompt</strong> for Claude Code&rsquo;s token, which macOS asks you about itself. Declining costs you Claude&rsquo;s quota figures and nothing else.</li>
+    <li><strong>Anonymous install statistics are separate</strong> and are not part of this choice. See the section above.</li>
+  </ul>
+
+  <p>Signing in implies this consent, because the sign-in step comes after the wizard&rsquo;s privacy screen and because syncing to an account is a larger commitment than scanning locally. Signing out does not revoke it &mdash; use the Settings toggle.</p>
 
   <h2>Security practices</h2>
   <ul>
