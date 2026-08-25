@@ -3,112 +3,369 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CLI Pulse — Downloads and Support</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
-       background:#f5f5f7;color:#1d1d1f;line-height:1.6}
-  .container{max-width:680px;margin:60px auto;padding:0 24px}
-  h1{font-size:2rem;font-weight:700;margin-bottom:8px}
-  .tagline{color:#86868b;font-size:1.1rem;margin-bottom:40px}
-  h2{font-size:1.25rem;font-weight:600;margin:32px 0 12px}
-  p,li{font-size:1rem;color:#424245}
-  ul{padding-left:20px;margin-bottom:16px}
-  li{margin-bottom:6px}
-  a{color:#0066cc;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;
-        box-shadow:0 1px 3px rgba(0,0,0,.08)}
-  .footer{text-align:center;color:#86868b;font-size:.85rem;margin-top:48px;padding-bottom:40px}
-</style>
+<title>CLI Pulse — AI Coding Usage Monitor for macOS, iOS &amp; Android Beta</title>
+<meta name="description" content="Monitor usage, quotas, reset state, sessions, cost estimates, and alerts across 50+ supported AI coding providers. Watch and steer supported Mac AI-CLI sessions from iPhone or iPad.">
+<link rel="canonical" href="https://cli-pulse.github.io/cli-pulse/">
+<link rel="alternate" hreflang="en" href="https://cli-pulse.github.io/cli-pulse/">
+<link rel="alternate" hreflang="zh-CN" href="https://cli-pulse.github.io/cli-pulse/zh/">
+<link rel="alternate" hreflang="x-default" href="https://cli-pulse.github.io/cli-pulse/">
+<meta name="theme-color" content="#08081a">
+<link rel="icon" href="assets/app-icon.png" type="image/png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="CLI Pulse — AI Coding Usage Monitor">
+<meta property="og:description" content="Monitor usage, quotas, reset state, sessions, cost estimates, and alerts across 50+ supported AI coding providers on Mac, iPhone, iPad, Apple Watch, and Android Beta.">
+<meta property="og:url" content="https://cli-pulse.github.io/cli-pulse/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://cli-pulse.github.io/cli-pulse/assets/hero-mac-v2.png">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="563">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CLI Pulse — AI Coding Usage Monitor">
+<meta name="twitter:description" content="Monitor usage, quotas, reset state, sessions, cost estimates, and alerts across 50+ supported AI coding providers, with Android Beta availability.">
+<meta name="twitter:image" content="https://cli-pulse.github.io/cli-pulse/assets/hero-mac-v2.png">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CLI Pulse",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "macOS, iOS, iPadOS, watchOS, Android Beta",
+  "url": "https://cli-pulse.github.io/cli-pulse/",
+  "description": "Monitor usage, quotas, reset state, sessions, cost estimates, and alerts across 50+ supported AI coding providers."
+}
+</script>
+
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="container">
-  <h1>CLI Pulse</h1>
-  <p class="tagline">Downloads, legal pages, and support for CLI Pulse</p>
 
-  <div class="card" style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;border:1px solid rgba(90,130,255,.25)">
-    <h2 style="color:#fff">Download</h2>
-    <p style="color:#c0c0d0">Get CLI Pulse for your platform:</p>
-    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
-      <a href="https://apps.apple.com/app/cli-pulse/id6761163709" style="display:inline-flex;align-items:center;gap:8px;background:#0066cc;color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;font-size:.95rem">
-        App Store — iPhone · iPad · Watch · Mac
-      </a>
-      <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" style="display:inline-flex;align-items:center;gap:8px;background:#2d2d44;color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.15);font-size:.95rem">
-        macOS DMG
-      </a>
-      <a href="https://github.com/cli-pulse/cli-pulse/releases" style="display:inline-flex;align-items:center;gap:8px;background:#3ddc84;color:#1a1a2e;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;font-size:.95rem">
-        Android APK
-      </a>
+<!-- Skip link -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation -->
+<header class="site-nav" role="banner">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a class="nav-brand" href="./" aria-label="CLI Pulse home">
+      <img src="assets/app-icon.png" alt="" width="32" height="32">
+      CLI Pulse
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#platforms">Platforms</a></li>
+      <li><a href="#privacy">Privacy</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#download">Download</a></li>
+      <li><a href="zh/" lang="zh-CN" hreflang="zh-CN" aria-label="Switch to Chinese">中文</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="section-inner">
+      <div class="hero-badge">
+        <span class="dot" aria-hidden="true"></span>
+        50+ Supported Providers
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        Your AI coding usage,<br>all in <span class="highlight">one place</span>
+      </h1>
+      <p class="hero-copy">
+        CLI Pulse brings usage, quotas, reset state, sessions, cost estimates,
+        and alerts from your supported AI coding providers into one calm view —
+        on your Mac, phone, and wrist.
+      </p>
+      <div class="hero-actions">
+        <a href="https://apps.apple.com/us/app/cli-pulse/id6761163709" class="btn btn-primary" aria-label="Download CLI Pulse on the App Store">
+          Download on the App&nbsp;Store
+        </a>
+        <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" class="btn btn-secondary" aria-label="Download CLI Pulse for macOS">
+          Download for macOS
+        </a>
+      </div>
+      <p class="hero-note">Signed and notarized for macOS. Provider credentials stay on your device.</p>
+      <div class="hero-devices">
+        <img class="mac-shot" src="assets/hero-mac-v2.png" alt="Illustrative CLI Pulse macOS dashboard with sample usage, cost estimates, supported providers, and alerts" width="900" height="563" loading="eager" fetchpriority="high" decoding="async">
+        <img class="phone-shot" src="assets/hero-phone-v2.png" alt="Illustrative CLI Pulse iPhone dashboard with sample usage and supported provider status" width="400" height="868" loading="eager" decoding="async">
+      </div>
     </div>
-    <p style="color:#808098;font-size:.85rem;margin-top:12px">Browse the latest builds on <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" style="color:#cfd6ff">GitHub Releases</a>.</p>
-    <div style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12)">
-      <p style="color:#c8cce0;font-size:.9rem;margin:0 0 8px;font-weight:600">Or install on macOS with Homebrew</p>
-      <pre style="background:#12121f;color:#e6e6f0;padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:.85rem;margin:0;line-height:1.7"><code>brew tap cli-pulse/tap
+  </section>
+
+  <!-- Provider strip -->
+  <section class="provider-strip" aria-label="Supported providers">
+    <div class="section-inner">
+      <p class="provider-label">Works with your tools</p>
+      <div class="provider-list">
+        <span>Claude</span>
+        <span>Codex</span>
+        <span>Gemini</span>
+        <span>Cursor</span>
+        <span>Copilot</span>
+        <span>OpenRouter</span>
+        <span>JetBrains AI</span>
+        <span>Ollama</span>
+        <span>Warp</span>
+        <span>Augment</span>
+      </div>
+      <p class="provider-footnote">50+ providers supported across local and cloud coding workflows. Available metrics and controls depend on what each provider exposes.</p>
+    </div>
+  </section>
+
+  <!-- Outcome cards -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="section-inner">
+      <span class="section-label">What CLI Pulse Does</span>
+      <h2 class="section-title" id="features-title">Know exactly where you stand</h2>
+      <p class="section-subtitle">See the signals that matter before switching between provider dashboards and local session logs.</p>
+      <div class="cards-grid">
+
+        <div class="outcome-card">
+          <div class="card-icon blue" aria-hidden="true">&#9881;</div>
+          <h3>Usage &amp; Quotas</h3>
+          <p>Track request counts, token consumption, quota remaining, and reset state across supported providers.</p>
+        </div>
+
+        <div class="outcome-card">
+          <div class="card-icon cyan" aria-hidden="true">&#9733;</div>
+          <h3>Sessions &amp; Cost Estimates</h3>
+          <p>Review session activity and model usage alongside clearly labeled cost estimates, without presenting estimates as exact billing.</p>
+        </div>
+
+        <div class="outcome-card">
+          <div class="card-icon violet" aria-hidden="true">&#9888;</div>
+          <h3>Alerts &amp; Notifications</h3>
+          <p>Keep quota, session, and provider alerts together so important changes do not disappear inside separate tools.</p>
+        </div>
+
+        <div class="outcome-card">
+          <div class="card-icon green" aria-hidden="true">&#8596;</div>
+          <h3>Cross-Device Control</h3>
+          <p>Watch and steer supported Mac AI-CLI sessions from your iPhone or iPad. Check usage from your wrist with the Apple Watch app.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Apple-platform showcase -->
+  <section class="section platform-showcase" id="platforms" aria-labelledby="platforms-title">
+    <div class="section-inner">
+      <div class="showcase-layout">
+        <div class="showcase-text">
+          <p class="showcase-kicker">Apple-first, across your devices</p>
+          <h2 id="platforms-title">Mac, iPhone, iPad, Apple&nbsp;Watch</h2>
+          <p>CLI Pulse spans macOS, iPhone, iPad, and Apple Watch. Use the Mac app for local collection, then check supported usage, alerts, and sessions from your other devices.</p>
+          <p>Supported mobile clients can watch and steer supported Mac AI-CLI sessions. Android beta extends the core monitoring experience beyond Apple devices.</p>
+        </div>
+        <div class="showcase-image">
+          <img src="assets/pulse-motif-v2.png" alt="Illustrative CLI Pulse Apple Watch view with sample estimated cost and activity indicators" width="422" height="483" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" id="how-it-works" aria-labelledby="steps-title">
+    <div class="section-inner">
+      <span class="section-label">Get Started</span>
+      <h2 class="section-title" id="steps-title">Three steps to clarity</h2>
+      <p class="section-subtitle">You're minutes away from one dashboard for the supported AI coding providers you use.</p>
+      <div class="steps-list">
+
+        <div class="step">
+          <h3>Install CLI Pulse on your Mac</h3>
+          <p>Download from the App Store, get the signed and notarized DMG, or install the Homebrew cask.</p>
+        </div>
+
+        <div class="step">
+          <h3>Grant access to your AI tools</h3>
+          <p>CLI Pulse discovers supported providers on your system and guides you through the access each source needs. Provider credentials and raw local session-log contents stay on your device.</p>
+        </div>
+
+        <div class="step">
+          <h3>Monitor from any device</h3>
+          <p>Check supported usage, quota state, sessions, and alerts across your devices. Aggregated usage and quota state can sync to your CLI Pulse account for cross-device access.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy / Trust -->
+  <section class="section" id="privacy" aria-labelledby="trust-title">
+    <div class="section-inner">
+      <span class="section-label">Privacy &amp; Trust</span>
+      <h2 class="section-title" id="trust-title">Your data, your rules</h2>
+      <p class="section-subtitle">CLI Pulse keeps provider credentials and raw local session-log contents on your device. Read the policies that explain what stays local and what can sync.</p>
+
+      <div class="trust-links">
+        <a href="privacy.html" class="trust-card">
+          <h3>Privacy Policy</h3>
+          <p>What stays on your device, what syncs to your account, and who the sub-processors are.</p>
+        </a>
+        <a href="data-handling.html" class="trust-card">
+          <h3>Data Handling</h3>
+          <p>A table of every data category CLI Pulse processes and where each one lives.</p>
+        </a>
+        <a href="security.html" class="trust-card">
+          <h3>Security Policy</h3>
+          <p>How credentials are protected and how to report a vulnerability.</p>
+        </a>
+        <a href="terms.html" class="trust-card">
+          <h3>Terms of Use</h3>
+          <p>The agreement you accept when you install CLI Pulse.</p>
+        </a>
+      </div>
+
+      <div class="trust-highlight">
+        <span class="shield" aria-hidden="true">&#128737;</span>
+        <p><strong>Credentials stay on your device.</strong> Provider API keys, session cookies, bridged OAuth tokens, and raw local session-log contents stay on-device. Aggregated usage and quota state can sync to your CLI Pulse account for cross-device viewing. The detailed boundaries and controls are documented in the Privacy Policy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download -->
+  <section class="section" id="download" aria-labelledby="download-title">
+    <div class="section-inner">
+      <span class="section-label">Download</span>
+      <h2 class="section-title" id="download-title">Get CLI Pulse</h2>
+      <p class="section-subtitle">Choose an official download for Apple devices, macOS, or the Android beta.</p>
+
+      <div class="download-grid">
+        <a href="https://apps.apple.com/us/app/cli-pulse/id6761163709" class="download-card" aria-label="Download CLI Pulse on the App Store for iPhone, iPad, Mac, and Apple Watch">
+          <div class="platform-icon" aria-hidden="true">&#63743;</div>
+          <span class="platform-tag stable">Stable</span>
+          <h3>App Store</h3>
+          <p>CLI Pulse for iPhone, iPad, Mac, and Apple&nbsp;Watch.</p>
+          <span class="cta-text">View on the App&nbsp;Store &rarr;</span>
+        </a>
+
+        <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" class="download-card" aria-label="Download CLI Pulse macOS DMG from GitHub Releases">
+          <div class="platform-icon" aria-hidden="true">&#9000;</div>
+          <span class="platform-tag stable">Stable</span>
+          <h3>macOS DMG</h3>
+          <p>Direct download from GitHub Releases. Signed and notarized for macOS Gatekeeper.</p>
+          <span class="cta-text">Latest release &rarr;</span>
+        </a>
+
+        <a href="https://github.com/cli-pulse/cli-pulse/releases" class="download-card" aria-label="Download CLI Pulse Android Beta APK from GitHub Releases">
+          <div class="platform-icon" aria-hidden="true">&#129001;</div>
+          <span class="platform-tag beta">Beta</span>
+          <h3>Android Beta APK</h3>
+          <p>Sideload the Android Beta from GitHub Releases. Availability and controls can differ by release.</p>
+          <span class="cta-text">All releases &rarr;</span>
+        </a>
+      </div>
+
+      <div class="brew-block">
+        <h3>Install on macOS with Homebrew</h3>
+        <pre><code>brew tap cli-pulse/tap
 brew trust cli-pulse/tap
 brew install --cask cli-pulse</code></pre>
-      <p style="color:#808098;font-size:.8rem;margin-top:8px">Homebrew 6 requires <code style="color:#cfd6ff">brew trust</code> before it will load casks from a third-party tap — without it the install stops after <code style="color:#cfd6ff">brew tap</code>.</p>
+        <p class="note">Homebrew 6 requires <code>brew trust</code> before it will load casks from a third-party tap — without it the install stops after <code>brew tap</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="section-inner">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title" id="faq-title">Questions you might have</h2>
+      <div class="faq-list">
+
+        <details>
+          <summary>What data stays on my device versus syncing to CLI Pulse?</summary>
+          <div class="faq-body">
+            <p>Provider API keys, session cookies, bridged OAuth tokens, and raw local session-log contents stay on your device. Aggregated usage and quota state can sync to your CLI Pulse account for cross-device viewing. See the <a href="privacy.html">Privacy Policy</a> for the complete data-by-data breakdown and controls.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do mobile clients watch and steer Mac AI-CLI sessions?</summary>
+          <div class="faq-body">
+            <p>After the Mac helper and your CLI Pulse account are configured, supported mobile clients can show supported Mac AI-CLI session status and available steering actions. Capabilities vary by provider and client rather than being assumed from a provider name.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Which AI coding providers does CLI Pulse support?</summary>
+          <div class="faq-body">
+            <p>CLI Pulse supports 50+ providers, including Claude, Codex, Gemini, Cursor, Copilot, OpenRouter, JetBrains AI, Ollama, Warp, and Augment. Available metrics and controls depend on what each provider exposes.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>How do I get help or report an issue?</summary>
+          <div class="faq-body">
+            <p>For bug reports and feature requests, open an issue on our <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub repository</a>. For other inquiries, email <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a>. We aim to respond within 48 business hours.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h2>Product</h2>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#platforms">Platforms</a></li>
+          <li><a href="#download">Download</a></li>
+          <li><a href="release-notes.html">Release Notes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="data-handling.html">Data Handling</a></li>
+          <li><a href="security.html">Security Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Support</h2>
+        <ul>
+          <li><a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a></li>
+          <li><a href="mailto:clipulse.support@gmail.com">Email Support</a></li>
+          <li><a href="support.html">Support Page</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Links</h2>
+        <ul>
+          <li><a href="https://apps.apple.com/us/app/cli-pulse/id6761163709">App Store</a></li>
+          <li><a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">macOS DMG</a></li>
+          <li><a href="https://github.com/cli-pulse/cli-pulse/releases">Android Beta Releases</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 CLI Pulse. All rights reserved.</span>
+      <a href="https://cli-pulse.github.io/cli-pulse/">cli-pulse.github.io/cli-pulse</a>
     </div>
   </div>
+</footer>
 
-  <div class="card" style="background:linear-gradient(135deg,#0d2818,#1a3a2a);color:#fff;border:1px solid rgba(61,220,132,.3)">
-    <h2 style="color:#3ddc84">Android Beta Testing</h2>
-    <p style="color:#c0d8c8">CLI Pulse for Android is in beta. Join our testing program to get early access.</p>
-    <div style="margin-top:16px">
-      <a href="https://play.google.com/apps/internaltest/4699926885235347963" style="display:inline-flex;align-items:center;gap:8px;background:#3ddc84;color:#0d2818;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;font-size:.95rem">
-        Join Android Beta on Google Play
-      </a>
-    </div>
-    <p style="color:#7aaa8e;font-size:.85rem;margin-top:12px">Limited to 100 testers. You can also sideload the <a href="https://github.com/cli-pulse/cli-pulse/releases" style="color:#a0e8c0">APK from GitHub Releases</a>.</p>
-  </div>
-
-  <div class="card">
-    <h2>About</h2>
-    <p>CLI Pulse is a developer app for monitoring usage, quotas, resets, sessions,
-       and alerts across 50+ AI coding providers — and for remotely watching and
-       steering your Mac's AI-CLI agents from iPhone or iPad.</p>
-    <p style="margin-top:12px">Supports 50+ providers including Claude, Codex, Gemini, Cursor, Copilot, JetBrains AI, Ollama, Warp, and Augment. Available on macOS, iOS, watchOS, and Android (beta).</p>
-  </div>
-
-  <div class="card">
-    <h2>Getting Help</h2>
-    <ul>
-      <li>For bug reports and feature requests, please open an issue on our
-          <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub repository</a>.</li>
-      <li>For other inquiries, email
-          <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a></li>
-      <li>Response time: within 48 hours on business days</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>Trust &amp; transparency</h2>
-    <ul>
-      <li><a href="privacy.html">Privacy Policy</a> — what stays on your device, what syncs to your account, who the sub-processors are.</li>
-      <li><a href="data-handling.html">Data Handling</a> — table of every data category and where it lives.</li>
-      <li><a href="security.html">Security Policy</a> — how to report a vulnerability and how credentials are protected.</li>
-      <li><a href="terms.html">Terms of Use</a> — the agreement you accept when you install CLI Pulse.</li>
-      <li><a href="support.html">Support</a> — how to reach us.</li>
-      <li><a href="release-notes.html">Release Notes</a> — what changed across versions.</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>About this repository</h2>
-    <p>This is the public distribution and trust-documentation repository for
-       CLI Pulse. It contains the privacy, security, and terms documents, the
-       landing page you're reading, and links to signed binary downloads on
-       GitHub Releases.</p>
-    <p style="margin-top:12px">CLI Pulse is closed-source commercial software.
-       This repository is <strong>not</strong> the product source code, not a
-       reproducible-build repo, and not a provider-integration reference.
-       All contents are <strong>All Rights Reserved</strong> — see
-       <a href="https://github.com/cli-pulse/cli-pulse/blob/main/LICENSE.md">LICENSE.md</a>.</p>
-  </div>
-
-  <div class="footer">
-    <p>&copy; 2026 CLI Pulse. All rights reserved.</p>
-  </div>
-</div>
 </body>
 </html>
