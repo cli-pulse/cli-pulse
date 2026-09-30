@@ -226,7 +226,7 @@
 
   <p>The question names all of it:</p>
   <ul>
-    <li><strong>Session logs: the last 30 days, and up to a year once</strong> &mdash; <code>~/.codex/sessions/</code>, <code>~/.codex/archived_sessions/</code>, <code>~/.claude/projects/</code> and <code>~/.config/claude/projects/</code>. Every refresh reads the last 30 days. Once, and only if you allow it, CLI Pulse also reads up to a year of older logs to fill in your usage history. Parsed on your Mac for usage records; the results are cached on your Mac.</li>
+    <li><strong>Session logs: the last 30 days, and a one-time read of up to a year</strong> &mdash; <code>~/.codex/sessions/</code>, <code>~/.codex/archived_sessions/</code>, <code>~/.claude/projects/</code> and <code>~/.config/claude/projects/</code>. Every refresh uses the last 30 days: a log last written before then is not opened, and older lines in a log that is still in use are skipped, not kept. Once, and only if you allow it, CLI Pulse also reads up to a year of older logs to fill in your usage history. Parsed on your Mac for usage records; the results are cached on your Mac.</li>
     <li><strong>What is derived from them</strong> &mdash; token counts, cost estimates, model names and dates, plus each conversation&rsquo;s file path, project folder and session id. Those last three are how the Sessions list can name your conversations. They stay on your Mac; the table above still governs what syncs (numbers only, and only when you are signed in).</li>
     <li><strong>Calls to the providers you use</strong>, made with the OAuth tokens their own CLIs already stored on your Mac. This is the part most easily missed: &ldquo;local mode&rdquo; refers to <em>your data staying local</em>, not to the app being offline. To show live quota it talks to OpenAI, Anthropic and others directly.</li>
     <li><strong>Renewing an expired provider token rewrites that CLI&rsquo;s own credential file</strong> (for example <code>~/.codex/auth.json</code>). CLI Pulse has always done this; it is now disclosed, and v1.50 also fixed a bug that made it happen far more often than intended &mdash; a date-parsing error meant a check written as &ldquo;renew if the token is more than 8 days old&rdquo; renewed it on essentially every refresh.</li>
@@ -234,7 +234,7 @@
     <li><strong>Anonymous install statistics are separate</strong> and are not part of this choice. See the section above.</li>
   </ul>
 
-  <p>Signing in implies consent to the 30-day scan, because the sign-in step comes after the wizard&rsquo;s privacy screen and because syncing to an account is a larger commitment than scanning locally. It does not imply consent to reading older logs: see the next section. Signing out does not revoke it &mdash; use the Settings toggle.</p>
+  <p>Signing in implies consent to the 30-day scan, because the sign-in step comes after the wizard&rsquo;s privacy screen and because syncing to an account is a larger commitment than scanning locally. It does not imply consent to reading older logs: see the next section. While you are signed in, the 30-day scan has no switch of its own; signing out stops it. Signing out does not revoke the consent, though: to turn the scan off when you use CLI Pulse without an account, use the Settings toggle.</p>
 
   <h2>Reading more than 30 days back, and what the question used to leave out</h2>
 
@@ -246,9 +246,11 @@
   <ul>
     <li><strong>New users</strong> choose on the same screen. &ldquo;Start local scan&rdquo; includes the one-time read of older logs; &ldquo;Last 30 days only&rdquo; leaves it out; &ldquo;Not now&rdquo; reads nothing.</li>
     <li><strong>People who agreed to the 30-day scan before v1.55</strong>, and <strong>signed-in users who were never shown the question</strong>, are shown it once, with both answers keeping the 30-day scan running: <strong>&ldquo;Include older history&rdquo;</strong> or <strong>&ldquo;Last 30 days only&rdquo;</strong>. Refusing the older logs does not take back the 30-day scan.</li>
-    <li>Until you say yes, CLI Pulse reads nothing older than 30 days. Signing in is not a yes to this.</li>
+    <li>Until you say yes, CLI Pulse uses nothing older than 30 days, in the sense given under &ldquo;Session logs&rdquo; above. Signing in is not a yes to this.</li>
     <li><strong>Settings &rsaquo; Privacy &rsaquo; &ldquo;Include older usage history&rdquo;</strong> changes the answer at any time. Turning it off stops further reads of older logs; it does not delete history that was already built, which stays on your Mac.</li>
   </ul>
+
+  <p>The routine scan had a smaller gap of the same kind. On its first run, and whenever its cache was reset, it opened Claude Code logs of any age and discarded their lines older than 30 days without using them. Since v1.55 a log last written before the 30-day window is not opened.</p>
 
   <h2>Security practices</h2>
   <ul>
