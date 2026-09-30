@@ -441,14 +441,19 @@
   list.</li>
   <li><strong>The Companion CLI</strong> follows the answer only from the release after 1.30.0.
   See its section.</li>
-  <li><strong>Three things happen whatever you answered.</strong> In the direct-download build,
-  opening the Sessions tab while the built-in agent or the Companion CLI is
-  running reads Claude Code's settings file, <code>~/.claude/settings.json</code>, to check
-  whether CLI Pulse's approval hook is installed. In the same build, starting a
-  Claude session from CLI Pulse, in the Sessions tab or from a paired phone over
-  your network, makes the built-in agent read <code>~/.claude/.credentials.json</code> to
-  sign the session in, and, when that token has expired, renew it and rewrite
-  the file. And the app contacts services that are not AI providers: our server
+  <li><strong>The Sessions tab</strong> follows it too. While the built-in agent or the
+  Companion CLI is running, the direct-download build reads Claude Code's
+  settings file, <code>~/.claude/settings.json</code>, to check whether CLI Pulse's
+  approval hook is installed, and the Companion CLI, asked which sessions to
+  list there, reads the command lines of the running programs to find AI CLI
+  sessions. After "Not now" neither happens, and the tab lists only the
+  sessions CLI Pulse started (Companion CLI 1.30.0 and earlier still read the
+  running programs).</li>
+  <li><strong>Two things happen whatever you answered.</strong> In the direct-download build,
+  starting a Claude session from CLI Pulse, in the Sessions tab or from a
+  paired phone over your network, makes the built-in agent read
+  <code>~/.claude/.credentials.json</code> to sign the session in, and, when that token
+  has expired, renew it and rewrite the file. And the app contacts services that are not AI providers: our server
   (for anonymous install statistics, and for your account if you are signed in),
   Sentry for crash reports, GitHub to check for updates, and an exchange-rate
   service (see <em>Third-party sub-processors</em>).</li>
@@ -529,7 +534,9 @@
   says. Whatever its state, it answers the CLI Pulse app on this Mac when the app
   asks it something, such as the Machine view's readings; while your answer
   allows the scan, with or without an account, that answer can include whether
-  Codex is signed in with a subscription, which it reads from <code>~/.codex/auth.json</code>.</p>
+  Codex is signed in with a subscription, which it reads from <code>~/.codex/auth.json</code>,
+  and the AI CLI sessions it finds among the running programs, for the Sessions
+  tab. Releases after 1.30.0 read neither while the answer pauses the scan.</p>
   <p><strong>Which versions follow your answer.</strong> Companion CLI 1.30.0 (the latest release
   when this was written) and earlier versions do not read the app's answer, its
   sign-in or its Privacy switches at all: while installed and paired they keep
