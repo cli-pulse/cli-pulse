@@ -142,7 +142,7 @@
   <td>So iPhone and Apple Watch can show what is running on your Mac. The App Store build's sandbox usually hides other programs from it, and then it has none to send. The Companion CLI sends more; see its section</td>
   </tr>
   <tr>
-  <td><strong>Alerts</strong>: a program using a lot of CPU, or a session running a long time (with that program's name, provider and folder name), budget alerts our server works out from your daily usage, and whether you resolved or snoozed each one</td>
+  <td><strong>Alerts</strong>: your Mac or a program using a lot of CPU, or a session running a long time (with that program's name, provider and folder name), budget alerts our server works out from your daily usage, and whether you resolved or snoozed each one</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in</td>
   <td>So your other devices can show them</td>
@@ -485,12 +485,13 @@
   <p>While it is paired and allowed to (see below), every 2 minutes by default it:</p>
   <ul>
   <li>reads the command line of each running program to find AI CLI sessions, and
-  uploads each one's name — the first 48 characters of its command line, which
-  can include folder paths and arguments — with the name of its project folder,
-  a keyed hash of that folder's path, its start and last-active times, and
-  alerts about it;</li>
+  uploads each one's name — up to 48 characters of its command line, which can
+  include folder paths and arguments — with a project name taken from its
+  command line, a keyed hash of its project folder's path, its start and
+  last-active times, and alerts about it;</li>
   <li>uploads this Mac's CPU and memory load, its session count and the machine
-  readings listed in the table;</li>
+  readings listed in the table, and reads <code>~/.codex/auth.json</code> to report whether
+  Codex is signed in with a subscription or an API key;</li>
   <li>when it finds a Claude, Codex or Gemini session running, reads that
   provider's credentials (Claude Code's Keychain item, <code>~/.codex/auth.json</code>,
   <code>~/.gemini/oauth_creds.json</code>) to ask it for your quota, uploads the quota
@@ -651,10 +652,10 @@
   support year-over-year cost comparisons with one month of buffer; beyond that
   the historical detail adds no product value and we'd rather delete it.</li>
   <li><strong>Ended AI CLI sessions, alerts, and device snapshots</strong> are deleted by a
-  nightly job once they are older than your account's retention setting, which
-  is 7 days; none of the Apple apps offers a way to change it. (Earlier versions
-  of this page pointed to a setting in Settings → Privacy that does not
-  exist.)</li>
+  nightly job once they are older than your account's retention setting: 7
+  days, unless an earlier version of the app changed it. The current apps offer
+  no way to change it. (Earlier versions of this page pointed to a setting
+  in Settings → Privacy that does not exist.)</li>
   <li><strong>Account deletion</strong> removes all associated rows within 30 days
   (cascading deletes handled at the database level).</li>
   <li><strong>Anonymous install rows</strong> are deleted 400 days after they were last
