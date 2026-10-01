@@ -364,6 +364,18 @@
   Settings → Privacy at any time: without an account, with the scan switch; while
   signed in, with <strong>"Choose again…"</strong>, which shows the same question with its
   three answers.</p>
+  <p><strong>Versions 1.50 through 1.54 did not keep that promise on a Mac synced to your
+  account</strong>, although this page made it from v1.50. There the app never
+  checked the answer: after "Not now" it kept reading this Mac and syncing what
+  it found anyway, as if you had started the scan. It read your session logs,
+  including the one-time read of older logs if that had not yet run on the Mac;
+  it read the credentials your AI CLIs keep and asked their providers for your
+  quota; and it uploaded what it found, such as that quota and your daily usage,
+  to your account. Without an account, and on a signed-in Mac that was not
+  synced, the app honored "Not now". Since v1.55 it honors it on a synced Mac
+  too, where it still shows what your account already holds. "Choose again…" is
+  also new in v1.55; before, the only way to change the answer while signed in
+  was to sign out.</p>
   <p>Starting the scan turns on:</p>
   <ul>
   <li><strong>Session logs: the last 30 days, and a one-time read of up to a year</strong> —
