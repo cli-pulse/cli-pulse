@@ -40,126 +40,19 @@
   <nav class="crumbs"><a href="index.html">CLI Pulse</a> &rsaquo; Data Handling</nav>
 
   <h1>Data Handling</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: April 28, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 3, 2026</p>
 
   <div class="lede">
-    This page lists every data category CLI Pulse touches and tells you whether it stays on your device, is synced to your CLI Pulse account, or is never collected at all. The authoritative privacy policy is on <a href="privacy.html">privacy.html</a>; this page is a quick lookup.
+    This page used to keep its own table of the data CLI Pulse handles. That table fell behind the app, and several of its statements were wrong, so it has been removed. The <a href="privacy.html">Privacy Policy</a> now lists every kind of data CLI Pulse reads, keeps or sends, where it is kept, and whether it syncs to your account: see <a href="privacy.html#data">Data-by-data breakdown</a>. Your controls and how long data is kept are in the same policy.
   </div>
 
-  <h2>Data category table</h2>
-
-  <table>
-    <thead>
-      <tr><th>Category</th><th>Disposition</th><th>Where it lives</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Provider API keys</strong> (OpenAI, Anthropic, Google, OpenRouter, etc.)</td>
-        <td class="local">Stored locally / not uploaded</td>
-        <td>macOS Keychain on Mac; iOS Keychain on iPhone / iPad / Apple Watch; AndroidX EncryptedSharedPreferences on Android. Used directly against the provider's API over TLS.</td>
-      </tr>
-      <tr>
-        <td><strong>Provider session cookies</strong> (manual cookie headers)</td>
-        <td class="local">Stored locally / not uploaded</td>
-        <td>Device Keychain. Used locally as a <code>Cookie</code> header to the provider.</td>
-      </tr>
-      <tr>
-        <td><strong>Bridged provider OAuth tokens</strong> (read from <code>~/.codex/auth.json</code>, <code>~/.claude/.credentials.json</code>, <code>~/.gemini/oauth_creds.json</code>)</td>
-        <td class="local">Stored locally / not uploaded</td>
-        <td>macOS Keychain (app-group shared between the sandboxed main app and the local helper). Used locally only.</td>
-      </tr>
-      <tr>
-        <td><strong>Local session logs</strong> &mdash; raw contents of <code>~/.codex/sessions/</code> and <code>~/.claude/projects/</code> JSONL files</td>
-        <td class="local">Scanned locally / raw contents not uploaded</td>
-        <td>Read on-device via security-scoped bookmarks the user explicitly grants. The scanner computes token counts and other metrics locally.</td>
-      </tr>
-      <tr>
-        <td><strong>Aggregated usage metrics</strong> (per-day token counts, request counts, model name, provider name, date)</td>
-        <td class="sync">Synced to your CLI Pulse account</td>
-        <td>Supabase, linked to your account, so iPhone, Apple Watch, and Android show the same history as your Mac.</td>
-      </tr>
-      <tr>
-        <td><strong>Cost estimates</strong> (derived from per-day token counts and the provider's published pricing)</td>
-        <td class="sync">Synced to your CLI Pulse account</td>
-        <td>Supabase. Computed locally, then synced as numbers.</td>
-      </tr>
-      <tr>
-        <td><strong>Provider quota / remaining / reset summaries</strong></td>
-        <td class="sync">Synced to your CLI Pulse account</td>
-        <td>Supabase, so mobile clients can show current quota state without re-running the local scanner.</td>
-      </tr>
-      <tr>
-        <td><strong>Session display metadata</strong> (session name, status, project identifier)</td>
-        <td class="sync">Synced to your CLI Pulse account</td>
-        <td>Supabase. Project identifiers are <strong>minimized or hashed</strong> in transit. Raw JSONL contents are not synced.</td>
-      </tr>
-      <tr>
-        <td><strong>Device heartbeat / status</strong> (device name, OS version, helper version)</td>
-        <td class="sync">Synced to your CLI Pulse account</td>
-        <td>Supabase. Shows which Macs / iPhones / Watches are reporting.</td>
-      </tr>
-      <tr>
-        <td><strong>Alerts you keep</strong></td>
-        <td class="sync">Synced to your CLI Pulse account</td>
-        <td>Supabase. Alerts you resolve locally are stored in device <code>UserDefaults</code> and not synced.</td>
-      </tr>
-      <tr>
-        <td><strong>CLI Pulse account email</strong></td>
-        <td class="sync">Synced (required to authenticate)</td>
-        <td>Supabase Auth.</td>
-      </tr>
-      <tr>
-        <td><strong>Apple / Google sign-in tokens</strong></td>
-        <td class="sync">Used at sign-in only, not persisted by us</td>
-        <td>Exchanged once with Supabase for a session, then dropped.</td>
-      </tr>
-      <tr>
-        <td><strong>Supabase session access / refresh token</strong></td>
-        <td class="local">Received and stored locally, not re-uploaded</td>
-        <td>Device Keychain. Keeps you signed in.</td>
-      </tr>
-      <tr>
-        <td><strong>Git activity (Yield Score)</strong> &mdash; commit hash, HMAC of project path, commit timestamp, merge-commit flag</td>
-        <td class="sync">Synced only when the toggle is ON</td>
-        <td>Supabase. Off by default. Toggle is in Settings &rarr; Privacy.</td>
-      </tr>
-      <tr>
-        <td><strong>Git commit messages, diffs, file paths, author identity</strong></td>
-        <td class="never">Never collected</td>
-        <td>Explicitly excluded even when Yield Score is on.</td>
-      </tr>
-      <tr>
-        <td><strong>Crash reports</strong></td>
-        <td class="sync">Synced when a crash or error occurs</td>
-        <td>Sentry. A local <code>beforeSend</code> hook scrubs API keys, tokens, JWTs, Bearer headers, <code>/Users/&lt;name&gt;</code> paths, and known sensitive field names before the event leaves the device. Performance tracing is disabled.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>User controls</h2>
+  <p>What the old table got wrong, as of CLI Pulse 1.55:</p>
   <ul>
-    <li><strong>Disable helper / background sync:</strong> Settings &rarr; General on macOS, or Settings &rarr; Sync on the mobile clients. With sync off, the local scanner still works for the local UI; nothing is sent to your account.</li>
-    <li><strong>Revoke folder access:</strong> Settings &rarr; CLI Tool Access &rarr; pick a directory &rarr; remove the security-scoped bookmark. The scanner will no longer read that location.</li>
-    <li><strong>Disable Yield Score / git tracking:</strong> Settings &rarr; Privacy &rarr; "Track git activity" toggle. Off by default; turning it off stops uploads immediately.</li>
-    <li><strong>Delete API keys:</strong> Settings &rarr; Providers &rarr; remove a provider. The Keychain entry is deleted.</li>
-    <li><strong>Delete your account / data:</strong> Settings &rarr; Account &rarr; Delete Account. Cascading deletes remove all associated rows within 30 days.</li>
-    <li><strong>Export your own data:</strong> "Export Report" in the Overview tab produces a PDF or CSV of your account's data.</li>
-  </ul>
-
-  <h2>Retention</h2>
-  <ul>
-    <li>Local Keychain entries persist until you delete the provider or the app.</li>
-    <li>Account-active metrics on Supabase are retained for up to 18 months of rolling history. A nightly job prunes rows older than that.</li>
-    <li>If you set a shorter <code>data_retention</code> in Settings &rarr; Privacy, that value applies to your sessions, alerts, and device snapshots.</li>
-    <li>Account deletion removes all associated rows within 30 days.</li>
-  </ul>
-
-  <h2>What we do not do</h2>
-  <ul>
-    <li>We do not upload your provider API keys, session cookies, or bridged provider OAuth tokens.</li>
-    <li>We do not upload the raw contents of your local session-log files.</li>
-    <li>We do not ship third-party product-analytics SDKs (no Google Analytics, Firebase Analytics, Amplitude, Mixpanel, or similar). Sentry is used for crash reports only and runs through a local scrubber.</li>
-    <li>We do not sell your data to anyone.</li>
+    <li>Only the App Store build reads files through the folder access you grant it. The direct-download build, its background helper and built-in agent, and the Companion CLI are not sandboxed and read the files the Privacy Policy names directly.</li>
+    <li>The app has no button to take back a single folder grant, and the current apps offer no way to change how long ended sessions, alerts and device snapshots are kept.</li>
+    <li>Project folders are not only hashed. While you are signed in and this Mac is paired, each running AI CLI session that CLI Pulse finds syncs its program&rsquo;s name and its project folder&rsquo;s name (never the full path), with a keyed hash of that folder&rsquo;s path.</li>
+    <li>Background sync and Yield Score&rsquo;s git tracking are both under Settings &rsaquo; Advanced, and only the Companion CLI collects git activity.</li>
+    <li>It said nothing about the Companion CLI or the anonymous install statistics.</li>
   </ul>
 
   <h2>Contact</h2>

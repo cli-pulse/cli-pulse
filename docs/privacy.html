@@ -38,7 +38,7 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: October 1, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 3, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, and a few diagnostic readings about each Mac (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
@@ -82,7 +82,7 @@
   or your own private network (such as Tailscale), encrypted with TLS 1.2 using a
   key the two devices agree on when you pair them; what they exchange does not
   pass through our servers.</p>
-  <h2>Data-by-data breakdown</h2>
+  <h2 id="data">Data-by-data breakdown</h2>
   <table>
   <thead>
   <tr>
@@ -451,8 +451,8 @@
   whether Claude's Remote Control can be offered to a phone. After "Not now"
   its hello reads neither. Starting a Claude session is separate: see the next
   list.</li>
-  <li><strong>The Companion CLI</strong> follows the answer only from the release after 1.30.0.
-  See its section.</li>
+  <li><strong>The Companion CLI</strong> follows the answer only from 1.31.0, the release after
+  1.30.0. See its section.</li>
   <li><strong>The Sessions tab</strong> follows it too. While the built-in agent or the
   Companion CLI is running, the direct-download build reads Claude Code's
   settings file, <code>~/.claude/settings.json</code>, to check whether CLI Pulse's
@@ -556,12 +556,12 @@
   notes about it, such as an exit code. Our server accepts these only while
   "Mac control requests from your other devices" is on for the paired account,
   and no CLI Pulse app shows them any more.</p>
-  <p><strong>Which versions follow your answer.</strong> Companion CLI 1.30.0 (the latest release
-  when this was written) and earlier versions do not read the app's answer, its
+  <p><strong>Which versions follow your answer.</strong> Companion CLI 1.30.0 and earlier versions
+  do not read the app's answer, its
   sign-in or its Privacy switches at all: while installed and paired they keep
   collecting and uploading, to the account they were paired with, whatever you
-  choose in the app, including after you sign out. Releases after 1.30.0 follow
-  them:</p>
+  choose in the app, including after you sign out. Companion CLI 1.31.0, released
+  with CLI Pulse 1.55, and later releases follow them:</p>
   <ul>
   <li><strong>Paused</strong> — nothing read or sent in its cycle, nothing sent about the
   sessions it runs, and our server not asked for remote-control or
@@ -772,7 +772,6 @@
 
   <h2>Related pages</h2>
   <ul>
-    <li><a href="data-handling.html">Data Handling</a> &mdash; per-category disposition table.</li>
     <li><a href="security.html">Security Policy</a> &mdash; vulnerability reporting and credential handling.</li>
     <li><a href="terms.html">Terms of Use</a></li>
     <li><a href="support.html">Support</a></li>
