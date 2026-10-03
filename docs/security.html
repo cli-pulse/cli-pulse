@@ -32,10 +32,10 @@
   <nav class="crumbs"><a href="index.html">CLI Pulse</a> &rsaquo; Security Policy</nav>
 
   <h1>Security Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: April 28, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 3, 2026</p>
 
   <div class="lede">
-    CLI Pulse touches local credentials and AI provider APIs, so security and privacy are explicit product goals. This page tells you <strong>how to report a vulnerability</strong> and summarizes how user data is handled. The full privacy policy is on <a href="privacy.html">privacy.html</a>.
+    CLI Pulse touches local credentials and AI provider APIs, so security and privacy are explicit product goals. This page tells you <strong>how to report a vulnerability</strong> and summarizes how user data is handled. The <a href="privacy.html">Privacy Policy</a> is the authority on what CLI Pulse reads, keeps and sends; where this page and the policy disagree, the policy is right.
   </div>
 
   <h2>Reporting vulnerabilities</h2>
@@ -61,48 +61,53 @@
   </ul>
 
   <h2>Data-handling summary</h2>
-  <p>Detailed table: <a href="data-handling.html">data-handling.html</a>. Key guarantees:</p>
+  <p>The policy&rsquo;s <a href="privacy.html#data">data-by-data breakdown</a> lists every item. What matters most for security, as of CLI Pulse 1.55:</p>
   <ul>
-    <li><strong>Provider API keys are not uploaded to CLI Pulse servers.</strong> They live only in the device's secure store (macOS / iOS Keychain, Android EncryptedSharedPreferences) and are used directly against the provider's API.</li>
-    <li><strong>Provider session cookies are not uploaded to CLI Pulse servers.</strong> Same handling.</li>
-    <li><strong>Bridged provider OAuth tokens</strong> read from local files such as <code>~/.codex/auth.json</code>, <code>~/.claude/.credentials.json</code>, and <code>~/.gemini/oauth_creds.json</code> stay on the device.</li>
-    <li><strong>Raw session-log contents</strong> under <code>~/.codex/sessions/</code> and <code>~/.claude/projects/</code> are scanned <strong>on-device only</strong>, after the user grants folder access via security-scoped bookmarks. The file contents never leave the device.</li>
-    <li>The data CLI Pulse syncs to your account is intentionally limited to aggregated metrics and operational metadata. See <a href="data-handling.html">data-handling.html</a>.</li>
+    <li><strong>Provider API keys and pasted session cookies are not uploaded to CLI Pulse servers.</strong> They are kept in the macOS Keychain on the Mac where you enter them (EncryptedSharedPreferences in the Android beta) and sent only to the provider they belong to, over HTTPS.</li>
+    <li><strong>Tokens AI CLIs keep on the Mac</strong> (<code>~/.codex/auth.json</code>, <code>~/.claude/.credentials.json</code>, <code>~/.gemini/oauth_creds.json</code>, <code>~/.local/share/kilo/auth.json</code> and Claude Code&rsquo;s Keychain item) are read to ask each provider for your quota and are <strong>not</strong> uploaded to CLI Pulse servers. The app copies the file-based ones into a Keychain item that only CLI Pulse&rsquo;s own programs can read. Renewing an expired token rewrites that CLI&rsquo;s own credential file.</li>
+    <li><strong>Browser cookies</strong> are sent only to the provider they belong to, never to CLI Pulse servers. The app reads them only for a provider whose cookie source is &ldquo;Automatic&rdquo; (Cursor&rsquo;s is by default), and not in Strict privacy mode. The Companion CLI has a separate fallback: when Claude&rsquo;s token does not work, it reads your claude.ai cookie from the Claude desktop app or a Chromium-based browser and keeps it in a plain-text file only your user account can read; from 1.31.0 it does not do this in Strict privacy mode, and 1.30.0 and earlier ignore that switch.</li>
+    <li><strong>Session-log contents</strong> (<code>~/.codex/sessions/</code>, <code>~/.claude/projects/</code> and the other paths the policy names) are parsed on the Mac and never uploaded. Of what they give, only daily token counts and cost estimates sync, and only while you are signed in.</li>
+    <li><strong>What does sync while you are signed in is more than metrics:</strong> quota state, the AI CLI sessions running on the Mac (the program&rsquo;s name and its project folder&rsquo;s name, never the full path, with a keyed hash of the path), alerts, an alert webhook address if you add one, the Mac&rsquo;s name, load and versions, and some diagnostics.</li>
+    <li><strong>The optional Companion CLI</strong>, installed separately, uploads more than the app, including up to 48 characters of each AI CLI&rsquo;s command line (which can include folder paths) and what sessions started through it print (with secrets redacted). See <a href="privacy.html#companion-cli">its section</a>.</li>
+    <li><strong>Yield Score</strong> is opt-in and collected only by the Companion CLI: the commit hash, a keyed hash of the project path, the commit timestamp and a merge flag. Commit messages, diffs, file paths and author identity are never uploaded.</li>
+    <li><strong>Consent comes before the scan.</strong> Without an account, CLI Pulse reads no session logs or credential files and contacts no AI provider until you answer &ldquo;Start local scan&rdquo; or &ldquo;Last 30 days only&rdquo;, and not after &ldquo;Not now&rdquo;, apart from the exceptions the policy lists. Signing in counts as a yes to the 30-day scan, but not over an earlier &ldquo;Not now&rdquo;. Versions 1.50 to 1.54 did not honour &ldquo;Not now&rdquo; on a Mac synced to an account; 1.55 does, in the app and its background helper, and so does Companion CLI 1.31.0. See <a href="privacy.html#consent">When the scanning starts</a>.</li>
   </ul>
 
   <h2>Credential handling</h2>
   <ul>
-    <li><strong>Storage:</strong> macOS Keychain, iOS Keychain, AndroidX EncryptedSharedPreferences. All are encrypted at rest by the OS and unlocked alongside the user account.</li>
-    <li><strong>Transport to providers:</strong> TLS 1.2+ direct from the user's device to the provider's API. Provider credentials do not transit CLI Pulse infrastructure.</li>
-    <li><strong>Transport to CLI Pulse Sync:</strong> TLS 1.2+ to Supabase, with per-account authorization.</li>
-    <li><strong>App Sandbox</strong> (<code>com.apple.security.app-sandbox</code>) is enabled on the Apple platforms. File access outside the app container requires user-granted security-scoped bookmarks.</li>
+    <li><strong>Storage:</strong> the macOS Keychain holds every secret the Mac app stores: provider API keys, pasted cookies, the CLI Pulse session token, the Mac&rsquo;s pairing secret, and the key behind the project-path hashes. On iPhone and Apple Watch the CLI Pulse session token is kept in the Keychain; on Android, AndroidX EncryptedSharedPreferences is used. The exception is the Companion CLI, which keeps its pairing secret, its hash key and the claude.ai cookie it reads from a browser or the Claude desktop app in files only your user account can read.</li>
+    <li><strong>Transport to providers:</strong> TLS 1.2+ direct from the user&rsquo;s device to the provider&rsquo;s API. Provider credentials do not transit CLI Pulse infrastructure.</li>
+    <li><strong>Transport to CLI Pulse Sync:</strong> TLS 1.2+ to Supabase. The app authorizes with your CLI Pulse session token; the background helper and the Companion CLI each upload with their own pairing of the Mac to your account.</li>
+    <li><strong>App Sandbox</strong> (<code>com.apple.security.app-sandbox</code>) is enabled in the Mac App Store build, for the app and its background helper. There, file access outside the app container requires security-scoped bookmarks you grant in Settings &rarr; Advanced &rarr; CLI Tool Access. The direct-download build (GitHub, Homebrew), its background helper and built-in agent, and the Companion CLI are <strong>not</strong> sandboxed and read the files the policy names directly.</li>
   </ul>
 
-  <h2>Local helper</h2>
-  <p>CLI Pulse for Mac uses a local helper component to perform on-device collection. The helper:</p>
+  <h2>Local components on the Mac</h2>
+  <p>Besides the app itself, CLI Pulse for Mac can run up to three local components. None of them uploads raw credentials, raw cookies or session-log contents, and none of them sends crash reports.</p>
   <ul>
-    <li>runs only on the user's Mac</li>
-    <li>reads only the local session-log paths the user has granted access to</li>
-    <li>communicates with the main app over a local IPC channel</li>
-    <li>shares Keychain items with the main app via the app group, not the network</li>
-    <li>can be disabled by the user; background sync can also be turned off</li>
+    <li><strong>The background helper</strong> runs the app&rsquo;s collectors on its own schedule (every 2 minutes by default) and uploads what they find for your iPhone and Apple Watch. It is switched on when you pair the Mac with your account and off with Settings &rarr; Advanced &rarr; &ldquo;Enable background sync&rdquo;. Since 1.55 it follows your answer to the scan question and uploads only while the app is signed in to the account the Mac was paired with. After an update from an earlier version, the helper that was already running stays the earlier version until it restarts, and keeps collecting and syncing as before; the 1.55 app restarts it the first time the app opens. Until the app has recorded, on that first launch, whether you are signed in, the new helper goes by this Mac&rsquo;s pairing rather than the app&rsquo;s sign-in, as earlier versions did (see <a href="privacy.html#consent">When the scanning starts</a>). An upload already under way when you sign out is allowed to finish.</li>
+    <li><strong>The built-in agent</strong> (direct-download build only) runs the sessions you start from CLI Pulse and answers the app&rsquo;s questions about the Mac. It uploads nothing.</li>
+    <li><strong>The Companion CLI</strong> is optional and installed separately from Settings &rarr; Companion CLI. It is not sandboxed, has its own pairing and schedule, and uploads more than the app (see above). Versions 1.30.0 and earlier ignore the app&rsquo;s consent answer, sign-in and Privacy switches; 1.31.0 follows them. Remove it with Settings &rarr; Companion CLI &rarr; Uninstall&hellip;.</li>
   </ul>
-  <p>The helper does not phone home with raw credentials, raw cookies, or raw session-log contents. Its uploads are limited to the metric and metadata categories described in <a href="data-handling.html">data-handling.html</a>.</p>
 
   <h2>Remote sync</h2>
   <ul>
     <li>Account-based via Supabase Auth.</li>
-    <li>Server-side encryption at rest (AES-256) on the database and storage backing each account.</li>
+    <li>Server-side encryption at rest (AES-256) on the database and storage backing each account. There is no end-to-end encryption.</li>
     <li>TLS 1.2+ in transit.</li>
-    <li>No third-party product-analytics SDK ships with CLI Pulse. <strong>Sentry is used for crash reports only</strong> and runs through a local <code>beforeSend</code> scrubber that removes API keys, OAuth tokens, JWTs, Bearer headers, <code>/Users/&lt;name&gt;</code> paths, and any field whose name contains common sensitive fragments before the event leaves the device. Performance tracing is disabled (<code>tracesSampleRate = 0</code>).</li>
+    <li>No third-party product-analytics SDK ships with CLI Pulse. <strong>Sentry</strong> receives crash reports from the Mac, iPhone and Apple Watch apps (and the Android app), whether or not you are signed in, and the same SDK reports whether each app session ended in a crash. A local <code>beforeSend</code> scrubber removes JWTs, strings shaped like <code>sk-&hellip;</code> API keys, Bearer headers, <code>/Users/&lt;name&gt;</code> paths, fields whose names contain common sensitive fragments, and the IP-address field before an event leaves the device. Since 1.55 web-request breadcrumbs carry no query strings, and parts of their addresses that look like identifiers, or follow words such as <code>workspace</code>, <code>organizations</code> or <code>users</code>, are replaced; this works by shape and place, so a part that looks like an ordinary word and follows no such word is kept. Performance tracing is disabled (<code>tracesSampleRate = 0</code>). There is no switch to turn crash reporting off.</li>
+    <li><strong>Anonymous install statistics</strong> (a random install id, the install channel, app and macOS versions, display language and a few yes/no milestones) go to our own database, linked to no account. They can be turned off, and Strict privacy mode turns them off too. See <a href="privacy.html#install-statistics">Anonymous install statistics</a>.</li>
+    <li><strong>Remote control</strong> between an iPhone and a Mac is built into the direct-download build but is not switched on in 1.55. When it is, the two devices connect directly over your local or private network, encrypted with TLS 1.2 using a key they agree on when you pair them, and what they exchange does not pass through CLI Pulse servers.</li>
   </ul>
 
   <h2>User controls</h2>
+  <p>The policy lists them under <a href="privacy.html#controls">Your controls</a>, except the scan question and older usage history, which are under <a href="privacy.html#consent">When the scanning starts</a> and the section after it. The ones that matter most for security:</p>
   <ul>
-    <li><strong>Disable background sync / helper:</strong> Settings &rarr; General on macOS; Settings &rarr; Sync on the mobile clients.</li>
-    <li><strong>Revoke folder access:</strong> Settings &rarr; CLI Tool Access &rarr; remove the bookmark for that directory.</li>
-    <li><strong>Delete API keys:</strong> Settings &rarr; Providers &rarr; remove a provider.</li>
-    <li><strong>Delete account:</strong> Settings &rarr; Account &rarr; Delete Account. Cascading deletes remove all associated rows within 30 days.</li>
+    <li><strong>Scan consent:</strong> Settings &rarr; Privacy: the scan switch when you use CLI Pulse without an account, or, after &ldquo;Not now&rdquo; while signed in, &ldquo;Choose again&hellip;&rdquo; (while you are signed in the 30-day scan has no switch of its own; signing out stops it); &ldquo;Include older usage history&rdquo; for logs older than 30 days.</li>
+    <li><strong>Stop background uploads from a Mac:</strong> sign out, or turn off Settings &rarr; Advanced &rarr; &ldquo;Enable background sync&rdquo;. The Companion CLI is separate: Settings &rarr; Companion CLI &rarr; Uninstall&hellip;.</li>
+    <li><strong>Strict privacy mode:</strong> Settings &rarr; Privacy. CLI Pulse then reads no secret that another app keeps in your keychain or browsers on its own (such as Claude Code&rsquo;s Keychain item or browser cookies). The sign-in files AI CLIs keep in your home folder are still read, for quota.</li>
+    <li><strong>Folder access (Mac App Store build):</strong> granted in Settings &rarr; Advanced &rarr; CLI Tool Access. There is no button to take back a single grant; turning the local scan off, or signing out, stops every read.</li>
+    <li><strong>Delete API keys:</strong> Settings &rarr; Providers &rarr; remove a provider; the Keychain entry is deleted.</li>
+    <li><strong>Delete account:</strong> &ldquo;Delete Account&rdquo;, at the bottom of Settings on the Mac and in Settings on iPhone. Cascading deletes remove all associated rows within 30 days.</li>
   </ul>
 
   <h2>Out of scope</h2>

@@ -273,7 +273,7 @@
   after you switch to another account it uploads nothing until you pair this Mac
   again, and after you sign out it stops reading altogether (see <em>When the
   scanning starts</em> below for how that applies right after an update).</p>
-  <h3>Anonymous install statistics</h3>
+  <h3 id="install-statistics">Anonymous install statistics</h3>
   <p>Since v1.44 you can use CLI Pulse without an account. That means we cannot tell
   whether the app works for the people using it that way — whether it found their
   CLIs, whether they ever saw a number. So the Mac app reports how far it got,
@@ -346,7 +346,7 @@
 </pre>
   <p>The scanner runs entirely on your Mac. Your API key never passes through our
   servers — it goes directly from your Mac to the provider.</p>
-  <h2>When the scanning starts, and what you agree to first</h2>
+  <h2 id="consent">When the scanning starts, and what you agree to first</h2>
   <p><em>(Added in v1.50. It corrects something this page previously left implied,
   and the correction is a change to the app, not only to the wording here.)</em></p>
   <p>Everything above describes what CLI Pulse does once it is running. It did not
@@ -506,7 +506,7 @@
   whenever its cache was reset, it opened Claude Code logs of any age and
   discarded their lines older than 30 days without using them. Since v1.55 a log
   last written before the 30-day window is not opened.</p>
-  <h2>The Companion CLI (optional, installed separately)</h2>
+  <h2 id="companion-cli">The Companion CLI (optional, installed separately)</h2>
   <p><em>(Added in v1.55. Earlier versions of this page described the app and its
   built-in helper only, and the promises above do not all hold for this program.)</em></p>
   <p>The Companion CLI is a separate program you can install from Settings ›
@@ -590,7 +590,7 @@
   each thing it sends about a session. It has no way to be told sooner.</li>
   </ul>
   <p><strong>To stop it entirely:</strong> Settings › Companion CLI › Uninstall….</p>
-  <h2>Security practices</h2>
+  <h2 id="security-practices">Security practices</h2>
   <ul>
   <li><strong>macOS Keychain</strong> is used for every secret the app stores: provider API keys,
   manual cookies, Supabase session tokens, this Mac's pairing secret, and the key
@@ -643,7 +643,7 @@
   generates. Performance tracing is disabled
   (<code>tracesSampleRate = 0</code>). There is no switch to turn crash reporting off.</li>
   </ul>
-  <h2>Your controls</h2>
+  <h2 id="controls">Your controls</h2>
   <ul>
   <li><strong>Folder access (App Store build):</strong> Settings → Advanced → CLI Tool Access
   grants it. The app has no button to take back a single grant: turning the

@@ -30,7 +30,10 @@ It also turns your phone into a remote control for your Mac's coding agents:
 pair the macOS app's local helper, then from iPhone or iPad watch your
 managed AI-CLI sessions live, send prompts, approve or deny permission
 requests, and keep an eye on a whole swarm of agents — without touching your
-Mac.
+Mac. Remote control is built into the direct-download Mac build but is not
+switched on in CLI Pulse 1.55. When it is, the phone and the Mac connect to
+each other directly over your local or private network, not through CLI
+Pulse servers.
 
 The product spans:
 
@@ -59,54 +62,85 @@ The published landing page lives at
 
 ## Privacy summary
 
-The full policy is in [PRIVACY.md](PRIVACY.md) and at
-<https://jasonyeyuhe.github.io/cli-pulse/privacy.html>. The short version:
+The privacy policy is at <https://cli-pulse.github.io/cli-pulse/privacy.html>
+(its source is [`docs/privacy.html`](docs/privacy.html)). It lists everything
+CLI Pulse reads, keeps and sends, and where this summary and the policy
+disagree, the policy is right. The short version, for CLI Pulse 1.55:
 
-- **Provider API keys are never uploaded.** They are stored only in your
-  device's secure store (macOS Keychain on Mac, iOS Keychain on iPhone,
-  AndroidX EncryptedSharedPreferences on Android) and used directly against
-  the provider's own API.
-- **Provider session cookies are never uploaded.** Same handling as API keys.
-- **Bridged OAuth tokens** read from local files such as `~/.codex/auth.json`,
-  `~/.claude/.credentials.json`, and `~/.gemini/oauth_creds.json` stay on
-  your device. They are shared between the sandboxed app and the local
-  helper through the Keychain and never sent to CLI Pulse servers.
-- **Raw session-log contents** under `~/.codex/sessions/` and
-  `~/.claude/projects/` are scanned **on-device only**, after you grant
-  folder access via security-scoped bookmarks. The file contents never leave
-  your Mac.
-- We do not ship any third-party product-analytics SDK (no Google Analytics,
-  Firebase Analytics, Amplitude, Mixpanel, or similar). Sentry is used for
-  crash reports only and runs through a local scrubber that strips secrets,
-  tokens, and `/Users/<name>` paths before any event is sent.
+- **Provider API keys and pasted session cookies never reach CLI Pulse
+  servers.** They are kept in the macOS Keychain on the Mac where you enter
+  them (EncryptedSharedPreferences in the Android beta) and sent only to the
+  provider they belong to. Browser cookies are likewise sent only to the
+  provider they belong to. The app reads them only for a provider set to read
+  them automatically (Cursor is, by default), and not in Strict privacy mode;
+  the Companion CLI has its own fallback that reads your claude.ai cookie (see
+  below).
+- **Tokens your AI CLIs keep on your Mac** (such as `~/.codex/auth.json`,
+  `~/.claude/.credentials.json`, `~/.gemini/oauth_creds.json` and Claude
+  Code's Keychain item) are read to ask each provider for your quota and are
+  sent only to that provider. Renewing an expired one rewrites that CLI's own
+  credential file.
+- **Session-log contents stay on your Mac.** Logs such as those under
+  `~/.codex/` and `~/.claude/` are parsed on the Mac; of what they give, only
+  daily token counts and cost estimates sync, and only while you are signed
+  in.
+- **You are asked before the scan starts.** Using CLI Pulse without an account
+  asks first: "Start local scan", "Last 30 days only" or "Not now". Until you
+  answer, and after "Not now", the app and its background helper read none of
+  your session logs or credential files and contact no AI provider
+  ([exceptions](https://cli-pulse.github.io/cli-pulse/privacy.html#consent)).
+  Signing in counts as a yes to the 30-day scan, but not over an earlier
+  "Not now", and never as a yes to the one-time read of up to a year of older
+  logs. Versions 1.50 to 1.54 did not honour "Not now" on a Mac synced to an
+  account; 1.55 does.
+- **What syncs while you are signed in is more than numbers.** Besides daily
+  token counts, cost estimates and quota state, it includes the AI CLI
+  sessions running on your Mac (the program's name and its project folder's
+  name, never the full path), alerts, your Mac's name (which often contains
+  your own name), its load and app versions, and a few diagnostics. The
+  [data-by-data breakdown](https://cli-pulse.github.io/cli-pulse/privacy.html#data)
+  lists every item.
+- **The optional Companion CLI**, installed separately, is not sandboxed,
+  keeps its own pairing with your account, and uploads more than the app,
+  including up to 48 characters of each AI CLI's command line (which can
+  include folder paths), machine readings such as battery and fan sensors,
+  what sessions you start through it print (with secrets redacted), and, if
+  Yield Score is on, commit metadata (commit hash, a keyed hash of the project
+  path, the commit timestamp and a merge flag; never messages, diffs, file
+  paths or author identity). When Claude's token does not work, it reads your
+  claude.ai sign-in cookie from the Claude desktop app or a Chromium-based
+  browser and keeps it in a plain-text file only your user account can read.
+  Companion CLI 1.30.0 and earlier ignore the app's consent answer, sign-in
+  and Privacy switches, Strict privacy mode included. See
+  [its section](https://cli-pulse.github.io/cli-pulse/privacy.html#companion-cli).
+- **On the Mac, only the App Store build runs in App Sandbox.** It reads
+  files outside its container only through the folder access you grant. The
+  direct-download build (GitHub, Homebrew), its background helper and
+  built-in agent, and the Companion CLI read the files the policy names
+  directly.
+- **Crash reports** go to Sentry from the Mac, iPhone and Apple Watch apps
+  (and the Android app), whether or not you are signed in. An on-device
+  scrubber first removes what it recognises, such as JWTs, `sk-…` API keys,
+  Bearer headers and `/Users/<name>` paths, and replaces parts of web
+  addresses that look like identifiers or follow words such as `users`; it
+  works by shape and place, so a part that looks like an ordinary word and
+  follows no such word is kept. The same SDK reports whether each app
+  session ended in a crash. There is no switch to turn crash reporting off.
+- **Anonymous install statistics** (a random install id, the install channel,
+  app and macOS versions, display language and a few yes/no milestones,
+  linked to no account) go to our own database; turn them off in Settings →
+  Privacy. No third-party analytics SDK ships with CLI Pulse.
+- **Strict privacy mode** (Settings → Privacy) stops CLI Pulse reading, on
+  its own, secrets other apps keep in your keychain or browsers, such as
+  Claude Code's Keychain item and browser cookies, and turns off the anonymous
+  install statistics. The sign-in files AI CLIs keep in your home folder are
+  still read for quota, and crash reports are still sent.
 
-### What stays on-device
-
-- provider API keys and session cookies
-- bridged provider OAuth tokens
-- the contents of local session logs
-- security-scoped folder bookmarks
-- locally-resolved alert suppression state
-
-### What syncs to your CLI Pulse account
-
-The data we sync is a small set of aggregated usage metrics and operational
-metadata, kept to the minimum needed for cross-device viewing:
-
-- provider name
-- per-day token counts and request counts
-- cost estimates derived locally
-- quota / remaining / reset summaries
-- session display metadata such as session name, status, and (minimized or
-  hashed) project identifier
-- device name, OS version, and helper version
-- alerts that you choose to keep
-- if you opt in to **Yield Score**: commit hash, an HMAC of the project
-  path, the commit timestamp, and a merge-commit flag — never message,
-  diff, file paths, or author identity
-
-You can disable background sync, revoke folder access, or delete your
-account at any time. See PRIVACY.md for the controls.
+The scan question is explained under
+[When the scanning starts](https://cli-pulse.github.io/cli-pulse/privacy.html#consent); your other
+controls (background sync, Strict privacy mode, the Companion CLI, deleting
+your account) are listed under
+[Your controls](https://cli-pulse.github.io/cli-pulse/privacy.html#controls).
 
 ---
 
@@ -116,7 +150,8 @@ This public repository is intentionally limited to:
 
 - this `README.md`
 - [LICENSE.md](LICENSE.md) — All Rights Reserved license
-- [PRIVACY.md](PRIVACY.md) — privacy policy
+- [PRIVACY.md](PRIVACY.md) — points to the privacy policy, which is
+  `docs/privacy.html`
 - [TERMS.md](TERMS.md) — terms of use
 - [SECURITY.md](SECURITY.md) — security policy and disclosure contact
 - `docs/` — the static GitHub Pages site (landing, privacy, terms, security,
