@@ -122,8 +122,9 @@ disagree, the policy is right. The short version, for CLI Pulse 1.55:
   (and the Android app), whether or not you are signed in. An on-device
   scrubber first removes what it recognises, such as JWTs, `sk-…` API keys,
   Bearer headers and `/Users/<name>` paths, and replaces parts of web
-  addresses that look like identifiers; it works by shape, so a part that
-  looks like an ordinary word is kept. The same SDK reports whether each app
+  addresses that look like identifiers or follow words such as `users`; it
+  works by shape and place, so a part that looks like an ordinary word and
+  follows no such word is kept. The same SDK reports whether each app
   session ended in a crash. There is no switch to turn crash reporting off.
 - **Anonymous install statistics** (a random install id, the install channel,
   app and macOS versions, display language and a few yes/no milestones,

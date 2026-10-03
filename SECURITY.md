@@ -181,7 +181,8 @@ Mac without re-running the local scanner themselves.
   Since 1.55 web-request breadcrumbs carry no query strings, and parts of
   their addresses that look like identifiers, or follow words such as
   `workspace`, `organizations` or `users`, are replaced; this works by shape
-  and place, so a part that looks like an ordinary word is kept.
+  and place, so a part that looks like an ordinary word and follows no such
+  word is kept.
   Performance tracing is disabled
   (`tracesSampleRate = 0`). There is no switch to turn crash reporting off.
 - **Anonymous install statistics** (a random install id, the install
