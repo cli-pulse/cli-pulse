@@ -136,8 +136,10 @@ disagree, the policy is right. The short version, for CLI Pulse 1.55:
   install statistics. The sign-in files AI CLIs keep in your home folder are
   still read for quota, and crash reports are still sent.
 
-Your controls (the scan question, background sync, Strict privacy mode, the
-Companion CLI, deleting your account) are listed under
+The scan question is explained under
+[When the scanning starts](https://cli-pulse.github.io/cli-pulse/privacy.html#consent); your other
+controls (background sync, Strict privacy mode, the Companion CLI, deleting
+your account) are listed under
 [Your controls](https://cli-pulse.github.io/cli-pulse/privacy.html#controls).
 
 ---

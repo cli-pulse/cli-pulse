@@ -120,8 +120,8 @@ lists every item. What matters most for security, as of CLI Pulse 1.55:
   claude.ai cookie it reads from a browser or the Claude desktop app in files
   only your user account can read.
 - **Transport to providers:** TLS 1.2+ direct from the user's device to
-  each provider's official API endpoint. Provider credentials do not
-  transit CLI Pulse infrastructure.
+  the provider's API. Provider credentials do not transit CLI Pulse
+  infrastructure.
 - **Transport to CLI Pulse Sync:** TLS 1.2+ to Supabase. The app authorizes
   with your CLI Pulse session token; the background helper and the
   Companion CLI each upload with their own pairing of the Mac to your
@@ -147,9 +147,14 @@ session-log contents, and none of them sends crash reports.
   and off with Settings → Advanced → "Enable background sync". Since 1.55 it
   follows your answer to the scan question and uploads only while the app is
   signed in to the account the Mac was paired with. After an update from an
-  earlier version this holds once the 1.55 app has restarted the helper and
-  recorded whether you are signed in; until then it behaves as before. An
-  upload already under way when you sign out is allowed to finish.
+  earlier version, the helper that was already running stays the earlier
+  version until it restarts, and keeps collecting and syncing as before; the
+  1.55 app restarts it the first time the app opens. Until the app has
+  recorded, on that first launch, whether you are signed in, the new helper
+  goes by this Mac's pairing rather than the app's sign-in, as earlier
+  versions did (see
+  [When the scanning starts](https://cli-pulse.github.io/cli-pulse/privacy.html#consent)). An upload
+  already under way when you sign out is allowed to finish.
 - **The built-in agent** (direct-download build only) runs the sessions you
   start from CLI Pulse and answers the app's questions about the Mac. It
   uploads nothing.
@@ -200,13 +205,17 @@ Mac without re-running the local scanner themselves.
 
 ## User controls
 
-The full list is under
-[Your controls](https://cli-pulse.github.io/cli-pulse/privacy.html#controls).
-The ones that matter most for security:
+The policy lists them under
+[Your controls](https://cli-pulse.github.io/cli-pulse/privacy.html#controls), except the scan
+question and older usage history, which are under
+[When the scanning starts](https://cli-pulse.github.io/cli-pulse/privacy.html#consent) and the
+section after it. The ones that matter most for security:
 
 - **Scan consent:** Settings → Privacy: the scan switch when you use CLI
-  Pulse without an account, or "Choose again…" while signed in; "Include
-  older usage history" for logs older than 30 days.
+  Pulse without an account, or, after "Not now" while signed in, "Choose
+  again…" (while you are signed in the 30-day scan has no switch of its own;
+  signing out stops it); "Include older usage history" for logs older than
+  30 days.
 - **Stop background uploads from a Mac:** sign out, or turn off Settings →
   Advanced → "Enable background sync". The Companion CLI is separate:
   Settings → Companion CLI → Uninstall….
