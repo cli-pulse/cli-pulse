@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CLI Pulse — V2 Direction C: SaaS Light/Dark</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: 'class', theme: { extend: {
+    colors: { brand: { 50:'#eff6ff',100:'#dbeafe',400:'#60a5fa',500:'#4a86ff',600:'#2563eb',900:'#1e3a8a' } }
+  }}}
+</script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+
+<aside id="prototype-only" role="note" style="padding:12px 20px;background:#2a1c08;color:#fef3c7;border-bottom:1px solid #f59e0b;text-align:center"><strong>Design prototype — not a production page.</strong> Layout, links, copy, and sample data are illustrative; use the current product page for verified information.</aside>
+
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 font-bold text-lg">
+      <img src="../assets/app-icon.png" alt="" class="w-7 h-7 rounded-md">
+      CLI Pulse
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-400">
+      <a href="#features" class="hover:text-brand-600 dark:hover:text-brand-400">Features</a>
+      <a href="#providers" class="hover:text-brand-600 dark:hover:text-brand-400">Providers</a>
+      <a href="#privacy" class="hover:text-brand-600 dark:hover:text-brand-400">Privacy</a>
+      <a href="#download" class="hover:text-brand-600 dark:hover:text-brand-400">Download</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button id="themeToggle" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300" aria-label="Toggle dark mode">
+        🌙
+      </button>
+      <a href="https://apps.apple.com/us/app/cli-pulse/id6761163709" class="hidden sm:inline-flex px-4 py-2 rounded-full bg-brand-600 text-white text-sm font-semibold hover:bg-brand-700">Download</a>
+    </div>
+  </div>
+</header>
+
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-50 to-transparent dark:from-brand-900/20 dark:to-transparent"></div>
+  <div class="relative max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
+    <span class="inline-block px-3 py-1 rounded-full bg-brand-100 dark:bg-brand-900/40 text-brand-900 dark:text-brand-100 text-xs font-semibold mb-6">AI coding usage tracker</span>
+    <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
+      One place to watch your
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">supported AI coding usage.</span>
+    </h1>
+    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+      Track usage, quotas, resets, sessions, and cost estimates across 50+ supported AI providers — on Mac, iPhone, iPad, Apple Watch, and Android Beta.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mb-14">
+      <a href="https://apps.apple.com/us/app/cli-pulse/id6761163709" class="px-6 py-3 rounded-full bg-brand-600 text-white font-semibold hover:bg-brand-700">Download on the App Store</a>
+      <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" class="px-6 py-3 rounded-full border border-slate-300 dark:border-slate-700 font-semibold hover:bg-slate-100 dark:hover:bg-slate-900">Get macOS DMG</a>
+    </div>
+    <div class="rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 max-w-4xl mx-auto">
+      <img src="../assets/hero-mac-v2.png" alt="Illustrative CLI Pulse dashboard with sample usage and estimates" class="w-full">
+    </div>
+  </div>
+</section>
+
+<section class="py-12 border-y border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-6">Works where you work</p>
+    <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-slate-700 dark:text-slate-300 font-medium">
+      <span>macOS</span>
+      <span>iOS</span>
+      <span>iPadOS</span>
+      <span>watchOS</span>
+      <span>Android Beta</span>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">A focused concept for supported AI usage signals</h2>
+      <p class="text-slate-600 dark:text-slate-400">A focused dashboard for the numbers that matter when you live inside AI coding agents.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center text-brand-600 mb-4">📊</div>
+        <h3 class="font-semibold text-lg mb-2">Usage &amp; quotas</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-sm">See tokens, requests, remaining quota, and plan tier per provider.</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center text-brand-600 mb-4">🔔</div>
+        <h3 class="font-semibold text-lg mb-2">Reset status &amp; alerts</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-sm">Track which quotas reset and get alerts before hitting limits.</p>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center text-brand-600 mb-4">💰</div>
+        <h3 class="font-semibold text-lg mb-2">Cost estimates</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-sm">Review clearly labeled estimates; provider invoices remain authoritative.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="providers" class="py-24 bg-slate-100 dark:bg-slate-900/30">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Works with the providers you already use</h2>
+    <p class="text-slate-600 dark:text-slate-400 mb-10">Connect the AI coding agents and CLI tools already on your machine.</p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Claude</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Codex</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Gemini</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Cursor</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Copilot</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">OpenRouter</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">JetBrains AI</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Ollama</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Warp</span>
+      <span class="px-4 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium">Augment</span>
+      <span class="px-4 py-2 rounded-full bg-slate-200 dark:bg-slate-700 text-sm font-medium">50+ supported total</span>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Privacy by design</h2>
+        <p class="text-slate-600 dark:text-slate-400 mb-6">Provider API keys, session cookies, bridged OAuth tokens, and raw local session-log contents stay on-device. Aggregated usage, quota, session-display, device, cost-estimate, and selected alert metadata can sync to your account.</p>
+        <ul class="space-y-3 text-slate-700 dark:text-slate-300">
+          <li class="flex items-start gap-3"><span class="text-green-500">✓</span> Provider API keys stay in your device's secure store</li>
+          <li class="flex items-start gap-3"><span class="text-green-500">✓</span> Session cookies and OAuth tokens stay local</li>
+          <li class="flex items-start gap-3"><span class="text-green-500">✓</span> Raw session logs are scanned on your Mac only</li>
+          <li class="flex items-start gap-3"><span class="text-green-500">✓</span> Documented aggregated metrics and operational metadata can sync</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-slate-900 text-slate-100 p-6 font-mono text-sm border border-slate-800">
+        <div class="text-slate-500 mb-4">What stays on device</div>
+        <div class="flex justify-between py-2 border-b border-slate-800"><span>API keys</span><span class="text-green-400">Local</span></div>
+        <div class="flex justify-between py-2 border-b border-slate-800"><span>Session cookies</span><span class="text-green-400">Local</span></div>
+        <div class="flex justify-between py-2 border-b border-slate-800"><span>OAuth tokens</span><span class="text-green-400">Local</span></div>
+        <div class="flex justify-between py-2 border-b border-slate-800"><span>Raw session logs</span><span class="text-green-400">Local</span></div>
+        <div class="flex justify-between py-2"><span>Aggregated metrics</span><span class="text-brand-400">Synced</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 bg-slate-100 dark:bg-slate-900/30">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold mb-4">Archived visual exploration</h2>
+    <p class="text-slate-600 dark:text-slate-400">The original placeholder testimonial cards were removed because no approved customer evidence was attached to this prototype.</p>
+  </div>
+</section>
+
+<section id="download" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Get CLI Pulse</h2>
+      <p class="text-slate-600 dark:text-slate-400">Download from the App Store, grab the signed macOS DMG, or install via Homebrew.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+        <div class="text-2xl mb-3">🍎</div>
+        <h4 class="font-semibold">App Store</h4>
+        <p class="text-xs text-slate-500 mb-4">iPhone · iPad · Watch · Mac</p>
+        <a href="https://apps.apple.com/us/app/cli-pulse/id6761163709" class="inline-block px-4 py-2 rounded-full bg-brand-600 text-white text-sm font-semibold">Download</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+        <div class="text-2xl mb-3">🖥</div>
+        <h4 class="font-semibold">macOS DMG</h4>
+        <p class="text-xs text-slate-500 mb-4">Signed &amp; notarized</p>
+        <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" class="inline-block px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 text-sm font-semibold">Download</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+        <div class="text-2xl mb-3">🤖</div>
+        <h4 class="font-semibold">Android Beta</h4>
+        <p class="text-xs text-slate-500 mb-4">APK releases; Play access may require an invitation</p>
+        <a href="https://github.com/cli-pulse/cli-pulse/releases" class="inline-block px-4 py-2 rounded-full bg-green-500 text-white text-sm font-semibold">View Beta releases</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center">
+        <div class="text-2xl mb-3">🍺</div>
+        <h4 class="font-semibold">Homebrew</h4>
+        <p class="text-xs text-slate-500 mb-4">macOS package manager</p>
+        <div class="text-left bg-slate-900 text-slate-100 rounded-lg p-3 text-xs font-mono overflow-x-auto">
+          brew tap cli-pulse/tap
+          brew trust cli-pulse/tap
+          brew install --cask cli-pulse
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-24 bg-slate-950 text-white">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to inspect supported AI usage more clearly?</h2>
+    <p class="text-slate-400 mb-8">Review the current product page for verified capabilities, privacy boundaries, and availability.</p>
+    <a href="https://apps.apple.com/us/app/cli-pulse/id6761163709" class="inline-block px-8 py-4 rounded-full bg-brand-500 text-white font-bold text-lg hover:bg-brand-600">Download on the App Store</a>
+  </div>
+</section>
+
+<footer class="py-12 border-t border-slate-200 dark:border-slate-800">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <strong class="text-lg">CLI Pulse</strong>
+        <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">AI coding usage tracker for developers.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Product</h4>
+        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <li><a href="#features" class="hover:text-brand-600">Features</a></li>
+          <li><a href="#providers" class="hover:text-brand-600">Providers</a></li>
+          <li><a href="#download" class="hover:text-brand-600">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Trust</h4>
+        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <li><a href="../privacy.html" class="hover:text-brand-600">Privacy</a></li>
+          <li><a href="../data-handling.html" class="hover:text-brand-600">Data Handling</a></li>
+          <li><a href="../security.html" class="hover:text-brand-600">Security</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-3">Support</h4>
+        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <li><a href="mailto:clipulse.support@gmail.com" class="hover:text-brand-600">Email</a></li>
+          <li><a href="https://github.com/cli-pulse/cli-pulse/issues" class="hover:text-brand-600">GitHub Issues</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-sm text-slate-500">&copy; 2026 CLI Pulse · Jason Ye &amp; Yuqi Cao. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    html.classList.add('dark');
+    btn.textContent = '☀️';
+  }
+  btn.addEventListener('click', () => {
+    html.classList.toggle('dark');
+    btn.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+  });
+</script>
+
+</body>
+</html>

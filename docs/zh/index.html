@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLI Pulse — 跨设备 AI 编程用量监控</title>
+<meta name="description" content="在 Mac、iPhone、iPad、Apple Watch 和 Android Beta 上集中查看 50+ 个受支持 AI 编程提供商的用量、额度、重置状态、会话、费用估算和提醒。">
+<link rel="canonical" href="https://cli-pulse.github.io/cli-pulse/zh/">
+<link rel="alternate" hreflang="en" href="https://cli-pulse.github.io/cli-pulse/">
+<link rel="alternate" hreflang="zh-CN" href="https://cli-pulse.github.io/cli-pulse/zh/">
+<link rel="alternate" hreflang="x-default" href="https://cli-pulse.github.io/cli-pulse/">
+<meta name="theme-color" content="#08081a">
+<link rel="icon" href="../assets/app-icon.png" type="image/png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="CLI Pulse — AI 编程用量监控">
+<meta property="og:description" content="集中查看 50+ 个受支持 AI 编程提供商的用量、额度、重置状态、会话、费用估算和提醒，支持 Mac、iPhone、iPad、Apple Watch 和 Android Beta。">
+<meta property="og:url" content="https://cli-pulse.github.io/cli-pulse/zh/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cli-pulse.github.io/cli-pulse/assets/hero-mac-v2.png">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="563">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CLI Pulse — AI 编程用量监控">
+<meta name="twitter:description" content="集中查看 50+ 个受支持 AI 编程提供商的用量、额度、重置状态、会话、费用估算和提醒，并提供 Android Beta。">
+<meta name="twitter:image" content="https://cli-pulse.github.io/cli-pulse/assets/hero-mac-v2.png">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "CLI Pulse",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "macOS, iOS, iPadOS, watchOS, Android Beta",
+  "url": "https://cli-pulse.github.io/cli-pulse/zh/",
+  "inLanguage": "zh-CN",
+  "description": "集中查看 50+ 个受支持 AI 编程提供商的用量、额度、重置状态、会话、费用估算和提醒。"
+}
+</script>
+
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">跳转到正文</a>
+
+<header class="site-nav" role="banner">
+  <nav class="nav-inner" aria-label="主导航">
+    <a class="nav-brand" href="../" aria-label="CLI Pulse 首页">
+      <img src="../assets/app-icon.png" alt="" width="32" height="32">
+      CLI Pulse
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">功能</a></li>
+      <li><a href="#platforms">平台</a></li>
+      <li><a href="#privacy">隐私</a></li>
+      <li><a href="#faq">常见问题</a></li>
+      <li><a href="#download">下载</a></li>
+      <li><a href="../index.html" lang="en" hreflang="en" aria-label="切换到英文">EN</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="section-inner">
+      <div class="hero-badge">
+        <span class="dot" aria-hidden="true"></span>
+        支持 50+ AI 编程提供商
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        AI 编程用量，<br>尽在<span class="highlight">一个界面</span>
+      </h1>
+      <p class="hero-copy">
+        CLI Pulse 将受支持 AI 编程提供商的用量、额度、重置状态、会话、
+        费用估算和提醒集中到一个清晰界面，并延伸到你的 Mac、手机和手腕。
+      </p>
+      <div class="hero-actions">
+        <a href="https://apps.apple.com/cn/app/cli-pulse/id6761163709" class="btn btn-primary" aria-label="在 App Store 下载 CLI Pulse">
+          前往 App Store 下载
+        </a>
+        <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" class="btn btn-secondary" aria-label="下载 CLI Pulse macOS 版本">
+          下载 macOS 版本
+        </a>
+      </div>
+      <p class="hero-note">macOS 版本已签名并公证；提供商凭证留在你的设备上。</p>
+      <div class="hero-devices">
+        <img class="mac-shot" src="../assets/hero-mac-v2.png" alt="CLI Pulse macOS 示意界面，使用示例数据展示用量、费用估算、受支持提供商和提醒" width="900" height="563" loading="eager" fetchpriority="high" decoding="async">
+        <img class="phone-shot" src="../assets/hero-phone-v2.png" alt="CLI Pulse iPhone 示意界面，使用示例数据展示用量和受支持提供商状态" width="400" height="868" loading="eager" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <section class="provider-strip" aria-label="受支持的提供商">
+    <div class="section-inner">
+      <p class="provider-label">与你已有的工具协同工作</p>
+      <div class="provider-list">
+        <span>Claude</span>
+        <span>Codex</span>
+        <span>Gemini</span>
+        <span>Cursor</span>
+        <span>Copilot</span>
+        <span>OpenRouter</span>
+        <span>JetBrains AI</span>
+        <span>Ollama</span>
+        <span>Warp</span>
+        <span>Augment</span>
+      </div>
+      <p class="provider-footnote">支持 50+ 个本地及云端编程工作流。可用指标和控制能力取决于各提供商实际开放的能力。</p>
+    </div>
+  </section>
+
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="section-inner">
+      <span class="section-label">CLI Pulse 能做什么</span>
+      <h2 class="section-title" id="features-title">随时知道自己用到了哪里</h2>
+      <p class="section-subtitle">无需反复切换提供商后台和本地会话日志，即可查看真正影响使用决策的信号。</p>
+      <div class="cards-grid">
+
+        <div class="outcome-card">
+          <div class="card-icon blue" aria-hidden="true">&#9881;</div>
+          <h3>用量与额度</h3>
+          <p>集中查看受支持提供商的请求数、Token 用量、剩余额度和重置状态。</p>
+        </div>
+
+        <div class="outcome-card">
+          <div class="card-icon cyan" aria-hidden="true">&#9733;</div>
+          <h3>会话与费用估算</h3>
+          <p>并排查看会话活动、模型用量和明确标注的费用估算；估算数据不等同于第一方账单。</p>
+        </div>
+
+        <div class="outcome-card">
+          <div class="card-icon violet" aria-hidden="true">&#9888;</div>
+          <h3>提醒与通知</h3>
+          <p>将额度、会话和提供商提醒放在一起，减少重要变化散落在不同工具中的情况。</p>
+        </div>
+
+        <div class="outcome-card">
+          <div class="card-icon green" aria-hidden="true">&#8596;</div>
+          <h3>跨设备控制</h3>
+          <p>从 iPhone 或 iPad 查看并控制受支持的 Mac AI-CLI 会话，也可在 Apple Watch 上快速查看用量。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section platform-showcase" id="platforms" aria-labelledby="platforms-title">
+    <div class="section-inner">
+      <div class="showcase-layout">
+        <div class="showcase-text">
+          <p class="showcase-kicker">Apple 优先，跨设备查看</p>
+          <h2 id="platforms-title">Mac、iPhone、iPad、Apple Watch</h2>
+          <p>CLI Pulse 覆盖 macOS、iPhone、iPad 和 Apple Watch。Mac 应用负责本地采集，其他设备可查看受支持的用量、提醒和会话。</p>
+          <p>受支持的移动客户端可以查看并控制受支持的 Mac AI-CLI 会话；Android Beta 将核心监控体验扩展到 Apple 设备之外。</p>
+        </div>
+        <div class="showcase-image">
+          <img src="../assets/pulse-motif-v2.png" alt="CLI Pulse Apple Watch 示意界面，使用示例数据展示费用估算和活动指标" width="422" height="483" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works" aria-labelledby="steps-title">
+    <div class="section-inner">
+      <span class="section-label">开始使用</span>
+      <h2 class="section-title" id="steps-title">三步看清 AI 编程用量</h2>
+      <p class="section-subtitle">只需几分钟，即可为你实际使用且受支持的 AI 编程提供商建立统一视图。</p>
+      <div class="steps-list">
+
+        <div class="step">
+          <h3>在 Mac 上安装 CLI Pulse</h3>
+          <p>从 App Store 下载，获取已签名并公证的 DMG，或通过 Homebrew cask 安装。</p>
+        </div>
+
+        <div class="step">
+          <h3>授权访问你的 AI 工具</h3>
+          <p>CLI Pulse 会发现系统中受支持的提供商，并说明每个数据源需要的权限。提供商凭证和原始本地会话日志内容留在设备上。</p>
+        </div>
+
+        <div class="step">
+          <h3>从其他设备查看</h3>
+          <p>跨设备查看受支持的用量、额度状态、会话和提醒。聚合后的用量与额度状态可以同步到你的 CLI Pulse 账户。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="privacy" aria-labelledby="trust-title">
+    <div class="section-inner">
+      <span class="section-label">隐私与信任</span>
+      <h2 class="section-title" id="trust-title">你的数据，由你掌控</h2>
+      <p class="section-subtitle">CLI Pulse 将提供商凭证和原始本地会话日志内容留在设备上，并通过公开政策说明哪些数据保持本地、哪些数据可以同步。</p>
+
+      <div class="trust-links">
+        <a href="../privacy.html" class="trust-card">
+          <h3>隐私政策</h3>
+          <p>了解哪些数据留在设备上、哪些数据同步到你的账户，以及相关子处理方。</p>
+        </a>
+        <a href="../data-handling.html" class="trust-card">
+          <h3>数据处理</h3>
+          <p>按数据类别查看 CLI Pulse 处理什么，以及每类数据保存在哪里。</p>
+        </a>
+        <a href="../security.html" class="trust-card">
+          <h3>安全政策</h3>
+          <p>了解凭证保护方式，以及如何负责任地报告安全问题。</p>
+        </a>
+        <a href="../terms.html" class="trust-card">
+          <h3>使用条款</h3>
+          <p>查看安装和使用 CLI Pulse 时适用的协议。</p>
+        </a>
+      </div>
+
+      <div class="trust-highlight">
+        <span class="shield" aria-hidden="true">&#128737;</span>
+        <p><strong>凭证留在你的设备上。</strong>提供商 API Key、会话 Cookie、桥接 OAuth Token 和原始本地会话日志内容保持在设备上。聚合后的用量与额度状态可以同步到你的 CLI Pulse 账户，用于跨设备查看。详细边界和控制方式以隐私政策为准。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="download" aria-labelledby="download-title">
+    <div class="section-inner">
+      <span class="section-label">下载</span>
+      <h2 class="section-title" id="download-title">获取 CLI Pulse</h2>
+      <p class="section-subtitle">选择适用于 Apple 设备、macOS 或 Android Beta 的官方渠道。</p>
+
+      <div class="download-grid">
+        <a href="https://apps.apple.com/cn/app/cli-pulse/id6761163709" class="download-card" aria-label="在 App Store 下载适用于 iPhone、iPad、Mac 和 Apple Watch 的 CLI Pulse">
+          <div class="platform-icon" aria-hidden="true">&#63743;</div>
+          <span class="platform-tag stable">正式版</span>
+          <h3>App Store</h3>
+          <p>适用于 iPhone、iPad、Mac 和 Apple Watch 的 CLI Pulse。</p>
+          <span class="cta-text">前往 App Store &rarr;</span>
+        </a>
+
+        <a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest" class="download-card" aria-label="从 GitHub Releases 下载 CLI Pulse macOS DMG">
+          <div class="platform-icon" aria-hidden="true">&#9000;</div>
+          <span class="platform-tag stable">正式版</span>
+          <h3>macOS DMG</h3>
+          <p>从 GitHub Releases 直接下载，已通过 macOS Gatekeeper 所需的签名与公证。</p>
+          <span class="cta-text">获取最新版本 &rarr;</span>
+        </a>
+
+        <a href="https://github.com/cli-pulse/cli-pulse/releases" class="download-card" aria-label="从 GitHub Releases 下载 CLI Pulse Android Beta APK">
+          <div class="platform-icon" aria-hidden="true">&#129001;</div>
+          <span class="platform-tag beta">Beta</span>
+          <h3>Android Beta APK</h3>
+          <p>从 GitHub Releases 侧载 Android Beta；可用功能和控制能力可能随版本而不同。</p>
+          <span class="cta-text">查看 Android Beta 版本 &rarr;</span>
+        </a>
+      </div>
+
+      <div class="brew-block">
+        <h3>通过 Homebrew 安装 macOS 版本</h3>
+        <pre><code>brew tap cli-pulse/tap
+brew trust cli-pulse/tap
+brew install --cask cli-pulse</code></pre>
+        <p class="note">Homebrew 6 需要先执行 <code>brew trust</code>，才能载入第三方 tap 的 cask；否则安装会在 <code>brew tap</code> 后停止。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="section-inner">
+      <span class="section-label">常见问题</span>
+      <h2 class="section-title" id="faq-title">你可能想了解这些</h2>
+      <div class="faq-list">
+
+        <details>
+          <summary>哪些数据留在设备上，哪些数据会同步？</summary>
+          <div class="faq-body">
+            <p>提供商 API Key、会话 Cookie、桥接 OAuth Token 和原始本地会话日志内容留在设备上。聚合后的用量与额度状态可以同步到你的 CLI Pulse 账户，用于跨设备查看。完整的数据分类、边界和控制方式请查看<a href="../privacy.html">隐私政策</a>。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>移动端如何查看和控制 Mac AI-CLI 会话？</summary>
+          <div class="faq-body">
+            <p>配置 Mac helper 和 CLI Pulse 账户后，受支持的移动客户端可以显示受支持 Mac AI-CLI 会话的状态和可用控制动作。实际能力取决于提供商和客户端开放的接口。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>CLI Pulse 支持哪些 AI 编程提供商？</summary>
+          <div class="faq-body">
+            <p>CLI Pulse 支持 50+ 个提供商，包括 Claude、Codex、Gemini、Cursor、Copilot、OpenRouter、JetBrains AI、Ollama、Warp 和 Augment。可用指标和控制能力取决于各提供商实际开放的能力。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>如何获得帮助或报告问题？</summary>
+          <div class="faq-body">
+            <p>Bug 和功能建议可提交到我们的 <a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a>；其他问题请发送邮件至 <a href="mailto:clipulse.support@gmail.com">clipulse.support@gmail.com</a>。我们力争在 48 个工作小时内回复。</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h2>产品</h2>
+        <ul>
+          <li><a href="#features">功能</a></li>
+          <li><a href="#platforms">平台</a></li>
+          <li><a href="#download">下载</a></li>
+          <li><a href="../release-notes.html">更新日志</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>法律与信任</h2>
+        <ul>
+          <li><a href="../privacy.html">隐私政策</a></li>
+          <li><a href="../terms.html">使用条款</a></li>
+          <li><a href="../data-handling.html">数据处理</a></li>
+          <li><a href="../security.html">安全政策</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>支持</h2>
+        <ul>
+          <li><a href="https://github.com/cli-pulse/cli-pulse/issues">GitHub Issues</a></li>
+          <li><a href="mailto:clipulse.support@gmail.com">邮件支持</a></li>
+          <li><a href="../support.html">支持页面</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>下载渠道</h2>
+        <ul>
+          <li><a href="https://apps.apple.com/cn/app/cli-pulse/id6761163709">App Store</a></li>
+          <li><a href="https://github.com/cli-pulse/cli-pulse-distrib/releases/latest">macOS DMG</a></li>
+          <li><a href="https://github.com/cli-pulse/cli-pulse/releases">Android Beta 版本</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 CLI Pulse。保留所有权利。</span>
+      <a href="https://cli-pulse.github.io/cli-pulse/zh/">cli-pulse.github.io/cli-pulse/zh</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
