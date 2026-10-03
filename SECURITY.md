@@ -72,9 +72,14 @@ lists every item. What matters most for security, as of CLI Pulse 1.55:
   servers. The app copies the file-based ones into a Keychain item that only
   CLI Pulse's own programs can read. Renewing an expired token rewrites that
   CLI's own credential file.
-- **Browser cookies** are read only for a provider whose cookie source is
-  "Automatic" (Cursor's is by default), never in Strict privacy mode, and are
-  sent only to that provider.
+- **Browser cookies** are sent only to the provider they belong to, never to
+  CLI Pulse servers. The app reads them only for a provider whose cookie
+  source is "Automatic" (Cursor's is by default), and not in Strict privacy
+  mode. The Companion CLI has a separate fallback: when Claude's token does
+  not work, it reads your claude.ai cookie from the Claude desktop app or a
+  Chromium-based browser and keeps it in a plain-text file only your user
+  account can read; from 1.31.0 it does not do this in Strict privacy
+  mode, and 1.30.0 and earlier ignore that switch.
 - **Session-log contents** (`~/.codex/sessions/`, `~/.claude/projects/` and
   the other paths the policy names) are parsed on the Mac and never
   uploaded. Of what they give, only daily token counts and cost estimates
@@ -141,7 +146,10 @@ session-log contents, and none of them sends crash reports.
   and Apple Watch. It is switched on when you pair the Mac with your account
   and off with Settings → Advanced → "Enable background sync". Since 1.55 it
   follows your answer to the scan question and uploads only while the app is
-  signed in to the account the Mac was paired with.
+  signed in to the account the Mac was paired with. After an update from an
+  earlier version this holds once the 1.55 app has restarted the helper and
+  recorded whether you are signed in; until then it behaves as before. An
+  upload already under way when you sign out is allowed to finish.
 - **The built-in agent** (direct-download build only) runs the sessions you
   start from CLI Pulse and answers the app's questions about the Mac. It
   uploads nothing.
@@ -167,11 +175,14 @@ Mac without re-running the local scanner themselves.
   receives crash reports from the Mac, iPhone and Apple Watch apps (and the
   Android app), whether or not you are signed in, and the same SDK reports
   whether each app session ended in a crash. A local `beforeSend` scrubber
-  removes JWTs, strings shaped like API keys, Bearer headers,
+  removes JWTs, strings shaped like `sk-…` API keys, Bearer headers,
   `/Users/<name>` paths, fields whose names contain common sensitive
-  fragments, and the IP-address field before an event leaves the device;
-  since 1.55 web-request breadcrumbs carry no query strings, and identifiers
-  in their addresses are replaced. Performance tracing is disabled
+  fragments, and the IP-address field before an event leaves the device.
+  Since 1.55 web-request breadcrumbs carry no query strings, and parts of
+  their addresses that look like identifiers, or follow words such as
+  `workspace`, `organizations` or `users`, are replaced; this works by shape
+  and place, so a part that looks like an ordinary word is kept.
+  Performance tracing is disabled
   (`tracesSampleRate = 0`). There is no switch to turn crash reporting off.
 - **Anonymous install statistics** (a random install id, the install
   channel, app and macOS versions, display language and a few yes/no

@@ -70,9 +70,11 @@ disagree, the policy is right. The short version, for CLI Pulse 1.55:
 - **Provider API keys and pasted session cookies never reach CLI Pulse
   servers.** They are kept in the macOS Keychain on the Mac where you enter
   them (EncryptedSharedPreferences in the Android beta) and sent only to the
-  provider they belong to. Browser cookies, read only for a provider set to
-  read them automatically (Cursor is, by default), are likewise sent only to
-  that provider.
+  provider they belong to. Browser cookies are likewise sent only to the
+  provider they belong to. The app reads them only for a provider set to read
+  them automatically (Cursor is, by default), and not in Strict privacy mode;
+  the Companion CLI has its own fallback that reads your claude.ai cookie (see
+  below).
 - **Tokens your AI CLIs keep on your Mac** (such as `~/.codex/auth.json`,
   `~/.claude/.credentials.json`, `~/.gemini/oauth_creds.json` and Claude
   Code's Keychain item) are read to ask each provider for your quota and are
@@ -105,8 +107,11 @@ disagree, the policy is right. The short version, for CLI Pulse 1.55:
   what sessions you start through it print (with secrets redacted), and, if
   Yield Score is on, commit metadata (commit hash, a keyed hash of the project
   path, the commit timestamp and a merge flag; never messages, diffs, file
-  paths or author identity). Companion CLI 1.30.0 and earlier ignore the
-  app's consent answer, sign-in and Privacy switches. See
+  paths or author identity). When Claude's token does not work, it reads your
+  claude.ai sign-in cookie from the Claude desktop app or a Chromium-based
+  browser and keeps it in a plain-text file only your user account can read.
+  Companion CLI 1.30.0 and earlier ignore the app's consent answer, sign-in
+  and Privacy switches, Strict privacy mode included. See
   [its section](https://cli-pulse.github.io/cli-pulse/privacy.html#companion-cli).
 - **On the Mac, only the App Store build runs in App Sandbox.** It reads
   files outside its container only through the folder access you grant. The
@@ -114,9 +119,11 @@ disagree, the policy is right. The short version, for CLI Pulse 1.55:
   built-in agent, and the Companion CLI read the files the policy names
   directly.
 - **Crash reports** go to Sentry from the Mac, iPhone and Apple Watch apps
-  (and the Android app), whether or not you are signed in, after an on-device
-  scrubber removes strings shaped like keys and tokens, `/Users/<name>` paths
-  and identifiers in web addresses. The same SDK reports whether each app
+  (and the Android app), whether or not you are signed in. An on-device
+  scrubber first removes what it recognises, such as JWTs, `sk-…` API keys,
+  Bearer headers and `/Users/<name>` paths, and replaces parts of web
+  addresses that look like identifiers; it works by shape, so a part that
+  looks like an ordinary word is kept. The same SDK reports whether each app
   session ended in a crash. There is no switch to turn crash reporting off.
 - **Anonymous install statistics** (a random install id, the install channel,
   app and macOS versions, display language and a few yes/no milestones,
