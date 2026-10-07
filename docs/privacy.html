@@ -38,14 +38,14 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: October 3, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 7, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, and a few diagnostic readings about each Mac (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
     <br><br>
     This page is the single source of truth for what we collect. If you find anything in the app, App Store listing, or GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
-    It describes CLI Pulse 1.55.
+    It describes CLI Pulse 1.56.
   </div>
 
   <h2>What this covers</h2>
@@ -62,7 +62,9 @@
   <li><strong>The app's background helper</strong>, which runs the same collectors as the app
   on its own schedule (every 2 minutes by default) and uploads what it finds
   for your iPhone and Apple Watch. It is switched on when you pair this Mac with
-  your account, and off with Settings › Advanced › "Enable background sync".
+  your account, and on or off with Settings › Advanced › "Enable background sync",
+  which since v1.56 is there whether or not you are signed in or this Mac is
+  paired. It uploads only with that pairing (see <em>When uploads happen</em>).
   It is sandboxed in the App Store build and not in the direct-download build.</li>
   <li>In the direct-download build only, <strong>a local agent built into the app</strong>
   (shown as "Built-in" under Settings › Companion CLI). It runs the sessions you
@@ -378,13 +380,16 @@
   was to sign out.</p>
   <p>Starting the scan turns on:</p>
   <ul>
-  <li><strong>Session logs: the last 30 days, and a one-time read of up to a year</strong> —
+  <li><strong>Session logs: the last 30 days, and up to a year if you allow it</strong> —
   <code>~/.codex/sessions/</code>, <code>~/.codex/archived_sessions/</code>, <code>~/.claude/projects/</code> and
   <code>~/.config/claude/projects/</code>. Every refresh uses the last 30 days: a log last
   written before then is not opened, and older lines in a log that is still in
-  use are skipped, not kept. Once, and only if you allow it, CLI Pulse also reads
-  up to a year of older logs to fill in your usage history. Parsed on your Mac
-  for usage records; the results are cached on your Mac.</li>
+  use are skipped, not kept. Only if you allow it, CLI Pulse also reads up to a
+  year of older logs to fill in your usage history: once, and the Codex logs
+  again whenever a CLI Pulse update changes how it counts Codex usage, or when
+  the account you're signed in to has older Codex figures from this Mac to
+  correct (see <em>Reading more than 30 days back</em>). Parsed on your Mac for usage
+  records; the results are cached on your Mac.</li>
   <li><strong>What is derived from them</strong> — token counts, cost estimates, model names and
   dates, plus each conversation's file path, project folder and session id. Those
   last three are how the Sessions list can name your conversations. They stay on
@@ -483,8 +488,8 @@
   <p>Since v1.55 that read is its own question:</p>
   <ul>
   <li><strong>New users</strong> choose on the same screen. "Start local scan" includes the
-  one-time read of older logs; "Last 30 days only" leaves it out; "Not now"
-  turns the scan off.</li>
+  read of older logs; "Last 30 days only" leaves it out; "Not now" turns the
+  scan off.</li>
   <li><strong>People who agreed to the 30-day scan before v1.55</strong>, and <strong>signed-in users
   who were never shown the question</strong>, are shown it once, with both answers
   keeping the 30-day scan running: <strong>"Include older history"</strong> or <strong>"Last 30 days
@@ -501,6 +506,25 @@
   <li><strong>Settings → Privacy → "Include older usage history"</strong> changes the answer at
   any time. Turning it off stops further reads of older logs; it does not
   delete history that was already built, which stays on your Mac.</li>
+  <li><strong>Since v1.56, a CLI Pulse update that changes how it counts Codex usage reads
+  up to a year of Codex logs again</strong> — only with this yes, once for each such
+  change, and once more if a later sign-in finds older Codex numbers from this
+  Mac in that account. A read that could not finish is tried again a day later.
+  (1.56 is the first: it counts Codex's cached input once, counts subagent
+  sessions, and prices requests at OpenAI's published rates.) No Claude log is
+  read for it. The older Codex days of your usage history are counted anew from
+  what is read; a day whose Codex log is no longer on the Mac keeps the figure
+  it had. While you are signed in, the daily Codex numbers this Mac had already
+  synced for those days are replaced with the new ones (the fields of the
+  <em>Daily usage</em> row above), so on those days your iPhone and Apple Watch show
+  the same figures as the Mac. A paired Mac uploads nothing for a day that has no
+  Codex numbers from it in the cloud, and numbers it synced before it was paired
+  keep their old figures. A Mac that is not paired keeps its numbers in one place
+  it shares with the account's other unpaired Macs, so it replaces figures on any
+  day where that shared place has Codex numbers, whichever unpaired Mac they
+  came from. There, only the models this Mac's logs report are replaced, and a
+  row under an older spelling of one of those model names (a dated one, say) is
+  set to zero.</li>
   </ul>
   <p>The routine scan had a smaller gap of the same kind. On its first run, and
   whenever its cache was reset, it opened Claude Code logs of any age and
