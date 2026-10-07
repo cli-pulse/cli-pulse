@@ -31,7 +31,7 @@ pair the macOS app's local helper, then from iPhone or iPad watch your
 managed AI-CLI sessions live, send prompts, approve or deny permission
 requests, and keep an eye on a whole swarm of agents — without touching your
 Mac. Remote control is built into the direct-download Mac build but is not
-switched on in CLI Pulse 1.55. When it is, the phone and the Mac connect to
+switched on in CLI Pulse 1.56. When it is, the phone and the Mac connect to
 each other directly over your local or private network, not through CLI
 Pulse servers.
 
@@ -65,7 +65,7 @@ The published landing page lives at
 The privacy policy is at <https://cli-pulse.github.io/cli-pulse/privacy.html>
 (its source is [`docs/privacy.html`](docs/privacy.html)). It lists everything
 CLI Pulse reads, keeps and sends, and where this summary and the policy
-disagree, the policy is right. The short version, for CLI Pulse 1.55:
+disagree, the policy is right. The short version, for CLI Pulse 1.56:
 
 - **Provider API keys and pasted session cookies never reach CLI Pulse
   servers.** They are kept in the macOS Keychain on the Mac where you enter
@@ -90,9 +90,16 @@ disagree, the policy is right. The short version, for CLI Pulse 1.55:
   your session logs or credential files and contact no AI provider
   ([exceptions](https://cli-pulse.github.io/cli-pulse/privacy.html#consent)).
   Signing in counts as a yes to the 30-day scan, but not over an earlier
-  "Not now", and never as a yes to the one-time read of up to a year of older
-  logs. Versions 1.50 to 1.54 did not honour "Not now" on a Mac synced to an
-  account; 1.55 does.
+  "Not now", and never as a yes to reading up to a year of older logs. Since
+  1.56 that read is not one-time: with that yes, an update that changes how
+  CLI Pulse counts Codex usage reads up to a year of Codex logs again, and
+  while you are signed in the daily Codex numbers this Mac already synced for
+  those days are replaced (on a Mac that is not paired, also those of the
+  account's other unpaired Macs), apart from the exceptions the policy
+  lists; see
+  [Reading more than 30 days back](https://cli-pulse.github.io/cli-pulse/privacy.html#older-history).
+  Versions 1.50 to 1.54 did not honour "Not now" on a Mac synced to an
+  account; 1.55 and later do.
 - **What syncs while you are signed in is more than numbers.** Besides daily
   token counts, cost estimates and quota state, it includes the AI CLI
   sessions running on your Mac (the program's name and its project folder's
