@@ -59,7 +59,7 @@ We support coordinated disclosure:
 
 The policy's
 [data-by-data breakdown](https://cli-pulse.github.io/cli-pulse/privacy.html#data)
-lists every item. What matters most for security, as of CLI Pulse 1.55:
+lists every item. What matters most for security, as of CLI Pulse 1.56:
 
 - **Provider API keys and pasted session cookies are not uploaded to CLI
   Pulse servers.** They are kept in the macOS Keychain on the Mac where you
@@ -83,7 +83,13 @@ lists every item. What matters most for security, as of CLI Pulse 1.55:
 - **Session-log contents** (`~/.codex/sessions/`, `~/.claude/projects/` and
   the other paths the policy names) are parsed on the Mac and never
   uploaded. Of what they give, only daily token counts and cost estimates
-  sync, and only while you are signed in.
+  sync, and only while you are signed in. Since 1.56, if you allowed CLI
+  Pulse to read older logs, an update that changes how it counts Codex usage
+  reads up to a year of Codex logs again, and while you are signed in the
+  daily Codex numbers this Mac already synced for those days are replaced
+  (on a Mac that is not paired, also those of the account's other unpaired
+  Macs); see
+  [Reading more than 30 days back](https://cli-pulse.github.io/cli-pulse/privacy.html#older-history).
 - **What does sync while you are signed in is more than metrics:** quota
   state, the AI CLI sessions running on the Mac (the program's name and its
   project folder's name, never the full path, with a keyed hash of the
@@ -103,8 +109,9 @@ lists every item. What matters most for security, as of CLI Pulse 1.55:
   answer "Start local scan" or "Last 30 days only", and not after "Not now",
   apart from the exceptions the policy lists. Signing in counts as a yes to
   the 30-day scan, but not over an earlier "Not now". Versions 1.50 to 1.54
-  did not honour "Not now" on a Mac synced to an account; 1.55 does, in the
-  app and its background helper, and so does Companion CLI 1.31.0. See
+  did not honour "Not now" on a Mac synced to an account; 1.55 and later do,
+  in the app and its background helper, and so does Companion CLI 1.31.0 and
+  later. See
   [When the scanning starts](https://cli-pulse.github.io/cli-pulse/privacy.html#consent).
 
 ---
@@ -143,13 +150,14 @@ session-log contents, and none of them sends crash reports.
 
 - **The background helper** runs the app's collectors on its own schedule
   (every 2 minutes by default) and uploads what they find for your iPhone
-  and Apple Watch. It is switched on when you pair the Mac with your account
-  and off with Settings → Advanced → "Enable background sync". Since 1.55 it
-  follows your answer to the scan question and uploads only while the app is
-  signed in to the account the Mac was paired with. After an update from an
-  earlier version, the helper that was already running stays the earlier
-  version until it restarts, and keeps collecting and syncing as before; the
-  1.55 app restarts it the first time the app opens. Until the app has
+  and Apple Watch. It is switched on when you pair the Mac with your account,
+  and on or off with Settings → Advanced → "Enable background sync", which
+  since 1.56 is there whether or not you are signed in or the Mac is paired.
+  Since 1.55 it follows your answer to the scan question and uploads only
+  while the app is signed in to the account the Mac was paired with. After an
+  update from an earlier version, the helper that was already running stays
+  the earlier version until it restarts, and keeps collecting and syncing as
+  before; the 1.55 app restarts it the first time the app opens. Until the app has
   recorded, on that first launch, whether you are signed in, the new helper
   goes by this Mac's pairing rather than the app's sign-in, as earlier
   versions did (see
@@ -196,7 +204,7 @@ Mac without re-running the local scanner themselves.
   turned off, and Strict privacy mode turns them off too. See
   [Anonymous install statistics](https://cli-pulse.github.io/cli-pulse/privacy.html#install-statistics).
 - **Remote control** between an iPhone and a Mac is built into the
-  direct-download build but is not switched on in 1.55. When it is, the two
+  direct-download build but is not switched on in 1.56. When it is, the two
   devices connect directly over your local or private network, encrypted
   with TLS 1.2 using a key they agree on when you pair them, and what they
   exchange does not pass through CLI Pulse servers.
