@@ -95,7 +95,8 @@ disagree, the policy is right. The short version, for CLI Pulse 1.56:
   CLI Pulse counts Codex usage reads up to a year of Codex logs again, and
   while you are signed in the daily Codex numbers this Mac already synced for
   those days are replaced (on a Mac that is not paired, also those of the
-  account's other unpaired Macs); see
+  account's other unpaired Macs), apart from the exceptions the policy
+  lists; see
   [Reading more than 30 days back](https://cli-pulse.github.io/cli-pulse/privacy.html#older-history).
   Versions 1.50 to 1.54 did not honour "Not now" on a Mac synced to an
   account; 1.55 and later do.

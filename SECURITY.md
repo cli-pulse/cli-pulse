@@ -88,7 +88,7 @@ lists every item. What matters most for security, as of CLI Pulse 1.56:
   reads up to a year of Codex logs again, and while you are signed in the
   daily Codex numbers this Mac already synced for those days are replaced
   (on a Mac that is not paired, also those of the account's other unpaired
-  Macs); see
+  Macs), apart from the exceptions the policy lists; see
   [Reading more than 30 days back](https://cli-pulse.github.io/cli-pulse/privacy.html#older-history).
 - **What does sync while you are signed in is more than metrics:** quota
   state, the AI CLI sessions running on the Mac (the program's name and its
@@ -110,7 +110,7 @@ lists every item. What matters most for security, as of CLI Pulse 1.56:
   apart from the exceptions the policy lists. Signing in counts as a yes to
   the 30-day scan, but not over an earlier "Not now". Versions 1.50 to 1.54
   did not honour "Not now" on a Mac synced to an account; 1.55 and later do,
-  in the app and its background helper, and so does Companion CLI 1.31.0 and
+  in the app and its background helper, and so do Companion CLI 1.31.0 and
   later. See
   [When the scanning starts](https://cli-pulse.github.io/cli-pulse/privacy.html#consent).
 
