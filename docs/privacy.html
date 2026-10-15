@@ -30,6 +30,7 @@
   .sync{color:#1a73c9;font-weight:600;white-space:nowrap}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(0,0,0,.05);
        padding:1px 6px;border-radius:4px;font-size:.9em}
+  li code{overflow-wrap:break-word}
   pre{background:#1d1d1f;color:#e8e8ed;padding:14px 18px;border-radius:10px;overflow-x:auto;
       font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;line-height:1.5;margin:12px 0 22px}
   .footer{text-align:center;color:#86868b;font-size:.85rem;margin-top:48px;padding-bottom:40px}
@@ -38,14 +39,14 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: October 7, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 15, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, and a few diagnostic readings about each Mac (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
     <br><br>
     This page is the single source of truth for what we collect. If you find anything in the app, App Store listing, or GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
-    It describes CLI Pulse 1.56.
+    It describes CLI Pulse 1.57.
   </div>
 
   <h2>What this covers</h2>
@@ -117,7 +118,7 @@
   <td><strong>Tokens that AI CLIs keep on your Mac</strong>: <code>~/.codex/auth.json</code>, <code>~/.claude/.credentials.json</code>, <code>~/.gemini/oauth_creds.json</code>, <code>~/.local/share/kilo/auth.json</code>, and Claude Code's Keychain item</td>
   <td>Read where each CLI keeps them. The app copies the file-based ones into a Keychain item that only CLI Pulse's own programs can read</td>
   <td class="good">❌ Never</td>
-  <td>Sent only to that provider, for live quota</td>
+  <td>Sent only to that provider, for live quota (and, since v1.57, Codex's limit reset credits)</td>
   </tr>
   <tr>
   <td><strong>Contents of your session logs</strong> (<code>~/.codex/sessions/</code>, <code>~/.codex/archived_sessions/</code>, <code>~/.claude/projects/</code>, <code>~/.config/claude/projects/</code>)</td>
@@ -238,6 +239,12 @@
   <td>UserDefaults (app group) on this device</td>
   <td class="good">❌ Never</td>
   <td>Keeps a spent Codex credits balance visible as "0 credits left"</td>
+  </tr>
+  <tr>
+  <td><strong>Codex limit reset credits</strong> (since v1.57, Mac app only): how many limit resets OpenAI has granted the ChatGPT account Codex is signed in to on this Mac, and when each expires. The app asks OpenAI for them (a read-only request to <code>chatgpt.com</code>) with the same Codex sign-in, in the same refresh as Codex's quota. It never asks OpenAI to use one</td>
+  <td>Kept in memory in the Mac app while it runs, each credit's ID and the ChatGPT account ID only as hashes; never written to disk</td>
+  <td class="good">❌ Never, and not to your iPhone or Apple Watch either</td>
+  <td>Shown on the Codex card</td>
   </tr>
   <tr>
   <td><strong>Crash reports</strong> from the Mac, iPhone and Apple Watch apps (see <em>Security practices</em> for what they contain)</td>
@@ -631,6 +638,24 @@
   Companion CLI are not sandboxed: they read the files named in this page
   directly.</li>
   <li><strong>TLS 1.2+</strong> for every network connection.</li>
+  <li><strong>Credentials are not written to disk caches.</strong> Since v1.57 every request
+  that the Mac app, its background helper, and the iPhone and Apple Watch apps
+  send with a sign-in token, API key or cookie goes through a connection that
+  keeps no cache and no cookies. The direct-download build's built-in agent
+  keeps none of its requests on disk either. When you sign in on a web page,
+  that page opens in your browser, which keeps its own cookies as it does for
+  any website. Earlier versions could leave copies of such requests, and the
+  answers to them, in an app's own web cache, and cookies that providers set
+  in its cookie file. Each app, and the Mac's background helper, empties both
+  once, the first time it starts after updating to v1.57. Each Mac build
+  empties only its own: if you switched between the App Store build and the
+  direct-download build before v1.57, what the other build left stays until
+  that build runs v1.57 or later. You can delete that build's web cache
+  yourself. For the App Store build it is the folders
+  <code>~/Library/Containers/yyh.CLI-Pulse/Data/Library/Caches/yyh.CLI-Pulse</code> and
+  <code>~/Library/Containers/yyh.CLI-Pulse.helper/Data/Library/Caches/yyh.CLI-Pulse.helper</code>;
+  for the direct-download build, <code>~/Library/Caches/yyh.CLI-Pulse</code> and
+  <code>~/Library/Caches/yyh.CLI-Pulse.helper</code>.</li>
   <li><strong>Supabase server-side encryption at rest</strong> (AES-256) for the database and
   storage backing your account. We do <strong>not</strong> currently offer end-to-end
   encryption — what we store is usage numbers and the descriptive details listed
