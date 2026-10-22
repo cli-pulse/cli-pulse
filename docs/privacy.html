@@ -39,14 +39,14 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: October 15, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 22, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, and a few diagnostic readings about each Mac (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
     <br><br>
     This page is the single source of truth for what we collect. If you find anything in the app, App Store listing, or GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
-    It describes CLI Pulse 1.57.
+    It describes CLI Pulse 1.58.
   </div>
 
   <h2>What this covers</h2>
@@ -145,7 +145,7 @@
   <td>So iPhone and Apple Watch can show what is running on your Mac. The App Store build's sandbox usually hides other programs from it, and then it has none to send. The Companion CLI sends more; see its section</td>
   </tr>
   <tr>
-  <td><strong>Alerts</strong>: your Mac or a program using a lot of CPU, or a session running a long time (with that program's name, provider and folder name), budget alerts our server works out from your daily usage, and whether you resolved or snoozed each one</td>
+  <td><strong>Alerts</strong>: your Mac or a program using a lot of CPU (with that program's name, provider and folder name; CLI Pulse 1.56 and earlier also raised one for a session running a long time), budget alerts our server works out from your daily usage, and whether you resolved or snoozed each one</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in</td>
   <td>So your other devices can show them</td>
@@ -398,10 +398,16 @@
   correct (see <em>Reading more than 30 days back</em>). Parsed on your Mac for usage
   records; the results are cached on your Mac.</li>
   <li><strong>What is derived from them</strong> — token counts, cost estimates, model names and
-  dates, plus each conversation's file path, project folder and session id. Those
-  last three are how the Sessions list can name your conversations. They stay on
-  your Mac; of what the logs give, only the daily numbers in the table sync, and
-  only when you are signed in.</li>
+  dates, plus each conversation's file path, project folder and session id, and
+  for a Codex conversation a one-way hash of its repository's address (the
+  address itself is never kept: it can hold a token). Those are how the Sessions
+  list can name your conversations, how Projects (the usage panel and the
+  Overview's Top Projects card) adds up usage by folder and counts a Codex
+  worktree or a clone in <code>/private/tmp</code> for the checkout it came from, and how
+  the usage panel's Sessions list adds up the last 30 days by session, a
+  session's subagents included, named by its project folder. They stay on your
+  Mac; of what the logs give, only the daily numbers in the table sync, and only
+  when you are signed in.</li>
   <li><strong>The programs running on your Mac.</strong> To find AI CLI sessions that are running
   now, CLI Pulse reads the command line of each running program and looks for a
   project marker (such as <code>.git</code>) in the folders it names. What it keeps from
@@ -647,11 +653,17 @@
   any website. Earlier versions could leave copies of such requests, and the
   answers to them, in an app's own web cache, and cookies that providers set
   in its cookie file. Each app, and the Mac's background helper, empties both
-  once, the first time it starts after updating to v1.57. Each Mac build
-  empties only its own: if you switched between the App Store build and the
-  direct-download build before v1.57, what the other build left stays until
-  that build runs v1.57 or later. You can delete that build's web cache
-  yourself. For the App Store build it is the folders
+  once, the first time it starts after updating to v1.57. A background helper
+  that does not start, for example while background sync is off, cannot do
+  that itself. Since v1.58 the direct-download app empties both for its
+  helper, once, at the first launch when the helper is not running and
+  background sync is off, unless the helper already has. The App Store
+  build's app cannot reach its helper's folders, so in that build the helper
+  still empties them itself, the first time it starts.
+  Each Mac build empties only its own: if you switched between the App Store
+  build and the direct-download build before v1.57, what the other build left
+  stays until that build runs v1.57 or later. You can delete that build's web
+  cache yourself. For the App Store build it is the folders
   <code>~/Library/Containers/yyh.CLI-Pulse/Data/Library/Caches/yyh.CLI-Pulse</code> and
   <code>~/Library/Containers/yyh.CLI-Pulse.helper/Data/Library/Caches/yyh.CLI-Pulse.helper</code>;
   for the direct-download build, <code>~/Library/Caches/yyh.CLI-Pulse</code> and
