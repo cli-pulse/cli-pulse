@@ -39,14 +39,14 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: October 26, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: October 30, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, and a few diagnostic readings about each Mac (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
     <br><br>
     This page is the single source of truth for what we collect. If you find anything in the app, App Store listing, or GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
-    It describes CLI Pulse 1.59.
+    It describes CLI Pulse 1.60.
   </div>
 
   <h2>What this covers</h2>
@@ -708,7 +708,18 @@
   device details and the SDK's random installation identifier), it holds
   only a fixed word for the reason (such as <code>rejected</code> or <code>network_failed</code>),
   the HTTP status, which of the app's two refresh paths it was and how many
-  refreshes in a row had failed. It has no breadcrumbs. Performance tracing
+  refreshes in a row had failed. It has no breadcrumbs. Since v1.60 the Mac
+  app also sends an error report when its main thread has not answered for ten
+  seconds, at most two a launch. Besides what every report carries (the app
+  and OS version, the device details and the SDK's random installation
+  identifier), it holds only the number of seconds, a fixed word for what the
+  main thread was doing (running, waiting, stopped, uninterruptible, halted or
+  unknown), how many times it was suspended, how much processor time it used
+  while we looked, a fixed word for the kind of event loop it was in
+  (<code>default</code>, <code>event_tracking</code>, <code>modal_panel</code>, <code>none</code>, <code>unreadable</code> or
+  <code>other</code>), which install channel this Mac has, and whether it was waiting in
+  a loop that waits for you on purpose (a menu held open or a dialog). It has no stack trace and no breadcrumbs, and no
+  window title, file name or account detail. Performance tracing
   is disabled
   (<code>tracesSampleRate = 0</code>). There is no switch to turn crash reporting off.</li>
   </ul>
