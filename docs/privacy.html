@@ -46,7 +46,7 @@
     <br><br>
     This page is the single source of truth for what we collect. If you find anything in the app, App Store listing, or GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
-    It describes CLI Pulse 1.60.
+    It describes CLI Pulse 1.62.
   </div>
 
   <h2>What this covers</h2>
@@ -719,7 +719,21 @@
   (<code>default</code>, <code>event_tracking</code>, <code>modal_panel</code>, <code>none</code>, <code>unreadable</code> or
   <code>other</code>), which install channel this Mac has, and whether it was waiting in
   a loop that waits for you on purpose (a menu held open or a dialog). It has no stack trace and no breadcrumbs, and no
-  window title, file name or account detail. Performance tracing
+  window title, file name or account detail. Since v1.62 the Mac app outside
+  the App Store also sends an error report when, on a refresh you started, the
+  Keychain answered "cancelled" or "authentication failed" for a browser's
+  "Safe Storage" item, and when a background refresh was told by the Keychain
+  that reading such an item would need a dialog (which a locked keychain also
+  says); and the iPhone app sends one when the Keychain did not accept the new
+  sign-in tokens and the app kept them in memory, when it wrote them later,
+  and when it opened and found that its last run had ended still holding
+  some. Each of these outcomes is sent at most once a UTC day. Besides what
+  every report carries (the stack trace, the app and OS version, the device
+  details and the SDK's random installation identifier), each holds only a
+  fixed word for what happened and, for the Mac one, the browser's name from a
+  fixed list, the install channel and whether the screen was locked (when the system says). It has
+  no breadcrumbs, no tokens, no error text from the system, and no account
+  detail. Performance tracing
   is disabled
   (<code>tracesSampleRate = 0</code>). There is no switch to turn crash reporting off.</li>
   </ul>
