@@ -49,7 +49,7 @@
   <p>What the old table got wrong, as of CLI Pulse 1.55:</p>
   <ul>
     <li>Only the App Store build reads files through the folder access you grant it. The direct-download build, its background helper and built-in agent, and the Companion CLI are not sandboxed and read the files the Privacy Policy names directly.</li>
-    <li>The app has no button to take back a single folder grant, and the current apps offer no way to change how long ended sessions and alerts are kept.</li>
+    <li>The app has no button to take back a single folder grant. Of the current apps, only the Android app can change how long ended sessions and alerts are kept (Settings &rarr; Thresholds &rarr; &ldquo;Data Retention (days)&rdquo;).</li>
     <li>Project folders are not only hashed. While you are signed in and this Mac is paired, each running AI CLI session that CLI Pulse finds syncs its program&rsquo;s name and its project folder&rsquo;s name (never the full path), with a keyed hash of that folder&rsquo;s path.</li>
     <li>Background sync and Yield Score&rsquo;s git tracking are both under Settings &rsaquo; Advanced, and only the Companion CLI collects git activity.</li>
     <li>It said nothing about the Companion CLI or the anonymous install statistics.</li>
