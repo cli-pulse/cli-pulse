@@ -42,9 +42,9 @@
   <p class="date">CLI Pulse &mdash; Last Updated: October 30, 2026</p>
 
   <div class="lede">
-    CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, and a few diagnostic readings about each Mac (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
+    CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, a few diagnostic readings about each Mac, and a record of each Android phone you sign in on (all described below), everything CLI Pulse uploads is there to show your usage and alerts on your other devices, or wherever you asked for alerts to go, and this page lists all of it, including the parts that are not numbers.
     <br><br>
-    This page is the single source of truth for what we collect. If you find anything in the app, App Store listing, or GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
+    This page is the single source of truth for what we collect. If you find anything in the apps, their App Store or Google Play listings, or the GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
     It describes CLI Pulse 1.62.
   </div>
@@ -76,6 +76,13 @@
   your account, and is described in its own section below.</li>
   <li><strong>The iPhone app</strong> (with its widgets) and <strong>the Apple Watch app</strong>. They show
   what your Macs synced. They read nothing from AI tools on the phone or watch.</li>
+  <li><strong>The Android app</strong> (from Google Play). It shows what your Macs synced to your
+  account and reads nothing from AI tools on the phone. This release has no
+  place to enter a provider API key, so it contacts no AI provider. While you
+  are signed out, or in "Try Demo" (which shows built-in sample data), it sends
+  nothing to our server; crash reports still go to Sentry, and Google's
+  Firebase and Google Play are contacted as described under <em>When uploads
+  happen</em>. Earlier versions of this page did not cover the Android app.</li>
   </ul>
   <p>Remote control between an iPhone and a Mac is built into the direct-download
   build but is off in this release: the Mac shows no Remote Control section in
@@ -98,7 +105,7 @@
   <tbody>
   <tr>
   <td><strong>Provider API keys you enter</strong> (OpenAI, Anthropic, Google, OpenRouter, etc.)</td>
-  <td>macOS Keychain on this Mac</td>
+  <td>macOS Keychain on this Mac. The Android app has no place to enter one</td>
   <td class="good">❌ Never</td>
   <td>Sent only to that provider, to ask for your usage and quota</td>
   </tr>
@@ -130,7 +137,7 @@
   <td><strong>Daily usage</strong> (per day, provider and model: input, cached and output token counts and a cost estimate; which of your Macs it came from, once that Mac is paired)</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in</td>
-  <td>So iPhone and Apple Watch show the same history as your Mac</td>
+  <td>So iPhone, Apple Watch and the Android app show the same history as your Mac</td>
   </tr>
   <tr>
   <td><strong>Provider quota state</strong> (remaining, limit, plan, reset times; the label you gave the account, if any; which Mac reported it)</td>
@@ -142,10 +149,10 @@
   <td><strong>AI CLI sessions running on your Mac</strong> (the program's name; the name of its project folder, never the full path; a keyed hash of that folder's path; when it started and was last active; an activity estimate based on how long it has run and its CPU use)</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in and this Mac is paired</td>
-  <td>So iPhone and Apple Watch can show what is running on your Mac. The App Store build's sandbox usually hides other programs from it, and then it has none to send. The Companion CLI sends more; see its section</td>
+  <td>So iPhone, Apple Watch and the Android app can show what is running on your Mac. The App Store build's sandbox usually hides other programs from it, and then it has none to send. The Companion CLI sends more; see its section</td>
   </tr>
   <tr>
-  <td><strong>Alerts</strong>: your Mac or a program using a lot of CPU (with that program's name, provider and folder name; CLI Pulse 1.56 and earlier also raised one for a session running a long time), budget alerts our server works out from your daily usage, and whether you resolved or snoozed each one</td>
+  <td><strong>Alerts</strong>: your Mac or a program using a lot of CPU (with that program's name, provider and folder name; CLI Pulse 1.56 and earlier also raised one for a session running a long time), budget alerts our server works out from your daily usage, and whether you marked each one read, resolved or snoozed it</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in</td>
   <td>So your other devices can show them</td>
@@ -157,7 +164,7 @@
   <td>Our server posts each matching alert (its title, message, type, severity and provider) to that address</td>
   </tr>
   <tr>
-  <td><strong>Settings kept with your account</strong> (such as alert thresholds and budget, and whether Yield Score and remote control are on)</td>
+  <td><strong>Settings kept with your account</strong> (such as alert thresholds and budget, how many days ended sessions and alerts are kept, and whether Yield Score and remote control are on)</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in</td>
   <td>So every device uses the same settings</td>
@@ -175,10 +182,16 @@
   <td>Shows which of your Macs are reporting. The versions are diagnostics for us</td>
   </tr>
   <tr>
+  <td><strong>Your Android phone's maker and model</strong> (such as "Google Pixel 8", not a name you gave it) <strong>and its Android version</strong>, sent the first time the app's background sync runs after you sign in (at most every 15 minutes, while the phone is online and its battery is not low)</td>
+  <td>Supabase, linked to your CLI Pulse account</td>
+  <td class="sync">✅ Yes, once per sign-in</td>
+  <td>Lists the phone among your devices. Signing out does not remove it, and each later sign-in on the phone adds another; the app cannot remove them, and they are deleted with your account</td>
+  </tr>
+  <tr>
   <td><strong>Machine readings</strong> (Companion CLI only): battery charge, health, cycle count and temperature, thermal state, temperature and fan sensors, load, uptime, memory pressure, swap and disk space, Low Power Mode, and the state of machine controls</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while the Companion CLI is allowed to upload</td>
-  <td>The Machine view on iPhone and Apple Watch</td>
+  <td>The Machine view on iPhone and Apple Watch, and the Devices screen in the Android app</td>
   </tr>
   <tr>
   <td><strong>Requests you send from your iPhone to a Mac</strong> (fan boost, fan back to automatic, Low Power Mode, Keep Awake)</td>
@@ -193,16 +206,28 @@
   <td>Lets our server ask your iPhone, through Apple, to refresh its widgets or to look at a pending request. These pushes carry none of your data</td>
   </tr>
   <tr>
+  <td><strong>Your Android phone's notification token</strong>, which Google's Firebase Cloud Messaging gives the app. It is sent only when Firebase gives the app a new token while you are signed in and the phone is already listed in your account; the first token usually arrives when the app first starts, before that, and is not sent</td>
+  <td>Supabase, with the phone's record in your account</td>
+  <td class="sync">✅ Yes, only a replaced token</td>
+  <td>None yet: our server sends no notifications to Android phones and does not read this token, and the app does not ask for permission to show notifications. A token that was sent stays with that record after you sign out</td>
+  </tr>
+  <tr>
   <td><strong>Your CLI Pulse login email</strong></td>
   <td>Supabase Auth</td>
   <td class="sync">✅ Yes</td>
-  <td>Required to authenticate you. We may also use it to email you <strong>occasionally</strong> about the product itself — a short survey, or notice of a change that affects you. Never marketing, never sold, never shared, and every such email carries a one-click opt out. See <a href="#product-email">Product email</a> below.</td>
+  <td>Required to authenticate you. Asking for a sign-in code for an address creates an account for it, even if the code is never entered. We may also use it to email you <strong>occasionally</strong> about the product itself — a short survey, or notice of a change that affects you. Never marketing, never sold, never shared, and every such email carries a one-click opt out. See <a href="#product-email">Product email</a> below.</td>
   </tr>
   <tr>
-  <td><strong>Your name and profile details from Apple, Google or GitHub</strong>, if you sign in with one of them (on iPhone)</td>
+  <td><strong>Your password</strong>, if you sign in with one</td>
+  <td>Supabase Auth</td>
+  <td class="sync">✅ Yes, when you sign in with it</td>
+  <td>Signs you in. Supabase keeps it only as a hash</td>
+  </tr>
+  <tr>
+  <td><strong>Your name and profile details from Apple, Google or GitHub</strong>, if you sign in with one of them (on iPhone; on Android, Google or GitHub, including one you link in Settings › Linked Accounts)</td>
   <td>Supabase Auth</td>
   <td class="sync">✅ Yes, if that provider shares them</td>
-  <td>Supabase keeps what the sign-in provider hands it</td>
+  <td>Supabase keeps what the sign-in provider hands it. When you sign in with Google on Android, the app also passes on the name Google gives it</td>
   </tr>
   <tr>
   <td><strong>Apple / Google / GitHub sign-in tokens</strong> (during sign-in)</td>
@@ -212,9 +237,21 @@
   </tr>
   <tr>
   <td><strong>Supabase session access / refresh token</strong></td>
-  <td>Keychain on each device you sign in on. Your iPhone passes it to your paired Apple Watch over Apple's own watch connection</td>
+  <td>Keychain on each Apple device you sign in on; on Android, the app's encrypted preferences (<code>cli_pulse_secure_prefs</code>). Your iPhone passes it to your paired Apple Watch over Apple's own watch connection</td>
   <td class="good">❌ Never re-uploaded (only received)</td>
   <td>Keeps you signed in</td>
+  </tr>
+  <tr>
+  <td><strong>What else the Android app keeps on the phone</strong>: your account's ID, name and email; the ID of the phone's record in your account; whether Try Demo is on; while a GitHub sign-in or account link you started in the browser is unfinished, a one-time code for finishing it; and, as last fetched from your account, the Overview's totals for today (tokens, estimated cost, and how many sessions, devices and open alerts) and up to 30 days of daily usage (per day, provider and model: token counts and cost)</td>
+  <td>The first four in the app's encrypted preferences (<code>cli_pulse_secure_prefs</code>); the totals and daily usage in the app's own database (<code>cli_pulse_cache</code>), which the app does not encrypt. Sign Out deletes all of it at once, without waiting for the network. Delete Account deletes all of it once our server has deleted the account. Exit Demo Mode deletes the encrypted preferences. If our server rejects your saved sign-in when the app starts, the app deletes the encrypted preferences but keeps the totals and daily usage until it next fetches them. A sign-in code you abandon stays until you start another or sign out. Uninstalling the app deletes all of it</td>
+  <td class="good">❌ No: copies of what your account holds</td>
+  <td>Shows who is signed in and finishes a browser sign-in. This release saves the totals and daily usage but never reads them back</td>
+  </tr>
+  <tr>
+  <td><strong>What the Android app's libraries keep on the phone</strong>: Google's Firebase keeps a random ID for this install of the app and its notification token; Sentry keeps its own random installation ID and any crash reports not yet sent, with the breadcrumbs and device details they carry; Android keeps the background sync's schedule</td>
+  <td>The app's private storage</td>
+  <td class="good">❌ Not to our server</td>
+  <td>Firebase and Sentry use them as described under <em>Security practices</em> and <em>Third-party sub-processors</em>. Signing out does not delete them; uninstalling the app does</td>
   </tr>
   <tr>
   <td><strong>Git activity metadata</strong> (commit hash, keyed hash of the project path, commit timestamp, merge flag)</td>
@@ -247,13 +284,13 @@
   <td>Shown on the Codex card</td>
   </tr>
   <tr>
-  <td><strong>Crash reports</strong> from the Mac, iPhone and Apple Watch apps (see <em>Security practices</em> for what they contain)</td>
+  <td><strong>Crash reports</strong> from the Mac, iPhone, Apple Watch and Android apps (see <em>Security practices</em> for what they contain)</td>
   <td>Sentry (sentry.io), scrubbed before leaving the device</td>
   <td class="sync">✅ Yes, when a crash or error happens, whether or not you are signed in; the same SDK also reports each app session's start and whether it ended in a crash</td>
-  <td>So crashes are visible to us without waiting for an App Store review</td>
+  <td>So crashes are visible to us without waiting for an App Store or Google Play review</td>
   </tr>
   <tr>
-  <td><strong>Anonymous install statistics</strong> (random install id, install channel, app version, OS major.minor, display language, and a few once-ever yes/no milestones listed below)</td>
+  <td><strong>Anonymous install statistics</strong> (Mac app only: random install id, install channel, app version, OS major.minor, display language, and a few once-ever yes/no milestones listed below)</td>
   <td>Supabase, <strong>not linked to any account</strong></td>
   <td class="sync">✅ Yes, unless you turn it off</td>
   <td>Tells us whether the app actually works for people who never sign in</td>
@@ -282,6 +319,20 @@
   after you switch to another account it uploads nothing until you pair this Mac
   again, and after you sign out it stops reading altogether (see <em>When the
   scanning starts</em> below for how that applies right after an update).</p>
+  <p>The Android app, too, uploads only while you are signed in, and then also in
+  the background, even when the app is closed: about every 15 minutes, while the
+  phone is online and its battery is not low, it asks our server for your
+  Overview totals, and the first time after you sign in it adds the phone to your
+  account. Each request for totals sends the phone's current date (the day only),
+  so that "today" matches your calendar; our server uses it to answer and does
+  not keep it. While the app is open, the screen you are on refreshes from our
+  server every 30 to 60 seconds, and the Alerts tab asks our server, at most every
+  5 minutes, to work out budget alerts from your daily usage. Two things happen
+  whether or not you are signed in, in Try Demo too, and neither goes to our
+  server: Google's Firebase gets the phone a notification token when the app
+  starts (Firebase's own default, which our code does not change), and opening
+  Settings › Subscription asks Google Play on the phone which CLI Pulse
+  subscriptions exist and whether you have one.</p>
   <h3 id="install-statistics">Anonymous install statistics</h3>
   <p>Since v1.44 you can use CLI Pulse without an account. That means we cannot tell
   whether the app works for the people using it that way — whether it found their
@@ -341,7 +392,8 @@
 │  │ readings         │    │                   ▼
 │  └──────────────────┘    │          ┌──────────────────┐
 │                          │          │  Your iPhone /   │
-│                          │          │  Apple Watch     │
+│                          │          │  Apple Watch /   │
+│                          │          │  Android phone   │
 │                          │          └──────────────────┘
 │  ┌──────────────────┐    │          ┌──────────────────┐
 │  │ Install          │─── HTTPS ────▶│ Anonymous install│
@@ -355,6 +407,10 @@
 </pre>
   <p>The scanner runs entirely on your Mac. Your API key never passes through our
   servers — it goes directly from your Mac to the provider.</p>
+  <p>The Android app runs no scanner and holds no provider keys: it reads what your
+  account holds, sends back the changes you make in it (settings, alert states, a
+  webhook) and the record of the phone, sends its crash reports to Sentry, and
+  gets its notification token from Google's Firebase.</p>
   <h2 id="consent">When the scanning starts, and what you agree to first</h2>
   <p><em>(Added in v1.50. It corrects something this page previously left implied,
   and the correction is a change to the app, not only to the wording here.)</em></p>
@@ -635,7 +691,10 @@
   alongside your login, and other apps cannot read CLI Pulse's items without your
   permission. The Companion CLI is the exception: it keeps its pairing secret,
   its hash key and the claude.ai cookie in files only your user account can read
-  (see its section).</li>
+  (see its section). The Android app has no Keychain: it keeps its sign-in
+  tokens and account details in Android's EncryptedSharedPreferences (AES-256,
+  with the key in the phone's Android Keystore), and its saved usage figures in
+  its private storage without that extra layer.</li>
   <li><strong>App Sandbox</strong> is enabled in the App Store build
   (<code>com.apple.security.app-sandbox</code>), for the app and its background helper;
   there, file access outside the app container requires security-scoped
@@ -643,12 +702,27 @@
   direct-download build, its background helper and built-in agent, and the
   Companion CLI are not sandboxed: they read the files named in this page
   directly.</li>
-  <li><strong>TLS 1.2+</strong> for every network connection.</li>
+  <li><strong>Android permissions and backup.</strong> The Android app asks Android for no
+  access to your files, photos, contacts, location, camera, microphone, calls
+  or list of other apps. The permissions it declares let it go online and see
+  whether the phone is connected, receive notifications through Google, keep
+  its background sync running (also after the phone restarts) and use Google
+  Play billing; two more, for fingerprint or face unlock, come with Google's
+  sign-in library, and the app never uses them. It declares the notification
+  permission but never asks you for it. It opts out of Android's backup to
+  Google's cloud (<code>android:allowBackup="false"</code>). On Android 12 and later a
+  direct transfer to a new phone can still copy the app's files, but Android
+  does not move Keystore keys, so the copied sign-in tokens cannot be read
+  there.</li>
+  <li><strong>TLS 1.2+</strong> for every network connection. The Android app also refuses any
+  unencrypted connection, and trusts only the certificate authorities built
+  into the phone.</li>
   <li><strong>Credentials are not written to disk caches.</strong> Since v1.57 every request
   that the Mac app, its background helper, and the iPhone and Apple Watch apps
   send with a sign-in token, API key or cookie goes through a connection that
   keeps no cache and no cookies. The direct-download build's built-in agent
-  keeps none of its requests on disk either. When you sign in on a web page,
+  keeps none of its requests on disk either, and the Android app's requests
+  keep no web cache and no cookies. When you sign in on a web page,
   that page opens in your browser, which keeps its own cookies as it does for
   any website. Earlier versions could leave copies of such requests, and the
   answers to them, in an app's own web cache, and cookies that providers set
@@ -674,7 +748,9 @@
   above, not secrets. See "Roadmap" below.</li>
   <li><strong>No third-party analytics SDKs.</strong> We do not ship Google Analytics,
   Firebase Analytics, Amplitude, Mixpanel, Crashlytics, or any similar
-  product-analytics tool. There is no fingerprinting and no ad network
+  product-analytics tool. The Android app includes one part of Google's
+  Firebase, Cloud Messaging, for its notification token (see <em>Third-party
+  sub-processors</em>), and no other Firebase product. There is no fingerprinting and no ad network
   integration. This is a statement about SDKs, and we would rather over-explain
   than let it read as more than it is: we do collect the anonymous install
   milestones described above, ourselves, to our own database. They are opt-out,
@@ -684,7 +760,7 @@
   background helper, the built-in agent and the Companion CLI do not use it. PII
   is disabled (<code>sendDefaultPii = false</code>), and a local <code>beforeSend</code> hook scrubs
   JWTs, strings shaped like <code>sk-…</code> API keys, Bearer headers, <code>/Users/&lt;name&gt;</code>
-  paths, and any field whose name contains common sensitive fragments (<code>token</code>,
+  paths (in the Apple apps), and any field whose name contains common sensitive fragments (<code>token</code>,
   <code>secret</code>, <code>password</code>, <code>api_key</code>, <code>supabase</code>, etc.) before the event leaves your
   device; it also clears the report's IP-address field. A report carries the
   stack trace, the app and OS version, the device model and the other device
@@ -699,7 +775,15 @@
   the report's breadcrumbs and error messages. This works by the shape and
   place of each part, so a part that looks like an ordinary word and follows
   no such word is kept. (Before v1.55 the query string was sent too, and a
-  request to our server named your account's internal ID in it.) The Android app records no web requests. The SDK also reports, for each app session, that it started
+  request to our server named your account's internal ID in it.) The Android app records no web requests, and its hook does not look for
+  identifiers, UUIDs or email addresses: it removes only the secrets named
+  above. Its breadcrumbs come from the Sentry SDK's own defaults: the app's
+  screens opening and closing, the app moving to the background, and changes on
+  the phone such as the network connection, the battery, the screen turning on
+  or off, and the time zone or language. By the same defaults it sends a report,
+  with the stack trace, when the app has not responded for about five seconds
+  (what Android calls "not responding"). Android reports carry no screenshots.
+  The SDK also reports, for each app session, that it started
   and whether it ended in a crash, with a random installation identifier the SDK
   generates. Since v1.59 the Mac app also sends an error report when three
   refreshes in a row have failed (a request to our server failed, or a
@@ -769,10 +853,26 @@
   <li><strong>Delete API keys:</strong> Remove any provider config in Settings → Providers;
   the Keychain entry is deleted.</li>
   <li><strong>Delete your account:</strong> "Delete Account" (at the bottom of Settings on the
-  Mac, and in Settings on iPhone) deletes your account and all associated usage
-  metrics from Supabase.</li>
-  <li><strong>Export:</strong> Use the Export menu in the Overview tab (Mac) to save a PDF or
-  CSV of the data it shows.</li>
+  Mac and on Android, and in Settings on iPhone) deletes your account and all
+  associated usage metrics from Supabase. On Android it then deletes what the
+  app keeps on the phone, except files you exported, and returns to the sign-in
+  screen; if our server cannot delete the account, for example because the
+  phone is offline, the app says so, keeps you signed in and deletes nothing.</li>
+  <li><strong>Sign out on Android:</strong> Settings → Sign Out deletes the app's sign-in
+  details and saved usage figures from the phone at once, then asks our server
+  once to end the session (it does not try again if the phone is offline).
+  After that the app sends nothing linked to your account. The phone's record
+  in your account (maker, model, Android version and any notification token)
+  stays until you delete the account, and each later sign-in adds a new one.</li>
+  <li><strong>Sign-in methods on Android:</strong> Settings → Linked Accounts adds Google or
+  GitHub as a way to sign in to your account, or removes one while another way
+  to sign in remains.</li>
+  <li><strong>Export:</strong> Use the Export menu in the Overview tab (Mac and Android) to save
+  a PDF or CSV of the data it shows. On Android the file is first written to
+  the app's cache folder and then handed to the app you pick in Android's share
+  menu. It stays in that folder, also after you sign out, until Android clears
+  the app's cache or you uninstall the app (a later export of the same file
+  overwrites it).</li>
   <li><strong>Stop product email:</strong> every product email we send carries a one-click opt
   out, and honouring it is immediate and permanent. You can also email
   yyyyy.yeyuhe@gmail.com and ask. Opting out never affects your account, your
@@ -802,13 +902,21 @@
   that is the end of it.</p>
   <p>If a survey ever offers something in return for your time, that offer is
   unconditional on what you say. We will not ask you to review the app in
-  exchange for anything — the App Store forbids it and so do we.</p>
+  exchange for anything — the App Store and Google Play forbid it, and so do we.</p>
   <h2>Data retention</h2>
   <ul>
   <li><strong>Local Keychain entries</strong> persist until you remove the provider (or, for
   the session token, sign out). Moving the app to the Trash does not remove
   them: macOS keeps Keychain items until they are deleted, for example in
   Keychain Access.</li>
+  <li><strong>What the Android app keeps on the phone</strong> stays until you sign out, delete
+  your account in the app, or uninstall the app (the table above lists the
+  exceptions). Files you export stay in the app's cache folder until Android
+  clears it or you uninstall the app.</li>
+  <li><strong>Your Android phone's record in your account</strong> (its maker, model, Android
+  version and any notification token) stays until you delete your account.
+  Signing out does not remove it and the app has no way to; each sign-in after
+  a sign-out adds a new one.</li>
   <li><strong>Usage history</strong> on Supabase is kept for <strong>up to 18 months</strong> of rolling
   history. A nightly job deletes rows older than that from the long-tail
   analytical tables (<code>commits</code>, <code>sessions</code>, <code>session_commit_links</code>,
@@ -816,11 +924,16 @@
   support year-over-year cost comparisons with one month of buffer; beyond that
   the historical detail adds no product value and we'd rather delete it.</li>
   <li><strong>Ended AI CLI sessions and alerts</strong> are deleted by a nightly job once they
-  are older than your account's retention setting: 7 days, unless an earlier
-  version of the app changed it. A session still marked as running is deleted
-  too once nothing has updated it for that long. The current apps offer no way
-  to change the setting. (Earlier versions of this page pointed to a
-  setting in Settings → Privacy that does not exist.)</li>
+  are older than your account's retention setting: 7 days, unless you changed
+  it in the Android app or an earlier version of an app changed it. A session
+  still marked as running is deleted too once nothing has updated it for that
+  long. Of the current apps, only the Android app can change the setting:
+  Settings → Thresholds → "Data Retention (days)", any whole number of days
+  from 1 up. The job counts at most 36,500 days (about 100 years), and sessions
+  are deleted after 18 months whatever the setting (see <em>Usage history</em>
+  above), so a setting longer than that keeps only alerts longer. (Earlier
+  versions of this page pointed to a setting in Settings → Privacy that
+  does not exist.)</li>
   <li><strong>Account deletion</strong> removes all associated rows within 30 days
   (cascading deletes handled at the database level).</li>
   <li><strong>Anonymous install rows</strong> are deleted 400 days after they were last
@@ -836,7 +949,20 @@
   StoreKit-based subscription management, and the notifications our server
   sends your iPhone. Receipt validation forwards only the StoreKit JWS and
   product ID.</li>
-  <li><strong>Google</strong> — used for Sign in with Google at the user's option.</li>
+  <li><strong>Google</strong> — used for Sign in with Google at the user's option. The Android
+  app also uses two other Google services. <strong>Firebase Cloud Messaging:</strong> when
+  the app starts, whether or not you are signed in and in Try Demo too,
+  Firebase registers this install of the app with Google (a random installation
+  ID and a notification token) and renews them from time to time. That is
+  Firebase's default, which our code does not change; signing out does not
+  remove them, and our server sends nothing through it. <strong>Google Play:</strong> when
+  you open Settings › Subscription, also in Try Demo, the app asks Google Play
+  on the phone which CLI Pulse subscriptions exist and whether your Google
+  account has one, and Google's billing library may send Google its own records
+  of those requests. Nothing can be bought on Android. Only if Google Play
+  reported a CLI Pulse subscription would the app send our server its purchase
+  token, product ID and the app's package name, for us to check with Google
+  Play.</li>
   <li><strong>GitHub</strong> — used for Sign in with GitHub at the user's option. GitHub also
   hosts the direct-download build's update information and downloads, and the
   Companion CLI's, so checking for an update is a request to GitHub.</li>
