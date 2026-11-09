@@ -94,7 +94,8 @@ lists every item. What matters most for security, as of CLI Pulse 1.56:
   state, the AI CLI sessions running on the Mac (the program's name and its
   project folder's name, never the full path, with a keyed hash of the
   path), alerts, an alert webhook address if you add one, the Mac's name,
-  load and versions, and some diagnostics.
+  load and versions, some diagnostics, and a record each time you sign in on
+  an Android phone (maker, model, Android version and any notification token).
 - **The optional Companion CLI**, installed separately, uploads more than the
   app, including up to 48 characters of each AI CLI's command line (which can
   include folder paths) and what sessions started through it print (with
@@ -150,8 +151,8 @@ components. None of them uploads raw credentials, raw cookies or
 session-log contents, and none of them sends crash reports.
 
 - **The background helper** runs the app's collectors on its own schedule
-  (every 2 minutes by default) and uploads what they find for your iPhone
-  and Apple Watch. It is switched on when you pair the Mac with your account,
+  (every 2 minutes by default) and uploads what they find for your iPhone,
+  Apple Watch and Android phone. It is switched on when you pair the Mac with your account,
   and on or off with Settings → Advanced → "Enable background sync", which
   since 1.56 is there whether or not you are signed in or the Mac is paired.
   Since 1.55 it follows your answer to the scan question and uploads only
@@ -241,7 +242,8 @@ section after it. The ones that matter most for security:
   and on Android, and in Settings on iPhone; without an app, see "Deleting your
   account" in the privacy policy
   (<https://cli-pulse.github.io/cli-pulse/privacy.html#delete-account>).
-  Cascading deletes remove all associated rows within 30 days.
+  Cascading deletes remove the rows associated with your account within 30
+  days; that section says what stays.
 
 ---
 

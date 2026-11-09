@@ -104,7 +104,9 @@ disagree, the policy is right. The short version, for CLI Pulse 1.56:
   token counts, cost estimates and quota state, it includes the AI CLI
   sessions running on your Mac (the program's name and its project folder's
   name, never the full path), alerts, your Mac's name (which often contains
-  your own name), its load and app versions, and a few diagnostics. The
+  your own name), its load and app versions, a few diagnostics, and a record
+  each time you sign in on an Android phone (maker, model, Android version and
+  any notification token). The
   [data-by-data breakdown](https://cli-pulse.github.io/cli-pulse/privacy.html#data)
   lists every item.
 - **The optional Companion CLI**, installed separately, is not sandboxed,
