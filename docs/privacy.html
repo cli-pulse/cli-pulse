@@ -43,7 +43,7 @@
   <p class="date">CLI Pulse &mdash; Last Updated: October 30, 2026</p>
 
   <div class="lede">
-    CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, a few diagnostic readings about each Mac, the record your Android phone adds to your account each time you sign in on it (with that phone's notification token if it was sent), the network details every request carries, a subscription's receipt sent to us for checking, and what sessions you run through the optional Companion CLI print (all described below), everything else CLI Pulse uploads is there to run the features you use across your devices (showing your usage and alerts, keeping your settings in step, carrying the requests you send to a Mac) or to send alerts where you asked, and this page lists all of it, including the parts that are not numbers.
+    CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, a few diagnostic readings about each Mac, the record your Android phone adds to your account each time you sign in on it (with that phone's notification token if it was sent), the network details every request carries, a subscription's receipt sent to us for checking, and what sessions you run through the optional Companion CLI print (all described below), everything else CLI Pulse uploads is there to run the features you use across your devices (showing your usage and alerts, keeping your settings in step, carrying the requests you send to a Mac) or to send alerts where you asked. We also count some of what is linked to your account, in our own database, to understand how the apps are used (see <em>Analytics we do ourselves</em> under <em>Security practices</em>), and this page lists all of it, including the parts that are not numbers.
     <br><br>
     This page is the single source of truth for what we collect. If you find anything in the apps, their App Store or Google Play listings, or the GitHub README that contradicts this page, <strong>this page wins</strong> — please <a href="https://github.com/cli-pulse/cli-pulse/issues">open an issue</a>.
     <br><br>
@@ -144,7 +144,7 @@
   <td>So iPhone, Apple Watch and the Android app show the same history as your Mac</td>
   </tr>
   <tr>
-  <td><strong>Provider quota state</strong> (remaining, limit, plan, reset times; the label you gave the account, if any; which Mac reported it)</td>
+  <td><strong>Provider quota state</strong> (remaining, limit, plan, reset times; for a provider that sells prepaid credit, such as OpenRouter, DeepSeek or Venice, the credit balance and, where the provider reports it, how much credit was bought; the label you gave the account, if any; which Mac reported it)</td>
   <td>Supabase, linked to your CLI Pulse account</td>
   <td class="sync">✅ Yes, while signed in</td>
   <td>So mobile clients display current quotas without running the scanner themselves</td>
@@ -219,7 +219,7 @@
   <td><strong>Your CLI Pulse login email</strong></td>
   <td>Supabase Auth</td>
   <td class="sync">✅ Yes</td>
-  <td>Required to authenticate you. Asking for a sign-in code for an address creates an account for it, even if the code is never entered. We may also use it to email you <strong>occasionally</strong> about the product itself — a short survey, or notice of a change that affects you. Never marketing, never sold, never shared, and every such email carries a one-click opt out. See <a href="#product-email">Product email</a> below.</td>
+  <td>Required to authenticate you. Asking for a sign-in code for an address creates an account for it, even if the code is never entered. We may also use it to email you <strong>occasionally</strong> about the product itself — a short survey, or notice of a change that affects you. Never marketing, never sold, never shared, and every such email carries a one-click opt out. See <a href="#product-email">Product email</a> below. The surveys are part of the analytics we do ourselves (see <em>Analytics we do ourselves</em>).</td>
   </tr>
   <tr>
   <td><strong>Your password</strong>, if you sign in with one</td>
@@ -228,10 +228,10 @@
   <td>Signs you in. Supabase keeps it only as a hash</td>
   </tr>
   <tr>
-  <td><strong>Your name and profile details from Apple, Google or GitHub</strong>, if you sign in with one of them (on iPhone; on Android, Google or GitHub, including one you link in Settings › Linked Accounts)</td>
+  <td><strong>Your name and profile details from Apple, Google or GitHub</strong>, if you sign in with one of them (on iPhone, including one you link in Settings › Linked Accounts; on Android, Google or GitHub, including one you link in the Android app's Settings › Linked Accounts)</td>
   <td>Supabase Auth</td>
   <td class="sync">✅ Yes, if that provider shares them</td>
-  <td>Supabase keeps what the sign-in provider hands it. When you sign in with Google on Android, the app also passes on the name Google gives it</td>
+  <td>Supabase keeps what the sign-in provider hands it. When you sign in with Apple on iPhone, or with Google on Android, the app also passes on the name Apple or Google gives it</td>
   </tr>
   <tr>
   <td><strong>Apple / Google / GitHub sign-in tokens</strong> (during sign-in)</td>
@@ -322,7 +322,9 @@
   sign-in code already creates the account), with these exceptions:</p>
   <ul>
   <li><strong>Crash reports</strong> are sent whether or not you are signed in, and whatever you
-  answer to the scan question below. They are not linked to your account, and
+  answer to the scan question below. They carry no account ID, but they are not
+  anonymous: they can be tied to your device, and those from the iPhone can name
+  your Mac (see <em>Security practices</em>), and
   since v1.55 the list of recent web requests a report carries keeps no query
   strings, and replaces the parts of an address that look like an account or
   other identifier (see <em>Security practices</em>).</li>
@@ -570,9 +572,11 @@
   starting a Claude session from CLI Pulse, in the Sessions tab or from a
   paired phone over your network, makes the built-in agent read
   <code>~/.claude/.credentials.json</code> to sign the session in, and, when that token
-  has expired, renew it and rewrite the file. And the app contacts services that are not AI providers: our server
+  has expired, renew it and rewrite the file. And the app contacts services other than the AI providers' own APIs: our server
   (for anonymous install statistics, and for your account if you are signed in),
-  Sentry for crash reports, GitHub to check for updates, and an exchange-rate
+  Sentry for crash reports, GitHub to check for updates, the providers' public
+  status pages (unless you turn off Settings › Check provider status), and an
+  exchange-rate
   service (see <em>Third-party sub-processors</em>).</li>
   </ul>
   <h2 id="older-history">Reading more than 30 days back, and what the question used to leave out</h2>
@@ -735,7 +739,9 @@
   directly.</li>
   <li><strong>Android permissions and backup.</strong> The Android app asks Android for no
   access to your files, photos, contacts, location, camera, microphone, calls
-  or list of other apps. The permissions it declares let it go online and see
+  or list of other apps (our hosting provider still works out an approximate
+  location from the IP address of each request: see <em>Network details</em> in the
+  table). The permissions it declares let it go online and see
   whether the phone is connected, receive notifications through Google, keep
   its background sync running (also after the phone restarts) and use Google
   Play billing; two more, for fingerprint or face unlock, come with Google's
@@ -785,11 +791,21 @@
   Messaging, for its notification token, with the Firebase parts it needs
   (Firebase Installations, which gives the install the random ID described under
   <em>Third-party sub-processors</em>), and no other Firebase product: no Firebase
-  Analytics and no Crashlytics. There is no fingerprinting and no ad network
-  integration. This is a statement about SDKs, and we would rather over-explain
+  Analytics and no Crashlytics. There is no ad network integration, and nothing
+  we ship tracks you across other companies' apps or websites; the one value
+  worked out from the device itself is the Sentry SDK's hash described under
+  <em>Sentry for crash reports</em>. This is a statement about SDKs, and we would rather over-explain
   than let it read as more than it is: we do collect the anonymous install
   milestones described above, ourselves, to our own database. They are opt-out,
   carry no account, and go nowhere else.</li>
+  <li><strong>Analytics we do ourselves, on data linked to your account.</strong> We count
+  things in our own database from the records linked to accounts (devices,
+  their app versions and when they last checked in, usage uploads, and
+  sign-ins): for example how many paired Macs send usage, which versions are in
+  use, or how many people come back after signing up. We may also email a short
+  survey (see <a href="#product-email">Product email</a>). This uses data linked to your account; we do it
+  ourselves and share it with no one. Our App Store and Google Play privacy
+  listings declare it as Analytics.</li>
   <li><strong>Sentry for crash reports.</strong> We ship the Sentry SDK in the Mac, iPhone and
   Apple Watch apps (and in our Android app) for crash and error reporting; the
   background helper, the built-in agent and the Companion CLI do not use it. PII
@@ -822,18 +838,38 @@
   screenshots.
   The SDK also reports, for each app session, that it started
   and whether it ended in a crash, with a random installation identifier the SDK
-  generates. Since v1.59 the Mac app also sends an error report when three
+  generates. Every report from the Mac and iPhone apps also carries a one-way
+  hash the SDK works out from the device and the app (on an iPhone from the
+  identifier iOS gives all apps from one maker, on a Mac from its network
+  hardware address); unlike the installation identifier, on a Mac it stays the
+  same if you reinstall the app. In the iPhone app the breadcrumbs also name the
+  screens you opened, by their titles: the screen for a paired Mac is titled
+  with the Mac's name, which often contains your own name, and a session's
+  screen with the session's title, which can be its project folder's name or,
+  for a session the Companion CLI reported, the start of its command line. With
+  Settings › Hide personal information on, these titles are masked. So crash
+  reports carry no account ID, but they are not anonymous, and the App Store
+  listing counts them as linked to you. In the Mac and iPhone apps the SDK also
+  sends a report, with the stack trace and breadcrumbs, when the app has frozen
+  (its main thread has not responded) for about two seconds (three on the Mac),
+  and the iPhone app sends one, with the breadcrumbs, on the launch after iOS
+  ended it while it was open. Since v1.59 the Mac app also sends an error report when three
   refreshes in a row have failed (a request to our server failed, or a
   refresh had not finished after ten minutes), at most one a day. Besides
   what every report carries (the stack trace, the app and OS version, the
-  device details and the SDK's random installation identifier), it holds
+  device details, the device hash described above and the SDK's random
+  installation identifier), it holds
   only a fixed word for the reason (such as <code>rejected</code> or <code>network_failed</code>),
   the HTTP status, which of the app's two refresh paths it was and how many
-  refreshes in a row had failed. It has no breadcrumbs. Since v1.60 the Mac
-  app also sends an error report when its main thread has not answered for ten
+  refreshes in a row had failed. It has no breadcrumbs. When pairing this Mac
+  with your account fails, the Mac app also sends a report that adds only an
+  error code (a fixed code, or the system's error domain and number) to what
+  every report carries; unlike the reports around it, this one keeps the usual
+  breadcrumbs. Since v1.60 the Mac app also sends a separate report of its own
+  when its main thread has not answered for ten
   seconds, at most two a launch. Besides what every report carries (the app
-  and OS version, the device details and the SDK's random installation
-  identifier), it holds only the number of seconds, a fixed word for what the
+  and OS version, the device details, the device hash described above and the
+  SDK's random installation identifier), it holds only the number of seconds, a fixed word for what the
   main thread was doing (running, waiting, stopped, uninterruptible, halted or
   unknown), how many times it was suspended, how much processor time it used
   while we looked, a fixed word for the kind of event loop it was in
@@ -850,7 +886,8 @@
   and when it opened and found that its last run had ended still holding
   some. Each of these outcomes is sent at most once a UTC day. Besides what
   every report carries (the stack trace, the app and OS version, the device
-  details and the SDK's random installation identifier), each holds only a
+  details, the device hash described above and the SDK's random installation
+  identifier), each holds only a
   fixed word for what happened and, for the Mac one, the browser's name from a
   fixed list, the install channel and whether the screen was locked (when the system says). It has
   no breadcrumbs, no tokens, no error text from the system, and no account
@@ -918,8 +955,8 @@
   every 15 minutes, and only with a network connection and a battery that is
   not low), but sends nothing while no one is signed in; uninstalling the app
   removes it. The app has no separate switch for it.</li>
-  <li><strong>Sign-in methods on Android:</strong> Settings → Linked Accounts adds Google or
-  GitHub as a way to sign in to your account, or removes one while another way
+  <li><strong>Sign-in methods on iPhone and Android:</strong> Settings → Linked Accounts adds
+  Apple (iPhone only), Google or GitHub as a way to sign in to your account, or removes one while another way
   to sign in remains.</li>
   <li><strong>Export:</strong> Use the Export menu in the Overview tab (Mac and Android) to save
   a PDF or CSV of the data it shows. On Android the file is first written to
@@ -949,7 +986,7 @@
   webhook, usage history, quotas, sessions, alerts, device records and the other
   records linked to your account, within 30 days (see <em>Data retention</em>); a team
   you own passes to another member, if one remains. It does not remove what is
-  not linked to an account (anonymous install statistics, crash reports already
+  stored apart from your account (anonymous install statistics, crash reports already
   sent to Sentry, the Firebase registration Google keeps for an Android install,
   and invitations to someone else's team sent to your email address), nor
   entries already written to Supabase's request and sign-in logs, which are
@@ -1021,6 +1058,13 @@
   password hash, linked sign-in methods, settings, alert webhook, quota state,
   subscription and device records) is kept while the account exists and deleted
   with it.</li>
+  <li><strong>A copy of each new alert.</strong> When an alert is made, our server also stores a
+  copy to send to an alert webhook, even if you have not added one: its title,
+  message, type, severity, provider, folder name, time and grouping keys (for a
+  Mac's CPU alert, these include that Mac's ID), and, if you have a webhook,
+  when delivery was tried and the start of any error it returned. The nightly
+  job above does not delete these copies, so they stay, even after the alert
+  itself is gone, until you delete your account.</li>
   <li><strong>Network details of requests</strong> are kept in Supabase's request and sign-in
   logs for about 90 days (the request logs also hold the city and country worked
   out from your IP address), and with each sign-in session until you sign out or
@@ -1079,7 +1123,12 @@
   your own credentials, and an alert webhook you add receives your alerts. CLI
   Pulse also fetches exchange rates from open.er-api.com, at most once a day, to
   show costs in other currencies; that request carries nothing about you or your
-  usage. We do not sell data.</p>
+  usage. The Mac and iPhone apps also ask the public status pages of the providers
+  you track (such as status.claude.com or status.openai.com) whether a provider
+  has an outage, unless you turn off Settings › Check provider status. Those
+  requests carry no credentials and none of your usage, but which pages are asked
+  shows which providers you track, and, like any web request, they show your IP
+  address. We do not sell data.</p>
   <h2>Children's privacy</h2>
   <p>CLI Pulse is a developer tool intended for users 17 or older. We do not
   knowingly collect data from children.</p>
