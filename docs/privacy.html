@@ -841,12 +841,14 @@
   generates. Every report from the Mac and iPhone apps also carries a one-way
   hash the SDK works out from the device and the app (on an iPhone from the
   identifier iOS gives all apps from one maker, on a Mac from its network
-  hardware address); unlike the installation identifier, on a Mac it stays the
-  same if you reinstall the app. In the iPhone app the breadcrumbs also name the
+  hardware address); on a Mac it stays the same if you reinstall the app, and
+  so, usually, does the installation identifier, which the SDK keeps in a
+  folder a reinstall leaves in place. In the iPhone app the breadcrumbs also name the
   screens you opened, by their titles: the screen for a paired Mac is titled
   with the Mac's name, which often contains your own name, and a session's
-  screen with the session's title, which can be its project folder's name or,
-  for a session the Companion CLI reported, the start of its command line. With
+  screen with the session's title, which can name its project folder (for a
+  session the Companion CLI reported, a folder name taken from its command
+  line). With
   Settings › Hide personal information on, these titles are masked. So crash
   reports carry no account ID, but they are not anonymous, and the App Store
   listing counts them as linked to you. In the Mac and iPhone apps the SDK also
@@ -1061,8 +1063,9 @@
   <li><strong>A copy of each new alert.</strong> When an alert is made, our server also stores a
   copy to send to an alert webhook, even if you have not added one: its title,
   message, type, severity, provider, folder name, time and grouping keys (for a
-  Mac's CPU alert, these include that Mac's ID), and, if you have a webhook,
-  when delivery was tried and the start of any error it returned. The nightly
+  Mac's CPU alert, these include that Mac's ID), when our server passed it on
+  for delivery and how many tries that took, and, if your webhook refused it,
+  the HTTP status it answered with. The nightly
   job above does not delete these copies, so they stay, even after the alert
   itself is gone, until you delete your account.</li>
   <li><strong>Network details of requests</strong> are kept in Supabase's request and sign-in
