@@ -306,7 +306,7 @@
   <td>Tells us whether the app actually works for people who never sign in</td>
   </tr>
   <tr>
-  <td><strong>Network details of every request to our server</strong>, from every app: your IP address; the label each request carries, which names the app, or the library or browser making the request, usually with version numbers (for the Mac, iPhone and Apple Watch apps, also the system's); and the address each request asks for, which can include your account's ID</td>
+  <td><strong>Network details of every request to our server</strong>, from every app: your IP address, and the approximate location (city and country) that our hosting provider works out from it and records with the request; the label each request carries, which names the app, or the library or browser making the request, usually with version numbers (for the Mac, iPhone and Apple Watch apps, also the system's); and the address each request asks for, which can include your account's ID</td>
   <td>Supabase's request and sign-in logs, kept for about 90 days; with each sign-in, Supabase Auth's record of that session, removed when you sign out or delete your account (records of expired sessions are cleaned up later); for each attempt to pair a Mac, our own database, until the cleanup after it is an hour old (at most about a day)</td>
   <td class="sync">✅ Yes, with every request</td>
   <td>Running and protecting the service (pairing attempts are counted to limit their rate). Deleting your account does not remove log entries already written</td>
@@ -384,7 +384,8 @@
   (beyond the remote-control fact above), or any token count or cost figure. Your
   IP address is not stored with the report, though, like any request over the
   internet, the connection itself reaches our hosting provider, whose request
-  logs keep it for about 90 days (see <em>Network details</em> in the table).</p>
+  logs keep it, with the city and country it points to, for about 90 days (see
+  <em>Network details</em> in the table).</p>
   <p>The identifier is random — not derived from your hardware, and not a hash of
   anything about it. It is kept in the app's preferences on your Mac. Moving the
   app to the Trash does not delete those preferences (macOS leaves them behind),
@@ -1021,7 +1022,8 @@
   subscription and device records) is kept while the account exists and deleted
   with it.</li>
   <li><strong>Network details of requests</strong> are kept in Supabase's request and sign-in
-  logs for about 90 days, and with each sign-in session until you sign out or
+  logs for about 90 days (the request logs also hold the city and country worked
+  out from your IP address), and with each sign-in session until you sign out or
   delete your account (records of expired sessions are cleaned up later); a Mac
   pairing attempt's IP address is deleted at the cleanup after it is an hour
   old. Deleting your account does not remove log entries already written.</li>
