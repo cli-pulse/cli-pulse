@@ -69,8 +69,8 @@ disagree, the policy is right. The short version, for CLI Pulse 1.56:
 
 - **Provider API keys and pasted session cookies never reach CLI Pulse
   servers.** They are kept in the macOS Keychain on the Mac where you enter
-  them (EncryptedSharedPreferences in the Android beta) and sent only to the
-  provider they belong to. Browser cookies are likewise sent only to the
+  them and sent only to the provider they belong to. The Android app has no
+  place to enter one. Browser cookies are likewise sent only to the
   provider they belong to. The app reads them only for a provider set to read
   them automatically (Cursor is, by default), and not in Strict privacy mode;
   the Companion CLI has its own fallback that reads your claude.ai cookie (see
@@ -104,7 +104,9 @@ disagree, the policy is right. The short version, for CLI Pulse 1.56:
   token counts, cost estimates and quota state, it includes the AI CLI
   sessions running on your Mac (the program's name and its project folder's
   name, never the full path), alerts, your Mac's name (which often contains
-  your own name), its load and app versions, and a few diagnostics. The
+  your own name), its load and app versions, a few diagnostics, and a record
+  each time you sign in on an Android phone (maker, model, Android version and
+  any notification token). The
   [data-by-data breakdown](https://cli-pulse.github.io/cli-pulse/privacy.html#data)
   lists every item.
 - **The optional Companion CLI**, installed separately, is not sandboxed,
@@ -128,8 +130,8 @@ disagree, the policy is right. The short version, for CLI Pulse 1.56:
 - **Crash reports** go to Sentry from the Mac, iPhone and Apple Watch apps
   (and the Android app), whether or not you are signed in. An on-device
   scrubber first removes what it recognises, such as JWTs, `sk-…` API keys,
-  Bearer headers and `/Users/<name>` paths, and replaces parts of web
-  addresses that look like identifiers or follow words such as `users`; it
+  Bearer headers and `/Users/<name>` paths (in the Apple apps), and, in the
+  Apple apps, replaces parts of web addresses that look like identifiers or follow words such as `users`; it
   works by shape and place, so a part that looks like an ordinary word and
   follows no such word is kept. The same SDK reports whether each app
   session ended in a crash. There is no switch to turn crash reporting off.

@@ -63,8 +63,8 @@ lists every item. What matters most for security, as of CLI Pulse 1.56:
 
 - **Provider API keys and pasted session cookies are not uploaded to CLI
   Pulse servers.** They are kept in the macOS Keychain on the Mac where you
-  enter them (EncryptedSharedPreferences in the Android beta) and sent only
-  to the provider they belong to, over HTTPS.
+  enter them and sent only to the provider they belong to, over HTTPS. The
+  Android app has no place to enter one.
 - **Tokens AI CLIs keep on the Mac** (`~/.codex/auth.json`,
   `~/.claude/.credentials.json`, `~/.gemini/oauth_creds.json`,
   `~/.local/share/kilo/auth.json` and Claude Code's Keychain item) are read
@@ -94,7 +94,8 @@ lists every item. What matters most for security, as of CLI Pulse 1.56:
   state, the AI CLI sessions running on the Mac (the program's name and its
   project folder's name, never the full path, with a keyed hash of the
   path), alerts, an alert webhook address if you add one, the Mac's name,
-  load and versions, and some diagnostics.
+  load and versions, some diagnostics, and a record each time you sign in on
+  an Android phone (maker, model, Android version and any notification token).
 - **The optional Companion CLI**, installed separately, uploads more than the
   app, including up to 48 characters of each AI CLI's command line (which can
   include folder paths) and what sessions started through it print (with
@@ -122,7 +123,8 @@ lists every item. What matters most for security, as of CLI Pulse 1.56:
   provider API keys, pasted cookies, the CLI Pulse session token, the Mac's
   pairing secret, and the key behind the project-path hashes. On iPhone and
   Apple Watch the CLI Pulse session token is kept in the Keychain; on
-  Android, AndroidX EncryptedSharedPreferences is used. The exception is the
+  Android, the session token and account details are kept in AndroidX
+  EncryptedSharedPreferences. The exception is the
   Companion CLI, which keeps its pairing secret, its hash key and the
   claude.ai cookie it reads from a browser or the Claude desktop app in files
   only your user account can read.
@@ -149,8 +151,8 @@ components. None of them uploads raw credentials, raw cookies or
 session-log contents, and none of them sends crash reports.
 
 - **The background helper** runs the app's collectors on its own schedule
-  (every 2 minutes by default) and uploads what they find for your iPhone
-  and Apple Watch. It is switched on when you pair the Mac with your account,
+  (every 2 minutes by default) and uploads what they find for your iPhone,
+  Apple Watch and Android phone. It is switched on when you pair the Mac with your account,
   and on or off with Settings → Advanced → "Enable background sync", which
   since 1.56 is there whether or not you are signed in or the Mac is paired.
   Since 1.55 it follows your answer to the scan question and uploads only
@@ -189,7 +191,7 @@ Mac without re-running the local scanner themselves.
   Android app), whether or not you are signed in, and the same SDK reports
   whether each app session ended in a crash. A local `beforeSend` scrubber
   removes JWTs, strings shaped like `sk-…` API keys, Bearer headers,
-  `/Users/<name>` paths, fields whose names contain common sensitive
+  `/Users/<name>` paths (in the Apple apps), fields whose names contain common sensitive
   fragments, and the IP-address field before an event leaves the device.
   Since 1.55 web-request breadcrumbs carry no query strings, and parts of
   their addresses that look like identifiers, or follow words such as
@@ -237,8 +239,11 @@ section after it. The ones that matter most for security:
 - **Delete API keys:** Settings → Providers → remove a provider; the
   Keychain entry is deleted.
 - **Delete account:** "Delete Account", at the bottom of Settings on the Mac
-  and in Settings on iPhone. Cascading deletes remove all associated rows
-  within 30 days.
+  and on Android, and in Settings on iPhone; without an app, see "Deleting your
+  account" in the privacy policy
+  (<https://cli-pulse.github.io/cli-pulse/privacy.html#delete-account>).
+  Cascading deletes remove the rows associated with your account within 30
+  days; that section says what stays.
 
 ---
 
