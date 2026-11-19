@@ -40,7 +40,7 @@
 <body>
 <div class="container">
   <h1>Privacy Policy</h1>
-  <p class="date">CLI Pulse &mdash; Last Updated: November 18, 2026</p>
+  <p class="date">CLI Pulse &mdash; Last Updated: November 19, 2026</p>
 
   <div class="lede">
     CLI Pulse is a developer tool for monitoring usage, quotas, and cost across AI coding providers (Claude, Codex, Gemini, OpenRouter, and others). Our privacy goal is straightforward: <strong>your provider API keys never reach our servers</strong> (CLI Pulse sends each one only to the provider it belongs to). Apart from what signing in needs, crash reports, the anonymous install statistics, a few diagnostic readings about each Mac, the record your Android phone adds to your account each time you sign in on it (with that phone's notification token if it was sent), the network details every request carries, a subscription's receipt sent to us for checking, and what sessions you run through the optional Companion CLI print (all described below), everything else CLI Pulse uploads is there to run the features you use across your devices (showing your usage and alerts, keeping your settings in step, carrying the requests you send to a Mac) or to send alerts where you asked. We also count some of what is linked to your account, in our own database, to understand how the apps are used (see <em>Analytics we do ourselves</em> under <em>Security practices</em>), and this page lists all of it, including the parts that are not numbers.
@@ -326,8 +326,8 @@
   <ul>
   <li><strong>Crash reports</strong> are sent whether or not you are signed in, and whatever you
   answer to the scan question below. They carry no account ID, but they are not
-  anonymous: they can be tied to your device, and those from the iPhone can name
-  your Mac (see <em>Security practices</em>), and
+  anonymous: they can be tied to your device, and those from the iPhone app 1.62 and earlier
+  can name your Mac (see <em>Security practices</em>), and
   since v1.55 the list of recent web requests a report carries keeps no query
   strings, and replaces the parts of an address that look like an account or
   other identifier (see <em>Security practices</em>).</li>
@@ -798,9 +798,9 @@
   (Firebase Installations, which gives the install the random ID described under
   <em>Third-party sub-processors</em>), and no other Firebase product: no Firebase
   Analytics and no Crashlytics. There is no ad network integration, and nothing
-  we ship tracks you across other companies' apps or websites; the one value
-  worked out from the device itself is the Sentry SDK's hash described under
-  <em>Sentry for crash reports</em>. This is a statement about SDKs, and we would rather over-explain
+  we ship tracks you across other companies' apps or websites; in 1.62 and earlier the one value worked out from the device itself was the
+  Sentry SDK's hash described under <em>Sentry for crash reports</em>, which 1.63
+  removes. This is a statement about SDKs, and we would rather over-explain
   than let it read as more than it is: we do collect the anonymous install
   milestones described above, ourselves, to our own database. They are opt-out,
   carry no account, and go nowhere else.</li>
@@ -847,22 +847,26 @@
   sends a report, with the stack trace, when the app has not responded for about
   five seconds (what Android calls "not responding"). Android reports carry no
   screenshots.
-  The SDK also reports, for each app session, that it started
-  and whether it ended in a crash, with a random installation identifier the SDK
-  generates. Every report from the Mac and iPhone apps also carries a one-way
-  hash the SDK works out from the device and the app (on an iPhone from the
-  identifier iOS gives all apps from one maker, on a Mac from its network
-  hardware address); on a Mac it stays the same if you reinstall the app, and
-  so, usually, does the installation identifier, which the SDK keeps in a
-  folder a reinstall leaves in place. In the iPhone app the breadcrumbs also name the
-  screens you opened, by their titles: the screen for a paired Mac is titled
-  with the Mac's name, which often contains your own name, and a session's
-  screen with the session's title, which can name its project folder (for a
-  session the Companion CLI reported, a folder name taken from its command
-  line). With
-  Settings › Hide personal information on, these titles are masked. So crash
-  reports carry no account ID, but they are not anonymous, and the App Store
-  listing counts them as linked to you. In the Mac and iPhone apps the SDK also
+  The SDK also reports, for each app session, that it started and whether it ended
+  in a crash, with a random installation identifier the SDK generates. On a Mac
+  the SDK keeps that identifier in a folder a reinstall leaves in place, so it
+  usually stays the same if you reinstall the app. In 1.62 and earlier, every
+  report from the Mac and iPhone apps also carried a one-way hash the SDK works
+  out from the device and the app (on an iPhone from the identifier iOS gives all
+  apps from one maker, on a Mac from its network hardware address, so on a Mac it
+  stayed the same if you reinstalled the app). From 1.63 the apps remove that hash
+  from every report before it leaves your device. In the iPhone app 1.62 and
+  earlier, the breadcrumbs also named the screens you opened, and the buttons you
+  tapped, by their titles: the screen for a paired Mac is titled with the Mac's
+  name, which often contains your own name, and a session's screen with the
+  session's title, which can name its project folder (for a session the Companion
+  CLI reported, a folder name taken from its command line). With Settings › Hide
+  personal information on, these titles were masked. From 1.63 the iPhone app
+  removes those titles from its breadcrumbs: a breadcrumb still records that a
+  screen opened, by the name the app's code gives that kind of screen, but not
+  what the screen showed. So crash reports carry no account ID, but they are not
+  anonymous: the installation identifier ties together the reports from one
+  installation, and the App Store listing counts them as linked to you. In the Mac and iPhone apps the SDK also
   sends a report, with the stack trace and breadcrumbs, when the app has frozen
   (its main thread has not responded) for about two seconds (three on the Mac),
   and the iPhone app sends one, with the breadcrumbs, on the launch after iOS
@@ -870,7 +874,7 @@
   refreshes in a row have failed (a request to our server failed, or a
   refresh had not finished after ten minutes), at most one a day. Besides
   what every report carries (the stack trace, the app and OS version, the
-  device details, the device hash described above and the SDK's random
+  device details, in 1.62 and earlier the device hash described above, and the SDK's random
   installation identifier), it holds
   only a fixed word for the reason (such as <code>rejected</code> or <code>network_failed</code>),
   the HTTP status, which of the app's two refresh paths it was and how many
@@ -881,8 +885,8 @@
   breadcrumbs. Since v1.60 the Mac app also sends a separate report of its own
   when its main thread has not answered for ten
   seconds, at most two a launch. Besides what every report carries (the app
-  and OS version, the device details, the device hash described above and the
-  SDK's random installation identifier), it holds only the number of seconds, a fixed word for what the
+  and OS version, the device details, in 1.62 and earlier the device hash described above, and the SDK's random
+  installation identifier), it holds only the number of seconds, a fixed word for what the
   main thread was doing (running, waiting, stopped, uninterruptible, halted or
   unknown), how many times it was suspended, how much processor time it used
   while we looked, a fixed word for the kind of event loop it was in
@@ -899,8 +903,8 @@
   and when it opened and found that its last run had ended still holding
   some. Each of these outcomes is sent at most once a UTC day. Besides what
   every report carries (the stack trace, the app and OS version, the device
-  details, the device hash described above and the SDK's random installation
-  identifier), each holds only a
+  details, in 1.62 and earlier the device hash described above, and the SDK's random
+  installation identifier), each holds only a
   fixed word for what happened and, for the Mac one, the browser's name from a
   fixed list, the install channel and whether the screen was locked (when the system says). It has
   no breadcrumbs, no tokens, no error text from the system, and no account
