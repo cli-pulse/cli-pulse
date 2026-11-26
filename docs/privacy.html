@@ -132,7 +132,7 @@
   <td><strong>Tokens that AI CLIs keep on your Mac</strong>: <code>~/.codex/auth.json</code>, <code>~/.claude/.credentials.json</code>, <code>~/.gemini/oauth_creds.json</code>, <code>~/.local/share/kilo/auth.json</code>, and Claude Code's Keychain item</td>
   <td>Read where each CLI keeps them. The app copies the file-based ones into a Keychain item that only CLI Pulse's own programs can read</td>
   <td class="good">❌ Never</td>
-  <td>Sent only to that provider, for live quota (and, since v1.57, Codex's limit reset credits; since 1.63.2, your Claude plan's name: CLI Pulse asks Anthropic for your account profile and keeps only the plan's name and rate-limit tier, in memory)</td>
+  <td>Sent only to that provider, for live quota (and, since v1.57, Codex's limit reset credits; since 1.63.2, your Claude plan's name: CLI Pulse asks Anthropic for your account profile and keeps only the plan's name and rate-limit tier from it, on your Mac)</td>
   </tr>
   <tr>
   <td><strong>Contents of your session logs</strong> (<code>~/.codex/sessions/</code>, <code>~/.codex/archived_sessions/</code>, <code>~/.claude/projects/</code>, <code>~/.config/claude/projects/</code>)</td>
